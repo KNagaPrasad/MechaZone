@@ -10,7 +10,6 @@
     width: 100%;
   }
   
-  /* Add a media query for screens smaller than 768px (e.g., mobile devices) */
   @media (max-width: 768px) {
     .footer {
       font-size: 14px; /* Adjust font size for smaller screens */
