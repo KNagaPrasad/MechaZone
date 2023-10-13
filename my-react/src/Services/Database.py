@@ -1,12 +1,9 @@
 from sqlalchemy import create_engine
 #from sqlalchemy import filter, filter_by
 
-#engine = create_engine('mssql+pyodbc://@' + DESKTOP-8FANH7R + '/' + BWorks + '?trusted_connection=yes&driver=ODBC+Driver+13+for+SQL+Server  driver=SQL Server Native Client 11.0')')
 
 engine = create_engine('mssql+pyodbc://@' + 'VINEETHA\MSSQL' + '/' + 'Mechazone' + '?trusted_connection=yes & driver=ODBC Driver 17 for SQL Server')
-
-#engine = create_engine('mssql+pyodbc://@' + 'DESKTOP-8FANH7R' + '/' + 'BWorks' + '?trusted_connection=yes&driver=SQL Server', use_setinputsizes=False)
-
+#engine = create_engine('mssql+pyodbc://@' + 'SREEHARI\MSSQLSERVER01' + '/' + 'Mechazone' + '?trusted_connection=yes & driver=ODBC Driver 17 for SQL Server')
 
 from sqlalchemy import String
 from sqlalchemy.ext.declarative import declarative_base
@@ -38,6 +35,27 @@ class cars(Base):
     model: str = Column(String,nullable=False )
     price: float = Column(Float, nullable = False)
     year: int = Column(Integer, nullable = False)
+    
+class Users(Base):
+    __tablename__ = "Users"
+
+    UserId: int = Column(Integer, primary_key=True)
+    Name: str = Column(String,nullable=False )
+    ContactId: int = Column(Integer, nullable = False)
+    Email: str = Column(String, nullable = False)
+    Address: str = Column(String, nullable = False)
+    ZipCode: str = Column(String,nullable = False)
+    UserName: str = Column(String, nullable = False)
+    Password: str = Column(String, nullable = False)
+
+def register_db(req):
+    from sqlalchemy import insert
+    stmt = insert(Users).values(Name=req['Name'], ContactId=req['ContactId'],Email=req['Email'],Address=req['Address'],ZipCode=req['ZipCode'],UserName=req['UserName'],Password=req['Password'])
+    compiled = stmt.compile()
+    with engine.connect() as conn:
+        result = conn.execute(stmt)
+        conn.commit()
+    return {"issuccess": True} 
         
 def getAllBikesFrom_db():
     try:
