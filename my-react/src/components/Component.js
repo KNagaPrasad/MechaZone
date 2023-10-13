@@ -55,6 +55,25 @@ function Signupandsignin() {
       window.alert("FAILURE");
     })
   }
+  const handleLoginSubmit=(e)=>{
+    e.preventDefault();
+    const _userLogin ={
+      "UserName" : user.userName,
+      "Password" : user.password
+    } 
+    axios.post(API_URL+"/login",_userLogin).then((res) => {
+      if (res && res.data && res.data.userName) {
+        navigate("/dashboard");
+      } 
+      else {
+        window.alert("Login Failed");
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      window.alert("Login Failed");
+    });
+  }
 
 
   return (
@@ -80,7 +99,7 @@ function Signupandsignin() {
           <h1>SIGN-IN</h1>
           <input type="text" placeholder="Username" id="userName" value={user.userName} onChange={handleChange} />
           <input type="password" placeholder="Password" id="password" value={user.password} onChange={handleChange} />
-          <button>Sign In</button>
+          <button onClick={handleLoginSubmit}>Sign In</button>
         </form>
       </div>
 
