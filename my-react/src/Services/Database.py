@@ -56,6 +56,32 @@ def register_db(req):
         result = conn.execute(stmt)
         conn.commit()
     return {"issuccess": True} 
+
+def login_db(req):
+    try:
+        from sqlalchemy import text
+        with Session(engine) as session:
+            
+            sql_statement = text("SELECT * FROM Users WHERE UserName = :userName and Password = :password" )
+            query = session.query(Users).from_statement(sql_statement)
+            query = query.params(userName=req['UserName'],password = req['Password'])
+
+           
+            result = query.first()
+            response = {
+                "userId": result.UserId,
+                "name" : result.Name,
+                "contactId": result.ContactId,
+                "email": result.Email,
+                "userName": result.UserName,
+                "address": result.Address,
+                "zipCode": result.ZipCode
+            }
+           
+            return response
+    except Exception as e:
+        print(e)
+        return {}        
         
 def getAllBikesFrom_db():
     try:
