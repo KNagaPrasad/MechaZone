@@ -1,0 +1,29 @@
+.contact-container {
+  background-color: rgb(255, 123, 0); 
+  color: white;
+  padding: 20px;
+  width: 800px;
+  height: 200px;
+  text-align: center;
+}
+
+.contact-text {
+  margin-bottom: 20px;
+  font-size:large;
+}
+
+.contact-text p {
+  margin: 5px 0;
+}
+
+.contact-text a {
+  color: rgb(0, 0, 0);
+  font-size: large;
+  text-decoration: none;
+}
+
+.social-links a {
+  margin: 0 10px;
+  font-size: large;
+  text-decoration: none;
+}

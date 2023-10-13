@@ -1,9 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import HomePage from './Pages/HomePage';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import ContactInfo from './components/ContactInfo'; // Import the ContactInfo component
+import HomePage from '../src/Pages/HomePage';
+import Header from '../src/components/Header';
+import Footer from '../src/components/Footer';
+import Signupandlogin from '../src/components/Component';
+import Bikes from '../src/components/Bike';
+import ContactInfo from '../src/components/ContactInfo'; 
 
 import './App.css';
 
@@ -14,10 +16,10 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/contact-info" element={<ContactInfo />} /> {/* Add this route */}
           <Route path="/signup" element={<Signupandlogin />} />
           <Route path="/login" element={<Signupandlogin />} />
           <Route path="/bikes" element={<Bikes />} />
+          <Route path="/contact-info" element={<ContactInfo />} /> {}
         </Routes>
         <Footer />
       </div>
