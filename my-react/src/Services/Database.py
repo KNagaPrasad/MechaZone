@@ -29,7 +29,7 @@ class bikes(Base):
     year :int = Column(Integer,nullable=False )
 
 class cars(Base):
-    _tablename_ = "cars"
+    __tablename__ = "cars"
 
     car_id: int = Column(Integer, primary_key=True)
     model: str = Column(String,nullable=False )
