@@ -1,27 +1,31 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import HomePage from '../src/Pages/HomePage';
-import Header from '../src/components/Header';
-import Footer from '../src/components/Footer';
-import Signupandlogin from '../src/components/Component';
-import Bikes from '../src/components/Bike';
-import ContactInfo from '../src/components/ContactInfo'; 
-
+import HomePage from './Pages/HomePage';
+import ContactUs from './components/ContactInfo';
+import SignupPage from './components/Component'; 
+import LoginPage from './components/Component'; 
+import Header from './components/Header'; 
+import Footer from './components/Footer'; 
 import './App.css';
+import Dashboard from './components/Dashboard';
+import Cars from './components/Car';
+import Bikes from './components/Bike';
 
 function App() {
   return (
     <Router>
       <div className="App">
-        <Header />
+        <Header /> 
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/signup" element={<Signupandlogin />} />
-          <Route path="/login" element={<Signupandlogin />} />
-          <Route path="/bikes" element={<Bikes />} />
-          <Route path="/contact-info" element={<ContactInfo />} /> {}
+          <Route path="/contact-Info" element={<ContactUs />} />
+          <Route path="/signup" element={<SignupPage />} /> 
+          <Route path="/login" element={<LoginPage />} /> 
+          <Route path ="/dashboard" element={<Dashboard/>}/>
+          <Route path ="/cars" element={<Cars/>}/>
+          <Route path ="/bikes" element={<Bikes/>}/>
         </Routes>
-        <Footer />
+        <Footer /> 
       </div>
     </Router>
   );
