@@ -5,6 +5,8 @@ import Header from './components/Header';
 import Footer from './components/Footer'; 
 import Signupandlogin from '../src/components/Component'; 
 import Bikes from './components/Bike';
+import Cars from './components/Car';
+import Dashboard from './components/Dashboard';
 
 import './App.css';
 
@@ -18,6 +20,7 @@ function App() {
           <Route path="/signup" element={<Signupandlogin />} />
           <Route path="/login" element={<Signupandlogin />} />
           <Route path ="/bikes" element={<Bikes/>}/>
+          <Route path ="/cars" element={<Cars/>}/>
         </Routes>
         <Footer /> {}
       </div>
