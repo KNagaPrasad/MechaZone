@@ -1,36 +1,85 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../CSS/Component.css";
+import axios from "axios";
+import { API_URL } from "../Services/Api"
+import { useNavigate } from "react-router-dom";
+
+
+const userObj = {
+  name: '',
+  contactId: '',
+  email: '',
+  address: '',
+  zipCode: '',
+  userName: '',
+  password: '',
+  confirmPassword: '',
+  isTNC: false
+}
+
 
 function Signupandsignin() {
   const [signIn, toggleSignIn] = useState(true);
+  const [user, setUser] = useState(userObj);
+  const navigate = useNavigate();
 
+  
   const toggleForm = () => {
     toggleSignIn(!signIn);
   };
+
+  const handleChange = (e)=>{
+    setUser({...user,...{[e.target.id]:e.target.value}});
+  }
+  
+  const handleRegisterSubmit = (e)=>{
+    e.preventDefault();
+    const _userObj = {   
+      "Name" : user.name,
+      "ContactId" : user.contactId, 
+      "Email" : user.email,
+      "Address" : user.address ,
+      "ZipCode" : user.zipCode,
+      "UserName" : user.userName,
+      "Password" : user.password
+    }
+    axios.post(API_URL+"/register",_userObj).then(res=>{
+      if(res && res.data && res.data.issuccess){
+        toggleForm();
+      }
+      else{
+        window.alert("FAILURE");
+      }
+    }).catch(err=>{
+      console.log(err);
+      window.alert("FAILURE");
+    })
+  }
+
 
   return (
     <div className="container">
       <div className={`signup-container ${signIn ? "signin" : ""}`}>
         <form>
           <h1>REGISTER</h1>
-          <input type="text" placeholder="Name" />
-          <input type="text" placeholder="Phone Number" />
-          <input type="email" placeholder="Email" />
-          <input type="text" placeholder="Address" />
-          <input type="Zip Code" placeholder="Zip Code" />
-          <input type="password" placeholder="Password" />
-          <input type="password" placeholder="Re-enter Password" />
+          <input type="text" placeholder="Name" id='name' value={user.name} onChange={handleChange} />
+          <input type="text" placeholder="Phone Number" id='contactId' value={user.contactId} onChange={handleChange} />
+          <input type="email" placeholder="Email" id='email' value={user.email} onChange={handleChange} />
+          <input type="text" placeholder="Address" id='address' value={user.address} onChange={handleChange} />
+          <input type="text" placeholder="Zip Code" id='zipCode' value={user.zipCode} onChange={handleChange} />
+          <input type="text" placeholder="UserName" id='userName' value={user.userName} onChange={handleChange} />
+          <input type="password" placeholder="Password" id='password' value={user.password} onChange={handleChange} />
+          <input type="password" placeholder="Re-enter Password" id='confirmPassword' value={user.confirmPassword} onChange={handleChange}  />
           <label className="terms-label"><input type="checkbox" /><span>I agree to the Terms and Conditions</span></label>
-          <button>Sign Up</button>
+          <button onClick={handleRegisterSubmit}>Sign Up</button>
         </form>
       </div>
 
       <div className={`signin-container ${signIn ? "" : "signin"}`}>
         <form>
           <h1>SIGN-IN</h1>
-          <input type="email" placeholder="Email" />
-          <input type="password" placeholder="Password" />
-          <a href="#">Forgot your password?</a>
+          <input type="text" placeholder="Username" id="userName" value={user.userName} onChange={handleChange} />
+          <input type="password" placeholder="Password" id="password" value={user.password} onChange={handleChange} />
           <button>Sign In</button>
         </form>
       </div>
