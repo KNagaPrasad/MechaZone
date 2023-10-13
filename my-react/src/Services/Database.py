@@ -31,6 +31,13 @@ class bikes(Base):
     price: str = Column(Float, nullable = False)
     year :int = Column(Integer,nullable=False )
 
+class cars(Base):
+    _tablename_ = "cars"
+
+    car_id: int = Column(Integer, primary_key=True)
+    model: str = Column(String,nullable=False )
+    price: float = Column(Float, nullable = False)
+    year: int = Column(Integer, nullable = False)
         
 def getAllBikesFrom_db():
     try:
@@ -55,4 +62,30 @@ def getAllBikesFrom_db():
             return bikesList
     except Exception as e:
         print(e)
-        return {}    
+        return {}   
+
+def getAllCarsFrom_db():
+    try:
+        
+        from sqlalchemy import text
+        with Session(engine) as session:
+            print("session")
+            sql_statement = text("SELECT * FROM cars" )
+            query = session.query(cars).from_statement(sql_statement)
+        
+            carsResult = query.all()
+            carsList = []
+            for car in carsResult:
+                carsList.append({
+                    "car_id": car.car_id,
+                    "model" : car.model,
+                    "year": car.year,
+                    "price": car.price,
+                })
+                
+           
+            return carsList
+
+    except Exception as e:
+        print(e)
+        return{}
