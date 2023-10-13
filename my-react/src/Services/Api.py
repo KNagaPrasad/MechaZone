@@ -6,6 +6,12 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
+@app.route('/register', methods=['POST'])
+def register_user():
+    req = request.get_json()
+    print(req)
+    res = register_db(req)
+    return jsonify(res)
 
 @app.route('/bike',methods = ['get'])
 def bikes():
