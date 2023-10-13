@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import HomePage from './Pages/HomePage';
+import AboutUs from './components/AboutUs';
 import ContactUs from './components/ContactInfo';
 import SignupPage from './components/Component'; 
 import LoginPage from './components/Component'; 
@@ -18,12 +19,14 @@ function App() {
         <Header /> 
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/contact-Info" element={<ContactUs />} />
+          <Route path="/about" element={<AboutUs />} />
+          <Route path="/contact" element={<ContactUs />} />
           <Route path="/signup" element={<SignupPage />} /> 
           <Route path="/login" element={<LoginPage />} /> 
           <Route path ="/dashboard" element={<Dashboard/>}/>
           <Route path ="/cars" element={<Cars/>}/>
           <Route path ="/bikes" element={<Bikes/>}/>
+
         </Routes>
         <Footer /> 
       </div>

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import '../CSS/Dashboard.css';
-import { FaBars, FaHome } from 'react-icons/fa';
+import { FaBars, FaHome, FaUser } from 'react-icons/fa';
 import { AiOutlineClose } from 'react-icons/ai';
-import { IoMdHelpCircle ,IoMdLogOut } from 'react-icons/io';
+import { IoMdHelpCircle ,IoMdLogOut} from 'react-icons/io';
 import { Link } from 'react-router-dom';
 
 const SidebarData = [
