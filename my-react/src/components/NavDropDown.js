@@ -21,9 +21,16 @@ const SidebarData = [
   },
 
   {
-    title: 'Logout', // New Settings link
-    path: '/logout', // Add the path for your settings page
-    icon: <IoMdLogOut />, // Use the appropriate icon
+    title: 'Profile', 
+    path: '/profile', 
+    icon: <FaUser />, 
+    cName: 'nav-text',
+  },
+  
+  {
+    title: 'Logout',
+    path: '/logout', 
+    icon: <IoMdLogOut />, 
     cName: 'nav-text',
   },
 ];
