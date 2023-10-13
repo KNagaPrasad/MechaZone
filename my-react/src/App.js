@@ -4,6 +4,7 @@ import HomePage from './Pages/HomePage';
 import Header from './components/Header'; 
 import Footer from './components/Footer'; 
 import Signupandlogin from '../src/components/Component'; 
+import Bikes from './components/Bike';
 
 import './App.css';
 
@@ -16,6 +17,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/signup" element={<Signupandlogin />} />
           <Route path="/login" element={<Signupandlogin />} />
+          <Route path ="/bikes" element={<Bikes/>}/>
         </Routes>
         <Footer /> {}
       </div>
