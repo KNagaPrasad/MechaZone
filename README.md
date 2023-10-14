@@ -1,4 +1,4 @@
-# MECHAZONE E-Commerce Platform
+# MECHAZONE E-Commerce  Platform
 
 MECHAZONE is a revolutionary e-commerce platform designed specifically for the automotive industry. It offers a comprehensive solution for vehicle enthusiasts and owners, simplifying the process of purchasing and installing vehicle parts. This README file provides an overview of the platform's features and how to get started.
 
