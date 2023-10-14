@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "../CSS/Component.css";
 import axios from "axios";
-import { API_URL } from "../Services/Api"
+import { API_URL } from "../Services/Api";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { addUser } from "../redux/Actions/UserActions";
 
 
 const userObj = {
@@ -22,6 +24,14 @@ function Signupandsignin() {
   const [signIn, toggleSignIn] = useState(true);
   const [user, setUser] = useState(userObj);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const userFromRedux = useSelector(state => state?.userInfo?.user);
+
+  useEffect(() => {
+    if(userFromRedux) {
+      navigate("/dashboard");
+    }
+  }, [userFromRedux]);
 
   
   const toggleForm = () => {
@@ -56,6 +66,30 @@ function Signupandsignin() {
     })
   }
 
+  const handleLoginSubmit=(e)=>{
+    e.preventDefault();
+    const _userLogin ={
+      "UserName" : user.userName,
+      "Password" : user.password
+    } 
+    axios.post(API_URL+"/login",_userLogin).then((res) => {
+      if (res && res.data && res.data.userName) {
+        saveUser(res.data);
+        navigate("/dashboard");
+      } 
+      else {
+        window.alert("Login Failed");
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      window.alert("Login Failed");
+    });
+  }
+
+  const saveUser = (data)=>{
+    dispatch(addUser(data));
+  }
 
   return (
     <div className="container">
@@ -80,7 +114,8 @@ function Signupandsignin() {
           <h1>SIGN-IN</h1>
           <input type="text" placeholder="Username" id="userName" value={user.userName} onChange={handleChange} />
           <input type="password" placeholder="Password" id="password" value={user.password} onChange={handleChange} />
-          <button>Sign In</button>
+          <button onClick={handleLoginSubmit}>Sign In</button>
+          
         </form>
       </div>
 
@@ -110,3 +145,4 @@ function Signupandsignin() {
 }
 
 export default Signupandsignin;
+

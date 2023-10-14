@@ -4,6 +4,9 @@ from sqlalchemy import create_engine
 
 engine = create_engine('mssql+pyodbc://@' + 'VINEETHA\MSSQL' + '/' + 'Mechazone' + '?trusted_connection=yes & driver=ODBC Driver 17 for SQL Server')
 #engine = create_engine('mssql+pyodbc://@' + 'SREEHARI\MSSQLSERVER01' + '/' + 'Mechazone' + '?trusted_connection=yes & driver=ODBC Driver 17 for SQL Server')
+#engine = create_engine('mssql+pyodbc://@' + 'DESKTOP-8FANH7R' + '/' + 'Mechazone' + '?trusted_connection=yes & driver=ODBC Driver 17 for SQL Server')Naga
+#engine = create_engine('mssql+pyodbc://@' + 'DESKTOP-E5BITMF' + '/' + 'Mechazone' + '?trusted_connection=yes & driver=SQL Server')Deepthi
+
 
 from sqlalchemy import String
 from sqlalchemy.ext.declarative import declarative_base
@@ -29,7 +32,7 @@ class bikes(Base):
     year :int = Column(Integer,nullable=False )
 
 class cars(Base):
-    _tablename_ = "cars"
+    __tablename__ = "cars"
 
     car_id: int = Column(Integer, primary_key=True)
     model: str = Column(String,nullable=False )
@@ -56,6 +59,32 @@ def register_db(req):
         result = conn.execute(stmt)
         conn.commit()
     return {"issuccess": True} 
+
+def login_db(req):
+    try:
+        from sqlalchemy import text
+        with Session(engine) as session:
+            
+            sql_statement = text("SELECT * FROM Users WHERE UserName = :userName and Password = :password" )
+            query = session.query(Users).from_statement(sql_statement)
+            query = query.params(userName=req['UserName'],password = req['Password'])
+
+           
+            result = query.first()
+            response = {
+                "userId": result.UserId,
+                "name" : result.Name,
+                "contactId": result.ContactId,
+                "email": result.Email,
+                "userName": result.UserName,
+                "address": result.Address,
+                "zipCode": result.ZipCode
+            }
+           
+            return response
+    except Exception as e:
+        print(e)
+        return {}        
         
 def getAllBikesFrom_db():
     try:
