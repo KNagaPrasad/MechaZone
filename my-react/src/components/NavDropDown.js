@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import '../CSS/Dashboard.css';
 import { FaBars, FaHome, FaUser } from 'react-icons/fa';
 import { AiOutlineClose } from 'react-icons/ai';
-import { IoMdHelpCircle ,IoMdLogOut} from 'react-icons/io';
+import { IoMdHelpCircle ,IoMdLogOut, IoMdSettings} from 'react-icons/io';
 import { Link } from 'react-router-dom';
 
 const SidebarData = [
@@ -24,6 +24,13 @@ const SidebarData = [
     title: 'Profile', 
     path: '/profile', 
     icon: <FaUser />, 
+    cName: 'nav-text',
+  },
+
+  {
+    title: 'Settings',
+    path: '/settings',
+    icon: <IoMdSettings />,
     cName: 'nav-text',
   },
   

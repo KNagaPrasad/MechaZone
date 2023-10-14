@@ -11,6 +11,7 @@ import './App.css';
 import Dashboard from './components/Dashboard';
 import Cars from './components/Car';
 import Bikes from './components/Bike';
+import Settings from './components/Settings';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path ="/dashboard" element={<Dashboard/>}/>
           <Route path ="/cars" element={<Cars/>}/>
           <Route path ="/bikes" element={<Bikes/>}/>
+          <Route path ="/settings" element={<Settings/>}/>
 
         </Routes>
         <Footer /> 

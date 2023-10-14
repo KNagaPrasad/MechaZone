@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "../CSS/Component.css";
 import axios from "axios";
-import { API_URL } from "../Services/Api"
+import { API_URL } from "../Services/Api";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { addUser } from "../redux/Actions/UserActions";
 
 
 const userObj = {
@@ -22,6 +24,14 @@ function Signupandsignin() {
   const [signIn, toggleSignIn] = useState(true);
   const [user, setUser] = useState(userObj);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const userFromRedux = useSelector(state => state?.userInfo?.user);
+
+  useEffect(() => {
+    if(userFromRedux) {
+      navigate("/dashboard");
+    }
+  }, [userFromRedux]);
 
   
   const toggleForm = () => {
@@ -55,6 +65,7 @@ function Signupandsignin() {
       window.alert("FAILURE");
     })
   }
+
   const handleLoginSubmit=(e)=>{
     e.preventDefault();
     const _userLogin ={
@@ -63,6 +74,7 @@ function Signupandsignin() {
     } 
     axios.post(API_URL+"/login",_userLogin).then((res) => {
       if (res && res.data && res.data.userName) {
+        saveUser(res.data);
         navigate("/dashboard");
       } 
       else {
@@ -75,6 +87,9 @@ function Signupandsignin() {
     });
   }
 
+  const saveUser = (data)=>{
+    dispatch(addUser(data));
+  }
 
   return (
     <div className="container">
@@ -100,6 +115,7 @@ function Signupandsignin() {
           <input type="text" placeholder="Username" id="userName" value={user.userName} onChange={handleChange} />
           <input type="password" placeholder="Password" id="password" value={user.password} onChange={handleChange} />
           <button onClick={handleLoginSubmit}>Sign In</button>
+          
         </form>
       </div>
 
@@ -129,3 +145,4 @@ function Signupandsignin() {
 }
 
 export default Signupandsignin;
+
