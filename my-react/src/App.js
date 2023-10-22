@@ -14,7 +14,7 @@ import Bikes from './components/Bike';
 import Logout from './components/Logout';
 import Settings from './components/Settings';
 import Dashboard from './components/Dashboard';
-import Cars from './components/Car';
+import Car from './components/Car';
 
 function App() {
   return (
