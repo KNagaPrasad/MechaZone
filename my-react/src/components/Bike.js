@@ -9,8 +9,7 @@ const Bikes =()=>{
   }, []);
 
   const getBikes = () =>{
-    axios
-    .get(API_URL+"/getbikes").then((res)=>{
+    axios.get(API_URL+"/getBikes").then((res)=>{
       if(res && res.data && res.data.length >0){ 
         setBikes(res.data);
       }
