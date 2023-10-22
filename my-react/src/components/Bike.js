@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
-import { API_URL } from "../Services/Api";
+import { API_URL } from "../Constants";
 
 const Bikes =()=>{
   const [bikes, setBikes]= useState(null);

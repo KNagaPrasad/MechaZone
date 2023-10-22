@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../CSS/Component.css";
 import axios from "axios";
-import { API_URL } from "../Services/Api";
+import { API_URL } from "../Constants";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../redux/Actions/UserActions";
@@ -66,6 +66,7 @@ function Signupandsignin() {
     })
   }
 
+
   const handleLoginSubmit=(e)=>{
     e.preventDefault();
     const _userLogin ={
@@ -103,6 +104,7 @@ function Signupandsignin() {
           <input type="text" placeholder="Zip Code" id='zipCode' value={user.zipCode} onChange={handleChange} />
           <input type="text" placeholder="UserName" id='userName' value={user.userName} onChange={handleChange} />
           <input type="password" placeholder="Password" id='password' value={user.password} onChange={handleChange} />
+
           <input type="password" placeholder="Re-enter Password" id='confirmPassword' value={user.confirmPassword} onChange={handleChange}  />
           <label className="terms-label"><input type="checkbox" /><span>I agree to the Terms and Conditions</span></label>
           <button onClick={handleRegisterSubmit}>Sign Up</button>
@@ -145,4 +147,7 @@ function Signupandsignin() {
 }
 
 export default Signupandsignin;
+
+
+
 
