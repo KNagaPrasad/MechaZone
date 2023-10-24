@@ -1,14 +1,14 @@
-import React from 'react';
-import CarLogo from './CarLogo';
 import Header from './Header';
 import Footer from './Footer';
-import '../CSS/Carpage.css';
+import React, { useState } from 'react';
+import CarLogo from './CarLogo'; // Make sure you have CarLogo component
+import '../CSS/Carpage.css'
+import { Link } from 'react-router-dom';
 
 function CarPage() {
-  const [selectedBrand, setSelectedBrand] = React.useState(null);
-  const [selectedModel, setSelectedModel] = React.useState(null);
-  const [searchTerm, setSearchTerm] = React.useState('');
-  const [searchModelTerm, setSearchModelTerm] = React.useState('');
+  const [selectedBrand, setSelectedBrand] = useState(null);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchModelTerm, setSearchModelTerm] = useState('');
 
   const carBrands = [
     {
@@ -80,46 +80,68 @@ function CarPage() {
 
   const handleBrandSelect = (brand) => {
     setSelectedBrand(brand);
-    setSearchModelTerm('');
-  };
-  
-  const handleSearchChange = (event) => {
-    setSearchTerm(event.target.value);
-    setSelectedBrand(null);
   };
 
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const handleModelSearchChange = (event) => {
+    setSearchModelTerm(event.target.value);
+  };
 
   const filteredCarBrands = carBrands.filter((brand) =>
     brand.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  const selectedBrandObject = carBrands.find(brand => brand.name === selectedBrand);
+  const filteredModels = selectedBrandObject ? selectedBrandObject.models.filter(model =>
+    model.toLowerCase().includes(searchModelTerm.toLowerCase())
+  ) : [];
+
   return (
     <div>
-      <Header />
-      <div className="carpage-container">
+      <Header /> 
+      <div className="car-page">
         <h1>Car Brands</h1>
         <div className="search-container">
-          <div className="search-input">
-            <input
-              type="text"
-              placeholder="Search car brands"
-              value={searchTerm}
-              onChange={handleSearchChange}
-            />
-          </div>
+          <input
+            type="text"
+            placeholder="Search car brands"
+            value={searchTerm}
+            onChange={handleSearchChange}
+          />
         </div>
         <div className="car-logos-container">
           {filteredCarBrands.map((brand) => (
-            <CarLogo
-              key={brand.name}
-              brand={brand.name}
-              selected={brand.name === selectedBrand}
-              onSelect={handleBrandSelect}
-            />
+            //<Link to = {'/'+ brand.name}>
+
+              <CarLogo
+                key={brand.name}
+                brand={brand.name}
+                selected={brand.name === selectedBrand}
+                onSelect={handleBrandSelect}
+              />
+            //</Link>
           ))}
         </div>
+        {selectedBrand && (
+          <div className="car-models-container">
+            <input
+              type="text"
+              placeholder={`Search ${selectedBrand} models`}
+              value={searchModelTerm}
+              onChange={handleModelSearchChange}
+            />
+            <ul>
+              {filteredModels.map((model) => (
+                <li key={model}>{model}</li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
-      <Footer />
+      <Footer/>
     </div>
   );
 }
