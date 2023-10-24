@@ -1,3 +1,6 @@
+
+/* App.css */
+
 @import url("https://fonts.googleapis.com/css?family=Montserrat:400,800");
 
 * {
@@ -13,7 +16,11 @@ body {
   font-family: "Montserrat", sans-serif;
   height: 100vh;
   margin: 0;
+
+  padding: 0; /* Remove margin and add padding */
+
   padding: 0; 
+
 }
 
 .App {
@@ -22,6 +29,18 @@ body {
   font-size: 18px;
   background-color: #f6f5f7;
   color: #ffffff;
+}
+
+
+
+@media (max-width: 768px) {
+  body {
+    padding: 10px; /* Adjust padding for smaller screens */
+  }
+
+  .App {
+    font-size: 16px; /* Adjust font size for smaller screens */
+  }
 }
 
 
