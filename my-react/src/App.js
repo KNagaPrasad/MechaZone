@@ -36,7 +36,8 @@ function App() {
           <Route path ="/logout" element={<Logout/>}/>
           <Route path ="/settings" element={<Settings/>}/>
           <Route path ="/bike-search" element={<BikePage/>}/>
-          <Route path="/carpage" element={<Carpage /> }/> 
+          <Route path ="/car-search" element={<Carpage/>}/>
+ 
 
 
 
