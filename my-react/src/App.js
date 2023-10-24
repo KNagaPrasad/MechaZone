@@ -1,6 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import HomePage from './Pages/HomePage';
+
+import Header from './components/Header'; // Import your Header component
+import Footer from './components/Footer'; // Import your Footer component
+
 import AboutUs from './components/AboutUs';
 import ContactUs from './components/ContactInfo';
 import SignupPage from './components/Component'; 
@@ -8,6 +12,7 @@ import LoginPage from './components/Component';
 import Navigation from './Links/Navigation';
 import Header from './components/Header'; 
 import Footer from './components/Footer'; 
+
 import './App.css';
 import Dashboard from './components/Dashboard';
 import Cars from './components/Car';
@@ -22,6 +27,13 @@ function App() {
   return (
     <Router>
       <div className="App">
+
+        <Header /> {/* Include your Header component */}
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+        </Routes>
+        <Footer /> {/* Include your Footer component */}
+
         <Header /> 
         <Navigation />
         <Routes>
@@ -43,6 +55,7 @@ function App() {
 
         </Routes>
         <Footer /> 
+
       </div>
     </Router>
   );
