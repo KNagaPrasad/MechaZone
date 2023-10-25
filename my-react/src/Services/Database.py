@@ -7,7 +7,7 @@ from sqlalchemy import create_engine
 #engine = create_engine('mssql+pyodbc://@' + 'DESKTOP-8FANH7R' + '/' + 'Mechazone' + '?trusted_connection=yes & driver=ODBC Driver 17 for SQL Server')Naga
 #engine = create_engine('mssql+pyodbc://@' + 'DESKTOP-E5BITMF' + '/' + 'Mechazone' + '?trusted_connection=yes & driver=SQL Server')Deepthi
 #engine = create_engine('mssql+pyodbc://@DESKTOP-E5BITMF/Mechazone?trusted_connection=yes&driver=SQL+Server')
-engine = create_engine('mssql+pyodbc://@' + 'HP' + '/' + 'Mechazone' + '?trusted_connection=yes & driver=ODBC Driver 17 for SQL Server')
+#engine = create_engine('mssql+pyodbc://@' + 'HP' + '/' + 'Mechazone' + '?trusted_connection=yes & driver=ODBC Driver 17 for SQL Server')
 
 
 
