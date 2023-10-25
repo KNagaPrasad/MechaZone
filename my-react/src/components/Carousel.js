@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { IoMdArrowDropleftCircle, IoMdArrowDroprightCircle } from "react-icons/io";
 import { Link } from 'react-router-dom';
 import '../CSS/HomePage.css';
 
@@ -27,10 +28,10 @@ function Carousel({ slides }) {
         </div>
       </div>
       <div className="arrow arrow-left" onClick={prevSlide}>
-        Left Arrow
+        <IoMdArrowDropleftCircle />
       </div>
       <div className="arrow arrow-right" onClick={nextSlide}>
-        Right Arrow
+        <IoMdArrowDroprightCircle />
       </div>
       <div className="indicators">
         {slides.map((_, idx) => (
