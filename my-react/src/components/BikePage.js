@@ -49,7 +49,7 @@ function CarPage() {
   };
 
 
-  const filteredCarBrands = carBrands.filter((brand) =>
+  const filteredBikeBrands = bikeBrands.filter((brand) =>
     brand.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -69,7 +69,7 @@ function CarPage() {
           </div>
         </div>
         <div className="Bike-logos-container">
-          {filteredCarBrands.map((brand) => (
+          {filteredBikeBrands.map((brand) => (
             <BikeLogo
               key={brand.name}
               brand={brand.name}

@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 const SidebarData = [
   {
     title: 'Home',
-    path: '/',
+    path: '/dashboard',
     icon: <FaHome />,
     cName: 'nav-text',
   },
