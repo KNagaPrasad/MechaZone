@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { Link } from 'react-router-dom';
 import Logo from './Logo';
 import '../CSS/Header.css';
@@ -13,11 +13,11 @@ function Header() {
     <header className="header">
       <div className="dashboard">
         <Logo />
-        <NavDropDown user={userFromRedux} />
+        {userFromRedux && <NavDropDown />}
       </div>
       <nav className="navigation">
         <ul>
-          {!userFromRedux && (
+        {userFromRedux ? null : ( 
             <>
               <li><Link to="/">Home</Link></li>
               <li><Link to="/about">About</Link></li>
@@ -29,11 +29,12 @@ function Header() {
       {userFromRedux && (
         <div className="cart-icon">
           <Link to="/cart">
-            {/* Set the color prop to white */}
+            {}
             <FaShoppingCart size={30} color="white" />
           </Link>
         </div>
       )}
+
     </header>
   );
 }

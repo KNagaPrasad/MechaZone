@@ -5,9 +5,9 @@ from sqlalchemy import create_engine
 #engine = create_engine('mssql+pyodbc://@' + 'VINEETHA\MSSQL' + '/' + 'Mechazone' + '?trusted_connection=yes & driver=ODBC Driver 17 for SQL Server')
 #engine = create_engine('mssql+pyodbc://@' + 'SREEHARI\MSSQLSERVER01' + '/' + 'Mechazone' + '?trusted_connection=yes & driver=ODBC Driver 17 for SQL Server')
 #engine = create_engine('mssql+pyodbc://@' + 'DESKTOP-8FANH7R' + '/' + 'Mechazone' + '?trusted_connection=yes & driver=ODBC Driver 17 for SQL Server')Naga
-#engine = create_engine('mssql+pyodbc://@' + 'DESKTOP-E5BITMF' + '/' + 'Mechazone' + '?trusted_connection=yes & driver=SQL Server')Deepthi
-#engine = create_engine('mssql+pyodbc://@DESKTOP-E5BITMF/Mechazone?trusted_connection=yes&driver=SQL+Server')
-engine = create_engine('mssql+pyodbc://@' + 'HP' + '/' + 'Mechazone' + '?trusted_connection=yes & driver=ODBC Driver 17 for SQL Server')
+#engine = create_engine('mssql+pyodbc://@' + 'DESKTOP-E5BITMF' + '/' + 'Mechazone' + '?trusted_connection=yes & driver=SQL Server')
+engine = create_engine('mssql+pyodbc://@DESKTOP-E5BITMF/Mechazone?trusted_connection=yes&driver=SQL+Server')
+#engine = create_engine('mssql+pyodbc://@' + 'HP' + '/' + 'Mechazone' + '?trusted_connection=yes & driver=ODBC Driver 17 for SQL Server')
 
 
 
@@ -42,17 +42,6 @@ class cars(Base):
     price: float = Column(Float, nullable = False)
     year: int = Column(Integer, nullable = False)
     
-# class Users(Base):
-#     __tablename__ = "Users"
-
-#     UserId: int = Column(Integer, primary_key=True)
-#     Name: str = Column(String(255))
-#     ContactId: int = Column(Integer, nullable = False)
-#     Email: str = Column(String, nullable = False)
-#     Address: str = Column(String, nullable = False)
-#     ZipCode: str = Column(String,nullable = False)
-#     UserName: str = Column(String, nullable = False)
-#     Password: str = Column(String, nullable = False)
 
 class Users(Base):
     __tablename__ = "Users"
