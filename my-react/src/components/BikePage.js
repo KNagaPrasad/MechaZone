@@ -2,9 +2,9 @@ import React from 'react';
 import BikeLogo from './BikeLogo';
 import Header from './Header';
 import Footer from './Footer';
-import '../CSS/Carpage.css';
+import '../CSS/BikePage.css';
 
-function CarPage() {
+function BikePage() {
   const [selectedBrand, setSelectedBrand] = React.useState(null);
   const [selectedModel, setSelectedModel] = React.useState(null);
   const [searchTerm, setSearchTerm] = React.useState('');
@@ -35,28 +35,50 @@ function CarPage() {
       name: 'Harley-Davidson',
       models: ['Sportster', 'Street Glide', 'Softail', 'Road King', 'Electra Glide'],
     }
-    // Add more bike brands as needed
   ];
 
   const handleBrandSelect = (brand) => {
     setSelectedBrand(brand);
     setSearchModelTerm('');
+    setSelectedModel(null);
   };
-  
+
+  const handleModelSelect = (model) => {
+    setSelectedModel(model);
+  };
+
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
     setSelectedBrand(null);
+    setSelectedModel(null);
   };
 
+  const handleModelSearchChange = (event) => {
+    setSearchModelTerm(event.target.value);
+  };
+
+  const handleGoClick = () => {
+    if (selectedBrand && selectedModel) {
+      console.log(`Redirecting to: /parts/${selectedBrand}/${selectedModel}`);
+    }
+  };
 
   const filteredBikeBrands = bikeBrands.filter((brand) =>
     brand.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  const filteredBikeModels = selectedBrand
+    ? bikeBrands
+        .find((brand) => brand.name === selectedBrand)
+        .models.filter((model) =>
+          model.toLowerCase().includes(searchModelTerm.toLowerCase())
+        )
+    : [];
+
   return (
     <div>
-      <Header /> 
-      <div className="BikePage-container">
+      <Header />
+      <div className="bikepage-container">
         <h1>Bike Brands</h1>
         <div className="search-container">
           <div className="search-input">
@@ -68,7 +90,7 @@ function CarPage() {
             />
           </div>
         </div>
-        <div className="Bike-logos-container">
+        <div className="bike-logos-container">
           {filteredBikeBrands.map((brand) => (
             <BikeLogo
               key={brand.name}
@@ -78,10 +100,39 @@ function CarPage() {
             />
           ))}
         </div>
+        {selectedBrand && (
+          <div className="bike-models-container">
+            <div className="search-model-container">
+              <input
+                type="text"
+                placeholder={`Enter your ${selectedBrand} model`}
+
+                value={searchModelTerm}
+                onChange={handleModelSearchChange}
+              />
+              <button className="search-button" onClick={handleGoClick}>
+                Search
+              </button>
+              {searchModelTerm && (
+                <div className="model-suggestions">
+                  {filteredBikeModels.map((model) => (
+                    <div
+                      key={model}
+                      onClick={() => handleModelSelect(model)}
+                      className="model-suggestion"
+                    >
+                      {model}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        )}
       </div>
       <Footer />
     </div>
   );
 }
 
-export default CarPage;
+export default BikePage;
