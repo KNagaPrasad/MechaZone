@@ -14,9 +14,8 @@ import Cars from './components/Car';
 import Bikes from './components/Bike';
 import Logout from './components/Logout';
 import Settings from './components/Settings';
-import BikePage from './components/BikePage';
 import Carpage from './components/Carpage';
-
+import BikePage from './components/BikePage';
 
 
 function App() {
@@ -37,9 +36,7 @@ function App() {
           <Route path ="/logout" element={<Logout/>}/>
           <Route path ="/settings" element={<Settings/>}/>
           <Route path ="/bike-search" element={<BikePage/>}/>
-          <Route path ="/car-search" element={<Carpage/>}/>
-          
-          
+          <Route path ="/car-search" element={<Carpage/>}/> 
         </Routes>
         <Footer /> 
       </div>

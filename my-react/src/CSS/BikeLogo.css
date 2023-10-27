@@ -67,5 +67,26 @@
 
   .bike-logo span {
     font-size: 18px;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    width: 50%;
+    max-width: 500px;
   }
-}
+  
+  @media (max-width: 768px) {
+    .bike-logo {
+      width: 150px;
+      height: 150px;
+    }
+  
+    .bike-logo img {
+      max-width: 70%;
+      max-height: 70%;
+    }
+  
+    .bike-logo span {
+      font-size: 18px;
+    }
+  }
+
