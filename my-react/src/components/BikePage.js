@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import BikeLogo from './BikeLogo';
 import Header from './Header';
@@ -10,6 +10,9 @@ function BikePage() {
   const [selectedModel, setSelectedModel] = React.useState(null);
   const [searchTerm, setSearchTerm] = React.useState('');
   const [searchModelTerm, setSearchModelTerm] = React.useState('');
+  const [error, setError] = useState(null);
+
+
   const bikeBrands = [
     {
       name: 'Honda',
@@ -59,10 +62,26 @@ function BikePage() {
 
   const navigate = useNavigate();
 
+  const showError = (message) => {
+    setError(message);
+    setTimeout(() => {
+      setError(null);
+    }, 3000);
+  };
   const handleGoClick = () => {
     if (selectedBrand && selectedModel) {
-      navigate(`/BikeParts/${selectedBrand}/${selectedModel}`);
-    }
+      const isModelAvailable = bikeBrands
+        .find((brand) => brand.name === selectedBrand)
+        .models.includes(selectedModel);
+  
+      if (isModelAvailable) {
+        navigate(`/BikeParts/${selectedBrand}/${selectedModel}`);
+      } else {
+        showError(`We don't have the ${selectedModel} model right now!`);
+      }
+    } else {
+      showError('Enter a valid model to search!');
+    }
   };
 
   const filteredBikeBrands = bikeBrands.filter((brand) =>
@@ -80,6 +99,7 @@ function BikePage() {
   return (
     <div>
       <Header />
+      {error && <ErrorPopup message={error} />}
       <div className="bikepage-container">
         <h1>Bike Brands</h1>
         <div className="search-container">
@@ -135,6 +155,14 @@ function BikePage() {
       </div>
      );
   }
+  const ErrorPopup = ({ message }) => {
+    return (
+      <div className="error-popup">
+        <p>{message}</p>
+      </div>
+    );
+  };
+  
 
 export default BikePage;
 

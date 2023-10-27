@@ -10,6 +10,7 @@ function CarPage() {
   const [selectedModel, setSelectedModel] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [searchModelTerm, setSearchModelTerm] = useState('');
+  const [error, setError] = useState(null);
 
   const carBrands = [
     {
@@ -101,9 +102,26 @@ function CarPage() {
     setSearchModelTerm(event.target.value);
   };
 
+  const showError = (message) => {
+    setError(message);
+    setTimeout(() => {
+      setError(null);
+    }, 3000);
+  };
+
   const handleGoClick = () => {
     if (selectedBrand && selectedModel) {
-      navigate(`/CarParts/${selectedBrand}/${selectedModel}`);
+      const isModelAvailable = carBrands
+        .find((brand) => brand.name === selectedBrand)
+        .models.includes(selectedModel);
+  
+      if (isModelAvailable) {
+        navigate(`/CarParts/${selectedBrand}/${selectedModel}`);
+      } else {
+        showError(`We don't have the ${selectedModel} model right now!`);
+      }
+    } else {
+      showError('Enter a valid model to search!');
     }
   };
 
@@ -122,6 +140,7 @@ function CarPage() {
   return (
     <div>
       <Header />
+      {error && <ErrorPopup message={error} />}
       <div className="carpage-container">
         <h1>Car Brands</h1>
         <div className="search-container">
@@ -177,5 +196,13 @@ function CarPage() {
     </div>
   );
 }
+
+const ErrorPopup = ({ message }) => {
+  return (
+    <div className="error-popup">
+      <p>{message}</p>
+    </div>
+  );
+};
 
 export default CarPage;

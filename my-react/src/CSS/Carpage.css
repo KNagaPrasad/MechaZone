@@ -43,7 +43,7 @@
 .car-models-container .search-model-container {
   display: flex;
   align-items: center;
-  margin-bottom: 10px; /* Add some margin between the input and suggestions */
+  margin-bottom: 10px; 
 }
 
 .car-models-container input[type="text"] {
@@ -61,7 +61,17 @@
   padding: 10px 20px;
   font-size: 16px;
   margin-left: 10px;
-  margin-right: 10px; /* Add margin-right for spacing */
+  margin-right: 10px; 
+}
+
+error-popup {
+  position: fixed;
+  bottom: 70px;
+  right: 100px;
+  background-color: #a10000;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 4px;
 }
 
 .model-suggestions {
