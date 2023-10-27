@@ -1,12 +1,17 @@
-import React, { useState } from 'react';
-import BikeLogo from './BikeLogo'; 
+import React, {useState} from 'react';
+import { useNavigate } from 'react-router-dom';
+import BikeLogo from './BikeLogo';
+import Header from './Header';
+import Footer from './Footer';
 import '../CSS/BikePage.css';
-import { Link } from 'react-router-dom';
 
 function BikePage() {
-  const [selectedBrand, setSelectedBrand] = useState(null);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [searchModelTerm, setSearchModelTerm] = useState('');
+  const [selectedBrand, setSelectedBrand] = React.useState(null);
+  const [selectedModel, setSelectedModel] = React.useState(null);
+  const [searchTerm, setSearchTerm] = React.useState('');
+  const [searchModelTerm, setSearchModelTerm] = React.useState('');
+  const [error, setError] = useState(null);
+
 
   const bikeBrands = [
     {
@@ -33,72 +38,131 @@ function BikePage() {
       name: 'Harley-Davidson',
       models: ['Sportster', 'Street Glide', 'Softail', 'Road King', 'Electra Glide'],
     }
-    // Add more bike brands as needed
   ];
 
   const handleBrandSelect = (brand) => {
     setSelectedBrand(brand);
+    setSearchModelTerm('');
+    setSelectedModel(null);
+  };
+
+  const handleModelSelect = (model) => {
+    setSelectedModel(model);
   };
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
+    setSelectedBrand(null);
+    setSelectedModel(null);
   };
 
   const handleModelSearchChange = (event) => {
     setSearchModelTerm(event.target.value);
   };
 
+  const navigate = useNavigate();
+
+  const showError = (message) => {
+    setError(message);
+    setTimeout(() => {
+      setError(null);
+    }, 3000);
+  };
+  const handleGoClick = () => {
+    if (selectedBrand && selectedModel) {
+      const isModelAvailable = bikeBrands
+        .find((brand) => brand.name === selectedBrand)
+        .models.includes(selectedModel);
+  
+      if (isModelAvailable) {
+        navigate(`/BikeParts/${selectedBrand}/${selectedModel}`);
+      } else {
+        showError(`We don't have the ${selectedModel} model right now!`);
+      }
+    } else {
+      showError('Enter a valid model to search!');
+    }
+  };
+
   const filteredBikeBrands = bikeBrands.filter((brand) =>
     brand.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const selectedBrandObject = bikeBrands.find((brand) => brand.name === selectedBrand);
-  const filteredModels = selectedBrandObject
-    ? selectedBrandObject.models.filter((model) =>
-        model.toLowerCase().includes(searchModelTerm.toLowerCase())
-      )
+  const filteredBikeModels = selectedBrand
+    ? bikeBrands
+        .find((brand) => brand.name === selectedBrand)
+        .models.filter((model) =>
+          model.toLowerCase().includes(searchModelTerm.toLowerCase())
+        )
     : [];
 
   return (
-    <div className="bike-page">
-      <h1>Bike Brands</h1>
-      <div className="search-container">
-        <input
-          type="text"
-          placeholder="Search bike brands"
-          value={searchTerm}
-          onChange={handleSearchChange}
-        />
-      </div>
-      <div className="bike-logos-container">
-        {filteredBikeBrands.map((brand) => (
-          <Link to={'/' + brand.name}>
+    <div>
+      <Header />
+      {error && <ErrorPopup message={error} />}
+      <div className="bikepage-container">
+        <h1>Bike Brands</h1>
+        <div className="search-container">
+          <div className="search-input">
+            <input
+              type="text"
+              placeholder="Search bike brands"
+              value={searchTerm}
+              onChange={handleSearchChange}
+            />
+          </div>
+        </div>
+        <div className="bike-logos-container">
+          {filteredBikeBrands.map((brand) => (
             <BikeLogo
               key={brand.name}
               brand={brand.name}
               selected={brand.name === selectedBrand}
               onSelect={handleBrandSelect}
             />
-          </Link>
-        ))}
-      </div>
-      {selectedBrand && (
-        <div className="bike-models-container">
-          <input
-            type="text"
-            placeholder={`Search ${selectedBrand} models`}
-            value={searchModelTerm}
-            onChange={handleModelSearchChange}
-          />
-          <ul>
-            {filteredModels.map((model) => (
-              <li key={model}>{model}</li>
-            ))}
-          </ul>
+          ))}
         </div>
-      )}
-    </div>
-  );
-}
+        {selectedBrand && (
+          <div className="bike-models-container">
+            <div className="search-model-container">
+              <input
+                type="text"
+                placeholder={`Enter your ${selectedBrand} model`}
+                value={searchModelTerm}
+                onChange={handleModelSearchChange}
+              />
+              <button className="search-button" onClick={handleGoClick}>
+                Search
+              </button>
+              {searchModelTerm && (
+                <div className="model-suggestions">
+                  {filteredBikeModels.map((model) => (
+                    <div
+                      key={model}
+                      onClick={() => handleModelSelect(model)}
+                      className="model-suggestion"
+                    >
+                      {model}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+        </div>
+        <Footer/>
+      </div>
+     );
+  }
+  const ErrorPopup = ({ message }) => {
+    return (
+      <div className="error-popup">
+        <p>{message}</p>
+      </div>
+    );
+  };
+  
 
 export default BikePage;
+

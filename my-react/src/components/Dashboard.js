@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Dashboard = () => (
   <>
-    <Link to={"/car-search"}>
+    <Link to="/car-search"> 
       <svg height="260" width="260">
         <circle cx="130" cy="120" r="40%" fill="black" />
         <text x="80" y="130" fill="white" style={{ fontSize: 40 }}>
@@ -12,7 +12,7 @@ const Dashboard = () => (
       </svg>
     </Link>
     
-    <Link to="/bikes">
+    <Link to="/bike-search">
       <svg height="260" width="260">
         <circle cx="130" cy="120" r="40%" fill="black" />
         <text x="80" y="130" fill="white" style={{ fontSize: 40 }}>

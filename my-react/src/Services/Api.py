@@ -2,8 +2,10 @@ from flask import Flask
 from flask import Flask, request
 from flask import jsonify
 
+
 from Database import getAllBikesFrom_db, getAllCarsFrom_db, login_db, register_db,getAllSparesForCars,getAllSparesForBikes
 
+from Database import getAllBikesFrom_db, getAllCarsFrom_db, login_db, register_db,getAllSparesForCars
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -42,6 +44,7 @@ def carspares():
     req = request.get_json()
     res = getAllSparesForCars(req)
     return jsonify(res)
+
 
 
 @app.route('/getBikeSpares',methods = ['post'])

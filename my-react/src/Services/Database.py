@@ -4,9 +4,10 @@ from sqlalchemy import create_engine
 
 #engine = create_engine('mssql+pyodbc://@' + 'VINEETHA\MSSQL' + '/' + 'Mechazone' + '?trusted_connection=yes & driver=ODBC Driver 17 for SQL Server')
 #engine = create_engine('mssql+pyodbc://@' + 'SREEHARI\MSSQLSERVER01' + '/' + 'Mechazone' + '?trusted_connection=yes & driver=ODBC Driver 17 for SQL Server')
-#engine = create_engine('mssql+pyodbc://@' + 'DESKTOP-8FANH7R' + '/' + 'Mechazone' + '?trusted_connection=yes & driver=ODBC Driver 17 for SQL Server')Naga
+engine = create_engine('mssql+pyodbc://@' + 'DESKTOP-8FANH7R' + '/' + 'Mechazone' + '?trusted_connection=yes & driver=ODBC Driver 17 for SQL Server')
+
 #engine = create_engine('mssql+pyodbc://@' + 'DESKTOP-E5BITMF' + '/' + 'Mechazone' + '?trusted_connection=yes & driver=SQL Server')
-engine = create_engine('mssql+pyodbc://@DESKTOP-E5BITMF/Mechazone?trusted_connection=yes&driver=SQL+Server')
+#engine = create_engine('mssql+pyodbc://@DESKTOP-E5BITMF/Mechazone?trusted_connection=yes&driver=SQL+Server')
 #engine = create_engine('mssql+pyodbc://@' + 'HP' + '/' + 'Mechazone' + '?trusted_connection=yes & driver=ODBC Driver 17 for SQL Server')
 
 
@@ -74,6 +75,15 @@ class Bike_Spares(Base):
     warranty: int = Column(Integer, nullable = True)
     c_id: int = Column(Integer, nullable = False)     
    
+
+class Car_Spares(Base):
+    __tablename__ = "Car_Spares"
+
+    s_id: int = Column(Integer, primary_key=True)
+    name: str = Column(String,nullable=False )
+    price: float = Column(Float, nullable = False)
+    warranty: int = Column(Integer, nullable = True)
+    c_id: int = Column(Integer, nullable = False)
 
 
 def register_db(req):
@@ -161,9 +171,10 @@ def getAllCarsFrom_db():
     except Exception as e:
         print(e)
 
-       
 
-       
+     
+        return{}
+
     
 def getAllSparesForCars(req):
     try:
@@ -185,6 +196,7 @@ def getAllSparesForCars(req):
             return spares
     except Exception as e:
         print(e)
+
         return [{}]
     
 def getAllSparesForBikes(req):
@@ -208,6 +220,5 @@ def getAllSparesForBikes(req):
     except Exception as e:
         print(e)
         return [{}]
-
 
 
