@@ -102,7 +102,9 @@ function CarPage() {
   };
 
   const handleGoClick = () => {
-    
+    if (selectedBrand && selectedModel) {
+      navigate(`/CarParts/${selectedBrand}/${selectedModel}`);
+    }
   };
 
   const filteredCarBrands = carBrands.filter((brand) =>
@@ -147,7 +149,7 @@ function CarPage() {
             <div className="search-model-container">
               <input
                 type="text"
-                placeholder={'Enter your ${selectedBrand} model'}
+                placeholder={`Enter your ${selectedBrand} model`}
                 value={searchModelTerm}
                 onChange={handleModelSearchChange}
               />
