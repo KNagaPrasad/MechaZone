@@ -17,6 +17,7 @@ import Settings from './components/Settings';
 import Carpage from './components/Carpage';
 import BikePage from './components/BikePage';
 
+
 function App() {
   return (
     <Router>
@@ -35,8 +36,8 @@ function App() {
           <Route path ="/logout" element={<Logout/>}/>
           <Route path ="/settings" element={<Settings/>}/>
           <Route path ="/bike-search" element={<BikePage/>}/>
-          <Route path ="/car-search" element={<Carpage/>}/>        
-          </Routes>
+          <Route path ="/car-search" element={<Carpage/>}/> 
+        </Routes>
         <Footer /> 
       </div>
     </Router>

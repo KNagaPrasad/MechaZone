@@ -9,7 +9,6 @@ function BikePage() {
   const [selectedModel, setSelectedModel] = React.useState(null);
   const [searchTerm, setSearchTerm] = React.useState('');
   const [searchModelTerm, setSearchModelTerm] = React.useState('');
-
   const bikeBrands = [
     {
       name: 'Honda',
@@ -61,6 +60,7 @@ function BikePage() {
     if (selectedBrand && selectedModel) {
       console.log(`Redirecting to: /parts/${selectedBrand}/${selectedModel}`);
     }
+
   };
 
   const filteredBikeBrands = bikeBrands.filter((brand) =>
@@ -129,10 +129,11 @@ function BikePage() {
             </div>
           </div>
         )}
+        </div>
+        <Footer/>
       </div>
-      <Footer />
-    </div>
-  );
-}
+     );
+  }
 
 export default BikePage;
+
