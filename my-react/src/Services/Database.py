@@ -4,10 +4,10 @@ from sqlalchemy import create_engine
 
 #engine = create_engine('mssql+pyodbc://@' + 'VINEETHA\MSSQL' + '/' + 'Mechazone' + '?trusted_connection=yes & driver=ODBC Driver 17 for SQL Server')
 #engine = create_engine('mssql+pyodbc://@' + 'SREEHARI\MSSQLSERVER01' + '/' + 'Mechazone' + '?trusted_connection=yes & driver=ODBC Driver 17 for SQL Server')
-#engine = create_engine('mssql+pyodbc://@' + 'DESKTOP-8FANH7R' + '/' + 'Mechazone' + '?trusted_connection=yes & driver=ODBC Driver 17 for SQL Server')Naga
+engine = create_engine('mssql+pyodbc://@' + 'DESKTOP-8FANH7R' + '/' + 'Mechazone' + '?trusted_connection=yes & driver=ODBC Driver 17 for SQL Server')
 
 #engine = create_engine('mssql+pyodbc://@' + 'DESKTOP-E5BITMF' + '/' + 'Mechazone' + '?trusted_connection=yes & driver=SQL Server')
-ython engine = create_engine('mssql+pyodbc://@DESKTOP-E5BITMF/Mechazone?trusted_connection=yes&driver=SQL+Server')
+#engine = create_engine('mssql+pyodbc://@DESKTOP-E5BITMF/Mechazone?trusted_connection=yes&driver=SQL+Server')
 #engine = create_engine('mssql+pyodbc://@' + 'HP' + '/' + 'Mechazone' + '?trusted_connection=yes & driver=ODBC Driver 17 for SQL Server')
 
 
@@ -55,6 +55,15 @@ class Users(Base):
     ZipCode: str = Column(String(20), nullable=False)
     UserName: str = Column(String(255), nullable=False)
     Password: str = Column(String(255), nullable=False)  # Update the length to match your database schema
+
+class Car_Spares(Base):
+    __tablename__ = "Car_Spares"
+
+    s_id: int = Column(Integer, primary_key=True)
+    name: str = Column(String,nullable=False )
+    price: float = Column(Float, nullable = False)
+    warranty: int = Column(Integer, nullable = True)
+    c_id: int = Column(Integer, nullable = False)
 
 
 def register_db(req):
@@ -142,3 +151,25 @@ def getAllCarsFrom_db():
     except Exception as e:
         print(e)
         return{}
+    
+def getAllSparesForCars(req):
+    try:
+        from sqlalchemy import text
+        with Session(engine) as session:
+            sql_statement = text("SELECT * FROM Car_Spares where car_id=:carId" )
+            query = session.query(Car_Spares).from_statement(sql_statement)
+            query = query.params(carId=req['carId'])
+            sparesResult = query.all()
+            spares = []
+            for spare in sparesResult:
+                spares.append({
+                    "s_id": spare.s_id,
+                    "name": spare.name,
+                    "price": spare.price,
+                    "warranty": spare.warranty
+                })
+
+            return spares
+    except Exception as e:
+        print(e)
+        return [{}]
