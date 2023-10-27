@@ -18,6 +18,7 @@ import BikePage from './components/BikePage';
 import Carpage from './components/Carpage';
 
 
+
 function App() {
   return (
     <Router>
@@ -37,6 +38,8 @@ function App() {
           <Route path ="/settings" element={<Settings/>}/>
           <Route path ="/bike-search" element={<BikePage/>}/>
           <Route path ="/car-search" element={<Carpage/>}/>
+          
+          
         </Routes>
         <Footer /> 
       </div>
