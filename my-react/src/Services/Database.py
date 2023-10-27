@@ -76,15 +76,6 @@ class Bike_Spares(Base):
     c_id: int = Column(Integer, nullable = False)     
    
 
-class Car_Spares(Base):
-    __tablename__ = "Car_Spares"
-
-    s_id: int = Column(Integer, primary_key=True)
-    name: str = Column(String,nullable=False )
-    price: float = Column(Float, nullable = False)
-    warranty: int = Column(Integer, nullable = True)
-    c_id: int = Column(Integer, nullable = False)
-
 
 def register_db(req):
     from sqlalchemy import insert
