@@ -16,6 +16,7 @@ import Logout from './components/Logout';
 import Settings from './components/Settings';
 import Carpage from './components/Carpage';
 import BikePage from './components/BikePage';
+import CarParts from './components/CarParts'; 
 
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
           <Route path ="/settings" element={<Settings/>}/>
           <Route path ="/bike-search" element={<BikePage/>}/>
           <Route path ="/car-search" element={<Carpage/>}/> 
+          <Route path="/carparts/:brand/:model" element={<CarParts />} />
         </Routes>
         <Footer /> 
       </div>
