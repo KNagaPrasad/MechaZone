@@ -53,7 +53,27 @@ class Users(Base):
     Address: str = Column(String(255), nullable=False)
     ZipCode: str = Column(String(20), nullable=False)
     UserName: str = Column(String(255), nullable=False)
-    Password: str = Column(String(255), nullable=False)  # Update the length to match your database schema
+    Password: str = Column(String(255), nullable=False)
+    
+class Car_Spares(Base):
+    __tablename__ = "Car_Spares"
+
+    s_id: int = Column(Integer, primary_key=True)
+    name: str = Column(String,nullable=False )
+    price: float = Column(Float, nullable = False)
+    warranty: int = Column(Integer, nullable = True)
+    c_id: int = Column(Integer, nullable = False)  
+
+
+class Bike_Spares(Base):
+    __tablename__ = "Bike_Spares"
+
+    s_id: int = Column(Integer, primary_key=True)
+    name: str = Column(String,nullable=False )
+    price: float = Column(Float, nullable = False)
+    warranty: int = Column(Integer, nullable = True)
+    c_id: int = Column(Integer, nullable = False)     
+   
 
 
 def register_db(req):
@@ -140,4 +160,54 @@ def getAllCarsFrom_db():
 
     except Exception as e:
         print(e)
-        return{}
+
+       
+
+       
+    
+def getAllSparesForCars(req):
+    try:
+        from sqlalchemy import text
+        with Session(engine) as session:
+            sql_statement = text("SELECT * FROM Car_Spares where car_id=:carId" )
+            query = session.query(Car_Spares).from_statement(sql_statement)
+            query = query.params(carId=req['carId'])
+            sparesResult = query.all()
+            spares = []
+            for spare in sparesResult:
+                spares.append({
+                    "s_id": spare.s_id,
+                    "name": spare.name,
+                    "price": spare.price,
+                    "warranty": spare.warranty
+                })
+
+            return spares
+    except Exception as e:
+        print(e)
+        return [{}]
+    
+def getAllSparesForBikes(req):
+    try:
+        from sqlalchemy import text
+        with Session(engine) as session:
+            sql_statement = text("SELECT * FROM Bike_Spares where bike_id=:bikeId" )
+            query = session.query(Bike_Spares).from_statement(sql_statement)
+            query = query.params(bikeId=req['bikeId'])
+            sparesResult = query.all()
+            spares = []
+            for spare in sparesResult:
+                spares.append({
+                    "s_id": spare.s_id,
+                    "name": spare.name,
+                    "price": spare.price,
+                    "warranty": spare.warranty
+                })
+
+            return spares
+    except Exception as e:
+        print(e)
+        return [{}]
+
+
+
