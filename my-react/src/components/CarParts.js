@@ -61,6 +61,7 @@ function CarParts() {
             </div>
             <div className="button-container">
               <button className="add-to-cart">Add to Cart</button>
+              <button className="Buy-now">Buy Now</button>
             </div>
           </div>
         ))}

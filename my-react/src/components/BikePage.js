@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import BikeLogo from './BikeLogo';
 import Header from './Header';
 import Footer from './Footer';
@@ -56,11 +57,12 @@ function BikePage() {
     setSearchModelTerm(event.target.value);
   };
 
+  const navigate = useNavigate();
+
   const handleGoClick = () => {
     if (selectedBrand && selectedModel) {
-      console.log(`Redirecting to: /parts/${selectedBrand}/${selectedModel}`);
+      navigate(`/BikeParts/${selectedBrand}/${selectedModel}`);
     }
-
   };
 
   const filteredBikeBrands = bikeBrands.filter((brand) =>
@@ -106,7 +108,6 @@ function BikePage() {
               <input
                 type="text"
                 placeholder={`Enter your ${selectedBrand} model`}
-
                 value={searchModelTerm}
                 onChange={handleModelSearchChange}
               />

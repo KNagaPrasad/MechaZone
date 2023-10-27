@@ -17,6 +17,7 @@ import Settings from './components/Settings';
 import Carpage from './components/Carpage';
 import BikePage from './components/BikePage';
 import CarParts from './components/CarParts'; 
+import BikeParts from './components/Bikepart';
 
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
           <Route path ="/bike-search" element={<BikePage/>}/>
           <Route path ="/car-search" element={<Carpage/>}/> 
           <Route path="/carparts/:brand/:model" element={<CarParts />} />
+          <Route path="/bikeparts/:brand/:model" element={<BikeParts />} />
         </Routes>
         <Footer /> 
       </div>
