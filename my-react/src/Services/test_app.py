@@ -37,6 +37,26 @@ def test_register_user(client):
     assert response.status_code == 200
     assert response.json['issuccess'] is True
 
+def test_login(client):
+    user_data = {
+        "Name": "Test User",
+        "ContactId": "1234567890",
+        "Email": "test@example.com",
+        "Address": "123 Test St",
+        "ZipCode": "12345",
+        "UserName": "testuser",
+        "Password": "testpassword"
+    }
+    register_db(user_data)  # Register the user first
+    response = client.post('/login', json={'UserName': 'testuser', 'Password': 'testpassword'})
+    assert response.status_code == 200
+    assert 'userId' in response.json
+
+def test_login_successful(client):
+    response = client.post('/login', json={'UserName': 'testuser', 'Password': 'testpassword'})
+    assert response.status_code == 200
+    assert 'userId' in response.json
+
 def test_get_bike_spares():
     with app.test_client() as client:
         response = client.post('/getBikeSpares', json={'bikeId': 1})
