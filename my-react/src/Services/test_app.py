@@ -4,7 +4,11 @@ from Database import (
     register_db,
     login_db,
     getAllBikesFrom_db,
+    getAllSparesForBikes,
+    getAllCarsFrom_db,
+    getAllSparesForCars,
     getAllSparesForBikes
+
 )
 
 @pytest.fixture
@@ -42,4 +46,14 @@ def test_get_bikes():
     with app.test_client() as client:
         response = client.get('/bike')
         assert response.status_code == 200   
+
+def test_get_all_cars(client):
+    response = client.get('/car')
+    assert response.status_code == 200
+    assert isinstance(response.json, list)
+
+def test_get_car_spares():
+    with app.test_client() as client:
+        response = client.post('/getCarSpares', json={'carId': 1})
+
 
