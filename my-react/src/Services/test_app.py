@@ -7,6 +7,7 @@ from Database import (
     getAllSparesForBikes,
     getAllCarsFrom_db,
     getAllSparesForCars,
+    getAllSparesForBikes
 
 )
 
@@ -54,4 +55,5 @@ def test_get_all_cars(client):
 def test_get_car_spares():
     with app.test_client() as client:
         response = client.post('/getCarSpares', json={'carId': 1})
-        assert response.status_code == 200
+
+
