@@ -10,3 +10,10 @@ jobs:
       - run:
           name: Start ReactJS
           command: npm start
+
+  run-pytest:
+    steps:
+      - checkout
+      - run:
+          name: Run Pytest
+          command: pytest
