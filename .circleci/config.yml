@@ -11,9 +11,18 @@ jobs:
           name: Start ReactJS
           command: npm start
 
+  run-python-api:
+    steps:
+      - checkout
+      - run:
+          name: Start Python API
+          command: python Api.py        
+
   run-pytest:
     steps:
       - checkout
       - run:
           name: Run Pytest
           command: pytest
+
+          
