@@ -55,7 +55,7 @@ def test_login(client):
 def test_login_successful(client):
     response = client.post('/login', json={'UserName': 'testuser', 'Password': 'testpassword'})
     assert response.status_code == 200
-    assert 'userId' in response.json
+    assert 'userId' in response.json
 
 def test_get_bike_spares():
     with app.test_client() as client:
