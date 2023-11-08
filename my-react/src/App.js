@@ -20,6 +20,8 @@ import CarParts from './components/CarParts';
 import BikeParts from './components/Bikepart';
 import CarSpares from './components/CarSpares';
 import BikeSpares from './components/BikeSpares';
+import Cart from './components/Cart'; 
+
 
 
 
@@ -46,6 +48,7 @@ function App() {
           <Route path="/bikeparts/:brand/:model" element={<BikeParts />} />
           <Route path ="/car-spares/:carId" element={<CarSpares/>}/>
           <Route path ="/bike-spares/:bikeId" element={<BikeSpares/>}/>
+          <Route path="/cart" element={<Cart />} />
 
         </Routes>
         <Footer /> 
