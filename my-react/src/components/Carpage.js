@@ -196,7 +196,6 @@ function CarPage() {
     </div>
   );
 }
-
 const ErrorPopup = ({ message }) => {
   return (
     <div className="error-popup">
