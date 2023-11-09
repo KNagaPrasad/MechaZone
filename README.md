@@ -15,7 +15,7 @@ Customers have the flexibility to choose how they want to receive their purchase
 ## 3. Repair Shop Integration
 MECHAZONE offers a seamless integration with local repair shops, providing users with the option to have their purchased parts professionally installed. This feature enhances the overall user experience by ensuring that vehicle owners can maintain and upgrade their vehicles without the hassle of DIY installations.
 
-### 4. Profile Management
+## 4. Profile Management
 
 MECHAZONE provides users with the ability to manage their profiles, track their orders, and access purchase history. This feature helps customers stay organized and informed about their automotive needs.
 
