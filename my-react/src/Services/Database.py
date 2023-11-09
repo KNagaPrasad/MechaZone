@@ -4,13 +4,11 @@ from sqlalchemy import create_engine
 
 #engine = create_engine('mssql+pyodbc://@' + 'VINEETHA\MSSQL' + '/' + 'Mechazone' + '?trusted_connection=yes & driver=ODBC Driver 17 for SQL Server')
 #engine = create_engine('mssql+pyodbc://@' + 'SREEHARI\MSSQLSERVER01' + '/' + 'Mechazone' + '?trusted_connection=yes & driver=ODBC Driver 17 for SQL Server')
-engine = create_engine('mssql+pyodbc://@' + 'DESKTOP-8FANH7R' + '/' + 'Mechazone' + '?trusted_connection=yes & driver=ODBC Driver 17 for SQL Server')
+#engine = create_engine('mssql+pyodbc://@' + 'DESKTOP-8FANH7R' + '/' + 'Mechazone' + '?trusted_connection=yes & driver=ODBC Driver 17 for SQL Server')
 
-#engine = create_engine('mssql+pyodbc://@' + 'DESKTOP-E5BITMF' + '/' + 'Mechazone' + '?trusted_connection=yes & driver=SQL Server')
+engine = create_engine('mssql+pyodbc://@' + 'DESKTOP-E5BITMF' + '/' + 'Mechazone' + '?trusted_connection=yes & driver=SQL Server')
 #engine = create_engine('mssql+pyodbc://@DESKTOP-E5BITMF/Mechazone?trusted_connection=yes&driver=SQL+Server')
 #engine = create_engine('mssql+pyodbc://@' + 'HP' + '/' + 'Mechazone' + '?trusted_connection=yes & driver=ODBC Driver 17 for SQL Server')
-
-
 
 from sqlalchemy import String
 from sqlalchemy.ext.declarative import declarative_base
@@ -21,19 +19,10 @@ from sqlalchemy.orm import Session
 
 class Base:
     pass
-    #_allow_unmapped_ = True
+    #allow_unmapped = True
 
 
 Base = declarative_base(cls=Base)
-  
-
-class bikes(Base):
-    __tablename__ = "bikes"
-
-    bike_id: int = Column(Integer, primary_key=True)
-    model: str = Column(String,nullable=False )
-    price: str = Column(Float, nullable = False)
-    year :int = Column(Integer,nullable=False )
 
 class cars(Base):
     __tablename__ = "cars"
@@ -43,14 +32,15 @@ class cars(Base):
     price: float = Column(Float, nullable = False)
     year: int = Column(Integer, nullable = False)
 
-class Bikes(Base):
+class bikes(Base):
     __tablename__ = "bikes"
 
     bike_id: int = Column(Integer, primary_key=True)
-    model: str = Column(String,nullable=False )
-    price: str = Column(Float, nullable = False)
-    year :int = Column(Integer,nullable=False )
-    brand: str = Column(String,nullable=False)    
+    model: str = Column(String, nullable=False)
+    price: float = Column(Float, nullable=False)  # Changed this line
+    year: int = Column(Integer, nullable=False)
+    brand: str = Column(String, nullable=False)
+
     
 
 class Users(Base):
@@ -87,7 +77,7 @@ class Bike_Spares(Base):
 def getBikeBrands(req):
     try:
         with Session(engine) as session:
-            query= session.query(Bikes).filter(Bikes.brand.like("%"+req['brand']+"%"))
+            query = session.query(bikes).filter(bikes.brand.like("%"+req['brand']+"%"))
             brandsResult = query.all()
             brands=[]
             for brand in brandsResult:
@@ -95,14 +85,14 @@ def getBikeBrands(req):
             return brands
     except Exception as e:
         print(e)
-        return []  
+        return []
     
 def getBikeModelsByBrand(req):
     try:
         from sqlalchemy import text
         with Session(engine) as session:
             sql_statement = text("select * from bikes where brand = :brand")
-            query = session.query(Bikes).from_statement(sql_statement)
+            query = session.query(bikes).from_statement(sql_statement)
             query = query.params(brand=req['brand'])
             modelsResult = query.all()
             models=[]
@@ -165,8 +155,9 @@ def getAllBikesFrom_db():
                 bikesList.append({
                 "bike_id": bikes.bike_id,
                 "model" : bikes.model,
-                "year": bikes.year,
                 "price": bikes.price,
+                "year": bikes.year,
+                "brand":bikes.brand
                 
             })
            
@@ -198,10 +189,7 @@ def getAllCarsFrom_db():
             return carsList
 
     except Exception as e:
-        print(e)
-
-
-     
+        print(e)    
         return{}
 
     
@@ -277,4 +265,4 @@ def getBrands(req):
             return brands
     except Exception as e:
         print(e)
-        return []    
+        return []
