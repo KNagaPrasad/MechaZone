@@ -3,9 +3,9 @@ from flask import Flask, request
 from flask import jsonify
 
 
-from Database import getAllBikesFrom_db, getAllCarsFrom_db, login_db, register_db,getAllSparesForCars,getAllSparesForBikes
+#from Database import getAllBikesFrom_db, getAllCarsFrom_db, login_db, register_db,getAllSparesForCars,getAllSparesForBikes
 
-from Database import getBikeModelsByBrand,getBikeBrands,getAllBikesFrom_db, getAllCarsFrom_db, login_db, register_db,getAllSparesForCars
+from Database import getBikeModelsByBrand,getBikeBrands,getAllBikesFrom_db, getAllCarsFrom_db, login_db, register_db,getAllSparesForCars,getModelsByBrand,getAllSparesForBikes,getBrands
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -45,8 +45,6 @@ def carspares():
     res = getAllSparesForCars(req)
     return jsonify(res)
 
-
-
 @app.route('/getBikeSpares',methods = ['post'])
 def bikespares():
     req = request.get_json()
@@ -66,7 +64,17 @@ def bikemodelbybrand():
     res = getBikeModelsByBrand(req)
     return jsonify(res)
 
+@app.route('/getModelsByBrand',methods = ['post'])
+def cars():
+    req = request.get_json()
+    res = getModelsByBrand(req)
+    return jsonify(res)
 
+@app.route('/getBrands',methods = ['post'])
+def brands():
+    req = request.get_json()
+    res = getBrands(req)
+    return jsonify(res)
 
 if __name__ == '__main__':
     app.run()

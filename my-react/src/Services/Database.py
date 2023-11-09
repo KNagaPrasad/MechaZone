@@ -42,6 +42,15 @@ class cars(Base):
     model: str = Column(String,nullable=False )
     price: float = Column(Float, nullable = False)
     year: int = Column(Integer, nullable = False)
+
+class Bikes(Base):
+    __tablename__ = "bikes"
+
+    bike_id: int = Column(Integer, primary_key=True)
+    model: str = Column(String,nullable=False )
+    price: str = Column(Float, nullable = False)
+    year :int = Column(Integer,nullable=False )
+    brand: str = Column(String,nullable=False)    
     
 
 class Users(Base):
@@ -241,4 +250,31 @@ def getAllSparesForBikes(req):
         print(e)
         return [{}]
 
-
+def getModelsByBrand(req):
+    try:
+        from sqlalchemy import text
+        with Session(engine) as session:
+            sql_statement = text("select * from cars where brand = :brand")
+            query = session.query(cars).from_statement(sql_statement)
+            query = query.params(brand=req['brand'])
+            modelsResult = query.all()
+            models=[]
+            for model in modelsResult:
+                models.append(model.model)
+            return models
+    except Exception as e:
+        print(e)
+        return []
+        
+def getBrands(req):
+    try:
+        with Session(engine) as session:
+            query= session.query(cars).filter(cars.brand.like("%"+req['brand']+"%"))
+            brandsResult = query.all()
+            brands=[]
+            for brand in brandsResult:
+                brands.append(brand.brand)
+            return brands
+    except Exception as e:
+        print(e)
+        return []    
