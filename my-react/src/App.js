@@ -15,7 +15,6 @@ import Bikes from './components/Bike';
 import Logout from './components/Logout';
 import Settings from './components/Settings';
 import Carpage from './components/Carpage';
-import BikePage from './components/BikePage';
 import CarParts from './components/CarParts'; 
 import BikeParts from './components/Bikepart';
 import CarSpares from './components/CarSpares';
