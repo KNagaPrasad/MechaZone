@@ -5,7 +5,7 @@ from flask import jsonify
 
 #from Database import getAllBikesFrom_db, getAllCarsFrom_db, login_db, register_db,getAllSparesForCars,getAllSparesForBikes
 
-from Database import getBikeModelsByBrand,getBikeBrands,getAllBikesFrom_db, getAllCarsFrom_db, login_db, register_db,getAllSparesForCars,getModelsByBrand,getAllSparesForBikes,getBrands
+from Database import getBikeModelsByBrand,getBikeBrands,getAllBikesFrom_db, getAllCarsFrom_db, login_db, register_db,getAllSparesForCars,getModelsByBrand,getAllSparesForBikes,getBrands,getBrandModelCarParts
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -73,6 +73,12 @@ def car_models_by_brand():  # Renamed to have a unique name
 def brands():
     req = request.get_json()
     res = getBrands(req)
+    return jsonify(res)
+
+@app.route('/getBrandModelCarParts',methods = ['post'])
+def brandmodelcarparts():
+    req = request.get_json()
+    res = getBrandModelCarParts(req)
     return jsonify(res)
 
 if __name__ == '__main__':

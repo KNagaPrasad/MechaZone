@@ -6,9 +6,9 @@ from sqlalchemy import create_engine
 #engine = create_engine('mssql+pyodbc://@' + 'SREEHARI\MSSQLSERVER01' + '/' + 'Mechazone' + '?trusted_connection=yes & driver=ODBC Driver 17 for SQL Server')
 #engine = create_engine('mssql+pyodbc://@' + 'DESKTOP-8FANH7R' + '/' + 'Mechazone' + '?trusted_connection=yes & driver=ODBC Driver 17 for SQL Server')
 
-engine = create_engine('mssql+pyodbc://@' + 'DESKTOP-E5BITMF' + '/' + 'Mechazone' + '?trusted_connection=yes & driver=SQL Server')
+#engine = create_engine('mssql+pyodbc://@' + 'DESKTOP-E5BITMF' + '/' + 'Mechazone' + '?trusted_connection=yes & driver=SQL Server')
 #engine = create_engine('mssql+pyodbc://@DESKTOP-E5BITMF/Mechazone?trusted_connection=yes&driver=SQL+Server')
-#engine = create_engine('mssql+pyodbc://@' + 'HP' + '/' + 'Mechazone' + '?trusted_connection=yes & driver=ODBC Driver 17 for SQL Server')
+engine = create_engine('mssql+pyodbc://@' + 'HP' + '/' + 'Mechazone' + '?trusted_connection=yes & driver=ODBC Driver 17 for SQL Server')
 
 from sqlalchemy import String
 from sqlalchemy.ext.declarative import declarative_base
@@ -31,6 +31,8 @@ class cars(Base):
     model: str = Column(String,nullable=False )
     price: float = Column(Float, nullable = False)
     year: int = Column(Integer, nullable = False)
+    brand: str = Column(String,nullable=False)
+
 
 class bikes(Base):
     __tablename__ = "bikes"
@@ -183,6 +185,7 @@ def getAllCarsFrom_db():
                     "model" : car.model,
                     "year": car.year,
                     "price": car.price,
+                    "brand": car.brand
                 })
                 
            
@@ -266,3 +269,25 @@ def getBrands(req):
     except Exception as e:
         print(e)
         return []
+
+def getBrandModelCarParts(req):
+    try:
+        from sqlalchemy import text
+        with Session(engine) as session:
+            sql_statement = text("SELECT * FROM Car_Spares where car_id  in  (select car_id  from cars WHERE brand = :brand AND model = :model)")
+            query = session.query(Car_Spares).from_statement(sql_statement)
+            query = query.params(brand=req['brand'], model=req['model'])
+            sparesResult = query.all()
+            spares = []
+            for spare in sparesResult:
+                spares.append({
+                    "s_id": spare.s_id,
+                    "name": spare.name,
+                    "price": spare.price,
+                    "warranty": spare.warranty
+                })
+
+            return spares
+    except Exception as e:
+        print(e)
+        return [{}]
