@@ -42,6 +42,15 @@ class cars(Base):
     model: str = Column(String,nullable=False )
     price: float = Column(Float, nullable = False)
     year: int = Column(Integer, nullable = False)
+
+class Bikes(Base):
+    __tablename__ = "bikes"
+
+    bike_id: int = Column(Integer, primary_key=True)
+    model: str = Column(String,nullable=False )
+    price: str = Column(Float, nullable = False)
+    year :int = Column(Integer,nullable=False )
+    brand: str = Column(String,nullable=False)    
     
 
 class Users(Base):

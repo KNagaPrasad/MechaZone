@@ -15,7 +15,6 @@ import Bikes from './components/Bike';
 import Logout from './components/Logout';
 import Settings from './components/Settings';
 import Carpage from './components/Carpage';
-import BikePage from './components/BikePage';
 import CarParts from './components/CarParts'; 
 import BikeParts from './components/Bikepart';
 import CarSpares from './components/CarSpares';
@@ -43,7 +42,11 @@ function App() {
           <Route path ="/bikes" element={<Bikes/>}/>
           <Route path ="/logout" element={<Logout/>}/>
           <Route path ="/settings" element={<Settings/>}/>
+<<<<<<< HEAD
           <Route path ="/bike-search" element={<BikePage/>}/>
+=======
+          <Route path ="/car-search" element={<Carpage/>}/> 
+>>>>>>> 884d5a7efca425ce34840b9d03fe7eec9c684d7f
           <Route path="/carparts/:brand/:model" element={<CarParts />} />
           <Route path="/bikeparts/:brand/:model" element={<BikeParts />} />
           <Route path ="/car-spares/:carId" element={<CarSpares/>}/>
