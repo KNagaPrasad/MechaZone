@@ -73,7 +73,36 @@ class Bike_Spares(Base):
     name: str = Column(String,nullable=False )
     price: float = Column(Float, nullable = False)
     warranty: int = Column(Integer, nullable = True)
-    c_id: int = Column(Integer, nullable = False)     
+    c_id: int = Column(Integer, nullable = False)  
+
+def getBikeBrands(req):
+    try:
+        with Session(engine) as session:
+            query= session.query(Bikes).filter(Bikes.brand.like("%"+req['brand']+"%"))
+            brandsResult = query.all()
+            brands=[]
+            for brand in brandsResult:
+                brands.append(brand.brand)
+            return brands
+    except Exception as e:
+        print(e)
+        return []  
+    
+def getBikeModelsByBrand(req):
+    try:
+        from sqlalchemy import text
+        with Session(engine) as session:
+            sql_statement = text("select * from bikes where brand = :brand")
+            query = session.query(Bikes).from_statement(sql_statement)
+            query = query.params(brand=req['brand'])
+            modelsResult = query.all()
+            models=[]
+            for model in modelsResult:
+                models.append(model.model)
+            return models
+    except Exception as e:
+        print(e)
+        return []       
    
 
 
