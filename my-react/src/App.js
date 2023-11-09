@@ -42,18 +42,13 @@ function App() {
           <Route path ="/bikes" element={<Bikes/>}/>
           <Route path ="/logout" element={<Logout/>}/>
           <Route path ="/settings" element={<Settings/>}/>
-<<<<<<< HEAD
-          <Route path ="/bike-search" element={<BikePage/>}/>
-=======
           <Route path ="/car-search" element={<Carpage/>}/> 
->>>>>>> 884d5a7efca425ce34840b9d03fe7eec9c684d7f
           <Route path="/carparts/:brand/:model" element={<CarParts />} />
           <Route path="/bikeparts/:brand/:model" element={<BikeParts />} />
           <Route path ="/car-spares/:carId" element={<CarSpares/>}/>
           <Route path ="/bike-spares/:bikeId" element={<BikeSpares/>}/>
-          <Route path="/cart" element={<Cart/>}/>
+          <Route path="/cart" element={<Cart />} />
           <Route path ="/bike-search" element={<NewBikePage/>}/>
-          <Route path ="/car-search" element={<NewCarPage/>}/> 
 
         </Routes>
         <Footer /> 

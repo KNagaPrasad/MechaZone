@@ -57,7 +57,6 @@ def bikebrands():
     res = getBikeBrands(req)
     return jsonify(res)
 
-
 @app.route('/getBikeModelsByBrand',methods = ['post'])
 def bikemodelbybrand():
     req = request.get_json()
@@ -65,7 +64,7 @@ def bikemodelbybrand():
     return jsonify(res)
 
 @app.route('/getModelsByBrand',methods = ['post'])
-def cars():
+def car_models_by_brand():  # Renamed to have a unique name
     req = request.get_json()
     res = getModelsByBrand(req)
     return jsonify(res)
@@ -78,5 +77,3 @@ def brands():
 
 if __name__ == '__main__':
     app.run()
-
-
