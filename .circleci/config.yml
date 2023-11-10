@@ -1,12 +1,7 @@
 version: 2.1
 
-on:
-  push:
-    branches:
-      - main
-
 jobs:
-  start-reactjs:
+  build-test-and-deploy-reactjs:
     steps:
       - checkout
       - run:
@@ -21,7 +16,7 @@ jobs:
       - checkout
       - run:
           name: Start Python API
-          command: python Api.py        
+          command: python Api.py
 
   run-pytest:
     steps:
@@ -29,16 +24,15 @@ jobs:
       - run:
           name: Run Pytest
           command: pytest
-          
+
 workflows:
   version: 2
-  build-test-and-deploy-reactjs:
+  build-test-and-deploy:
     jobs:
-      - start-reactjs
+      - build-test-and-deploy-reactjs
       - run-python-api:
           requires:
-            - start-reactjs
+            - build-test-and-deploy-reactjs
       - run-pytest:
           requires:
-            - run-python-api
-
+            - build-test-and-deploy-reactjs
