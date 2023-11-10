@@ -2,19 +2,19 @@ version: 2.1
 
 jobs:
   build-test-and-deploy-reactjs:
-    docker: 
+    docker:
       - image: cimg/base:stable
     steps:
       - checkout
       - run:
-          name: Install Frontend Dependencies
+          name: Install Node.js Dependencies
           command: npm install
       - run:
           name: Start ReactJS
           command: npm start
 
   run-python-api:
-    docker: 
+    docker:
       - image: cimg/base:stable
     steps:
       - checkout
@@ -23,7 +23,7 @@ jobs:
           command: python Api.py
 
   run-pytest:
-    docker: 
+    docker:
       - image: cimg/base:stable
     steps:
       - checkout
