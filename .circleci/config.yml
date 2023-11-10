@@ -30,7 +30,8 @@ jobs:
           name: Run Pytest
           command: pytest
           
-  workflows:
+workflows:
+  version: 2
   build-test-and-deploy-reactjs:
     jobs:
       - start-reactjs
@@ -39,6 +40,4 @@ jobs:
             - start-reactjs
       - run-pytest:
           requires:
-            - run-python-api
-
-          
+            - run-python-api
