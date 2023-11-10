@@ -23,7 +23,7 @@ function CarParts() {
     axios.post(`${API_URL}/addToCart`, _addToCart)
       .then((res) =>{
         if (res && res.data && res.data.issuccess) {
-          window.alert('added succesfully');
+          window.alert('Added to cart sucessfully ');
         }
       }).catch((err) => {
         console.error(err);
