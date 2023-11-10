@@ -14,16 +14,11 @@ import Cars from './components/Car';
 import Bikes from './components/Bike';
 import Logout from './components/Logout';
 import Settings from './components/Settings';
-import Carpage from './components/Carpage';
 import CarParts from './components/CarParts'; 
 import BikeParts from './components/Bikepart';
-import CarSpares from './components/CarSpares';
-import BikeSpares from './components/BikeSpares';
 import Cart from './components/Cart'; 
 import NewBikePage from './components/NewBikePage';
 import NewCarPage from './components/NewCarPage';
-
-
 
 function App() {
   return (
@@ -47,7 +42,6 @@ function App() {
           <Route path="/bikeparts/:brand/:model" element={<BikeParts />} />
           <Route path="/cart" element={<Cart/>}/>
           <Route path ="/bike-search" element={<NewBikePage/>}/>
-
         </Routes>
         <Footer /> 
       </div>
