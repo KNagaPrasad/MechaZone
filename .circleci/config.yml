@@ -1,10 +1,11 @@
-on:
-  push:
-    branches-ignore:
-      - '*'
+version: 2.1
 
 jobs:
   build-test-and-deploy-reactjs:
+    docker:
+      - image: some-docker-image
+    resource_class: medium
+
     steps:
       - checkout
       - run:
@@ -15,6 +16,10 @@ jobs:
           command: npm start
 
   run-python-api:
+    docker:
+      - image: some-docker-image
+    resource_class: medium
+
     steps:
       - checkout
       - run:
@@ -22,6 +27,10 @@ jobs:
           command: python Api.py
 
   run-pytest:
+    docker:
+      - image: some-docker-image
+    resource_class: medium
+
     steps:
       - checkout
       - run:
