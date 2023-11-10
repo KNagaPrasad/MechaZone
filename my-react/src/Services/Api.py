@@ -5,7 +5,8 @@ from flask import jsonify
 
 #from Database import getAllBikesFrom_db, getAllCarsFrom_db, login_db, register_db,getAllSparesForCars,getAllSparesForBikes
 
-from Database import getBikeModelsByBrand,getBikeBrands,getAllBikesFrom_db, getAllCarsFrom_db, login_db, register_db,getAllSparesForCars,getModelsByBrand,getAllSparesForBikes,getBrands,getBrandModelCarParts
+from Database import getBikeModelsByBrand,getBikeBrands,getAllBikesFrom_db, getAllCarsFrom_db, login_db, register_db,getAllSparesForCars,getModelsByBrand,getAllSparesForBikes,getBrands,getBrandModelCarParts,addBike_item_to_cart,addCar_item_to_cart
+
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -67,6 +68,22 @@ def bikemodelbybrand():
 def car_models_by_brand():  # Renamed to have a unique name
     req = request.get_json()
     res = getModelsByBrand(req)
+    return jsonify(res)
+
+@app.route('/addToCart',methods = ['post'])
+def addtocart():
+    req = request.get_json()
+    if req['user_id'] is None or req['s_id'] is None:
+        return {"issuccess": False, "message": "user_id and s_id are required."}
+    res = addCar_item_to_cart(req)
+    return jsonify(res)
+
+@app.route('/addToBikeCart',methods = ['post'])
+def addtobikecart():
+    req = request.get_json()
+    if req['user_id'] is None or req['s_id'] is None:
+        return {"issuccess": False, "message": "user_id and s_id are required."}
+    res = addBike_item_to_cart(req)
     return jsonify(res)
 
 @app.route('/getBrands',methods = ['post'])

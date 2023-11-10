@@ -9,9 +9,9 @@ import base64
 #engine = create_engine('mssql+pyodbc://@' + 'SREEHARI\MSSQLSERVER01' + '/' + 'Mechazone' + '?trusted_connection=yes & driver=ODBC Driver 17 for SQL Server')
 #engine = create_engine('mssql+pyodbc://@' + 'DESKTOP-8FANH7R' + '/' + 'Mechazone' + '?trusted_connection=yes & driver=ODBC Driver 17 for SQL Server')
 
-#engine = create_engine('mssql+pyodbc://@' + 'DESKTOP-E5BITMF' + '/' + 'Mechazone' + '?trusted_connection=yes & driver=SQL Server')
+engine = create_engine('mssql+pyodbc://@' + 'DESKTOP-E5BITMF' + '/' + 'Mechazone' + '?trusted_connection=yes & driver=SQL Server')
 #engine = create_engine('mssql+pyodbc://@DESKTOP-E5BITMF/Mechazone?trusted_connection=yes&driver=SQL+Server')
-engine = create_engine('mssql+pyodbc://@' + 'HP' + '/' + 'Mechazone' + '?trusted_connection=yes & driver=ODBC Driver 17 for SQL Server')
+#engine = create_engine('mssql+pyodbc://@' + 'HP' + '/' + 'Mechazone' + '?trusted_connection=yes & driver=ODBC Driver 17 for SQL Server')
 
 from datetime import datetime
 from sqlalchemy import ForeignKey,DateTime,Boolean
@@ -86,6 +86,20 @@ class Users(Base):
     ZipCode: str = Column(String,nullable = False)
     UserName: str = Column(String, nullable = False)
     Password: str = Column(String, nullable = False)
+
+class CartItems(Base): 
+    __tablename__ = "CartItems"
+
+    cart_item_id: int = Column(Integer, primary_key=True)
+    user_id: int = Column(Integer, nullable=False)
+    s_id: int =  Column(Integer, nullable=False)
+
+class BikeCartItems(Base):
+    __tablename__ = "BikeCartItems"
+
+    cart_item_id: int = Column(Integer, primary_key=True)
+    user_id: int = Column(Integer, nullable=False)
+    s_id: int =  Column(Integer, nullable=False)
 
 def register_db(req):
     from sqlalchemy import insert
@@ -318,3 +332,29 @@ def getBrandModelBikeParts(req):
     except Exception as e:
         print(e)
         return [{}]
+
+def addBike_item_to_cart(req):
+    from sqlalchemy import insert
+    try:
+        stmt = insert(BikeCartItems).values(user_id=req['user_id'], s_id=req['s_id'])
+        stmt.compile()
+        with engine.connect() as conn:
+            result = conn.execute(stmt)
+            conn.commit()
+        return {"issuccess": True}
+    except Exception as e:
+        print(f"Failed to add item to cart: {str(e)}")
+        return {"issuccess": False, "message": str(e)}        
+    
+def addCar_item_to_cart(req):
+    from sqlalchemy import insert
+    try:
+        stmt = insert(CartItems).values(user_id=req['user_id'], s_id=req['s_id'])
+        stmt.compile()
+        with engine.connect() as conn:
+            result = conn.execute(stmt)
+            conn.commit()
+        return {"issuccess": True}
+    except Exception as e:
+        print(f"Failed to add item to cart: {str(e)}")
+        return {"issuccess": False, "message": str(e)}
