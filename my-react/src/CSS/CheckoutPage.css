@@ -1,0 +1,107 @@
+/* CheckoutPage.css */
+
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .checkout-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 50px auto;
+    max-width: 800px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .sub-container {
+    width: 100%;
+    margin: 20px 0;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .carousel {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+  }
+  
+  .carousel-item {
+    flex: 0 0 100%;
+    box-sizing: border-box;
+  }
+  
+  .product-details,
+  .delivery-box,
+  .payment-section {
+    padding: 20px;
+  }
+  
+  /* Styling for delivery box */
+  .delivery-box label {
+    display: block;
+    margin-bottom: 8px;
+  }
+  
+  .delivery-option {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-bottom: 8px; /* Add margin between delivery options */
+  }
+  
+  .store-dropdown {
+    margin-top: 10px;
+  }
+  
+  .store-option label {
+    display: block;
+    cursor: pointer;
+  }
+  
+  /* Styling for other address form */
+  .other-address-form label {
+    display: block;
+    margin-bottom: 8px;
+  }
+  
+  .other-address-form input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+  }
+  
+  /* Styling for payment section */
+  .payment-section label {
+    display: block;
+    margin-bottom: 8px;
+  }
+  
+  .payment-section select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+  }
+  
+  /* Styling for Pay Now button */
+  .payment-section button {
+    background-color: #f0c14b;
+    border: 1px solid #a88734;
+    padding: 10px 15px;
+    color: #111;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 16px;
+    margin-top: 10px; /* Add top margin to create space */
+  }
+  
+  .payment-section button:hover {
+    background-color: #ddb347;
+  }
