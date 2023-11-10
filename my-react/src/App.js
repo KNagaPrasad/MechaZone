@@ -14,16 +14,11 @@ import Cars from './components/Car';
 import Bikes from './components/Bike';
 import Logout from './components/Logout';
 import Settings from './components/Settings';
-import Carpage from './components/Carpage';
 import CarParts from './components/CarParts'; 
 import BikeParts from './components/Bikepart';
-import CarSpares from './components/CarSpares';
-import BikeSpares from './components/BikeSpares';
 import Cart from './components/Cart'; 
 import NewBikePage from './components/NewBikePage';
-
-
-
+import NewCarPage from './components/NewCarPage';
 
 function App() {
   return (
@@ -42,14 +37,11 @@ function App() {
           <Route path ="/bikes" element={<Bikes/>}/>
           <Route path ="/logout" element={<Logout/>}/>
           <Route path ="/settings" element={<Settings/>}/>
-          <Route path ="/car-search" element={<Carpage/>}/> 
+          <Route path ="/car-search" element={<NewCarPage/>}/> 
           <Route path="/carparts/:brand/:model" element={<CarParts />} />
           <Route path="/bikeparts/:brand/:model" element={<BikeParts />} />
-          <Route path ="/car-spares/:carId" element={<CarSpares/>}/>
-          <Route path ="/bike-spares/:bikeId" element={<BikeSpares/>}/>
-          <Route path="/cart" element={<Cart />} />
+          <Route path="/cart" element={<Cart/>}/>
           <Route path ="/bike-search" element={<NewBikePage/>}/>
-
         </Routes>
         <Footer /> 
       </div>

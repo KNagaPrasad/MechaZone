@@ -12,7 +12,7 @@ function BikeParts() {
 
   useEffect(() => {
     getBrandModelBikeParts();
-  });
+  },[]);
 
   const addToBikeCart = (s_id) =>{
     const _addToCart = {
