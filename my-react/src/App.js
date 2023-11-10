@@ -21,7 +21,7 @@ import CarSpares from './components/CarSpares';
 import BikeSpares from './components/BikeSpares';
 import Cart from './components/Cart'; 
 import NewBikePage from './components/NewBikePage';
-
+import NewCarPage from './components/NewCarPage';
 
 
 
@@ -42,12 +42,10 @@ function App() {
           <Route path ="/bikes" element={<Bikes/>}/>
           <Route path ="/logout" element={<Logout/>}/>
           <Route path ="/settings" element={<Settings/>}/>
-          <Route path ="/car-search" element={<Carpage/>}/> 
+          <Route path ="/car-search" element={<NewCarPage/>}/> 
           <Route path="/carparts/:brand/:model" element={<CarParts />} />
           <Route path="/bikeparts/:brand/:model" element={<BikeParts />} />
-          <Route path ="/car-spares/:carId" element={<CarSpares/>}/>
-          <Route path ="/bike-spares/:bikeId" element={<BikeSpares/>}/>
-          <Route path="/cart" element={<Cart />} />
+          <Route path="/cart" element={<Cart/>}/>
           <Route path ="/bike-search" element={<NewBikePage/>}/>
 
         </Routes>
