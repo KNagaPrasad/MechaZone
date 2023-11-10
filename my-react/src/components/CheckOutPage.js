@@ -98,6 +98,25 @@ const CheckoutPage = () => {
             Other
           </button>
         </div>
+        {deliveryType === 'Other' && (
+          <div className="other-address-form">
+            <label>Street:</label>
+            <input type="text" name="street" value={otherAddress.street} onChange={handleOtherAddressChange} required />
+
+            <label>Apt:</label>
+            <input type="text" name="apt" value={otherAddress.apt} onChange={handleOtherAddressChange} required />
+
+            <label>Zipcode:</label>
+            <input type="text" name="zipcode" value={otherAddress.zipcode} onChange={handleOtherAddressChange} required />
+
+            <label>City:</label>
+            <input type="text" name="city" value={otherAddress.city} onChange={handleOtherAddressChange} required />
+
+            <label>Phone Number:</label>
+            <input type="tel" name="phoneNumber" value={otherAddress.phoneNumber} onChange={handleOtherAddressChange} required />
+          </div>
+        )}
+      </div>
 
       <div className="sub-container product-details">
         <h3>Product Details</h3>
