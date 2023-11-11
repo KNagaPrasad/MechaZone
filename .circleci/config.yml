@@ -8,7 +8,7 @@ jobs:
     steps:
       - checkout
       - node/install-packages:
-          app-dir: my-react  # Add this line to specify the app directory
+          app-dir: MechaZone/my-react
           pkg-manager: npm
       - run:
           name: Install Node.js Dependencies
