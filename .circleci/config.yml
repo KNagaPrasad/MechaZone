@@ -21,6 +21,9 @@ jobs:
       - run:
           name: Run tests
           command: npm run test
+      - run:
+          name: Start Server
+          command: npm start
 
 workflows:
   version: 2
