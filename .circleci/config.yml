@@ -1,14 +1,11 @@
 version: 2.1
-orbs:
-  node: circleci/node@5.1.0
 
 jobs:
   build-test-and-deploy-reactjs:
-    executor: node/default
+    docker:
+      - image: cimg/base:stable
     steps:
       - checkout
-      - node/install-packages:
-          pkg-manager: npm
       - run:
           name: Install Node.js Dependencies
           command: npm install
@@ -17,6 +14,8 @@ jobs:
           command: npm start
 
   run-python-api:
+    docker:
+      - image: cimg/base:stable
     steps:
       - checkout
       - run:
@@ -24,6 +23,8 @@ jobs:
           command: python Api.py
 
   run-pytest:
+    docker:
+      - image: cimg/base:stable
     steps:
       - checkout
       - run:
