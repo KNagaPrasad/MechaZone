@@ -10,6 +10,7 @@ filters:
 jobs:
   test:
     executor: node/default
+    working_directory: /home/circleci/project/my-react  # Set the correct path to your project
     steps:
       - checkout
       - node/install-packages:
