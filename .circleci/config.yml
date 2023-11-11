@@ -2,24 +2,27 @@ version: 2.1
 orbs:
   node: circleci/node@5.1.0
 
+filters:
+  branches:
+    only:
+      - "*"  # run on all branches
+
 jobs:
-  build_and_test:
+  test:
     executor: node/default
-    working_directory: my-react/package.json
     steps:
       - checkout
+      - node/install-packages:
+          pkg-manager: npm
       - run:
-          name: Change directory permissions
-          command: sudo chmod -R 777 /home/circleci/my-react
-      - run:
-          name: Install Node.js Dependencies
           command: npm install
+          name: Install Node.js Dependencies
       - run:
+          command: npm run test
           name: Run tests
-          command: npm test
 
 workflows:
   version: 2
   test_my_app:
     jobs:
-      - build_and_test
+      - test
