@@ -20,6 +20,7 @@ import Cart from './components/Cart';
 import NewBikePage from './components/NewBikePage';
 import NewCarPage from './components/NewCarPage';
 import CheckoutPage from './components/CheckOutPage';
+import PaymentsPage from './components/PaymentsPage';
 
 function App() {
   return (
@@ -43,7 +44,8 @@ function App() {
           <Route path="/bikeparts/:brand/:model" element={<BikeParts />} />
           <Route path="/cart" element={<Cart/>}/>
           <Route path ="/bike-search" element={<NewBikePage/>}/> 
-          <Route path="/checkout" element={<CheckoutPage />} /> {/* Add a new route for the CheckoutPage */}
+          <Route path="/checkout" element={<CheckoutPage />} />
+          <Route path="/payments" element={<PaymentsPage />} />
         </Routes>
         <Footer /> 
       </div>
