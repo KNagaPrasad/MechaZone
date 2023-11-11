@@ -1,50 +1,27 @@
 version: 2.1
+orbs:
+  node: circleci/node@5.1.0
 
 jobs:
-  build-test-and-deploy-reactjs:
-    docker:
-      - image: circleci/node:latest
-
+  build_and_test:
+    executor: node/default
     steps:
       - checkout
+      - node/install-packages:
+          app-dir: my-react  # Add this line to specify the app directory
+          pkg-manager: npm
       - run:
-          name: Install Frontend Dependencies
+          name: Install Node.js Dependencies
           command: npm install
       - run:
-          name: Start ReactJS
-          command: npm start
-
-  run-python-api:
-    docker:
-      - image: python:3.8
-
-    steps:
-      - checkout
+          name: Run tests
+          command: npm run test
       - run:
-          name: Start Python API
-          command: python Api.py
-
-  run-pytest:
-    docker:
-      - image: python:3.8
-
-    steps:
-      - checkout
-      - run:
-          name: Install Python Dependencies
-          command: pip install -r requirements.txt
-      - run:
-          name: Run Pytest
-          command: pytest
+          name: Build app
+          command: npm run build
 
 workflows:
   version: 2
-  build-test-and-deploy:
+  test_my_app:
     jobs:
-      - build-test-and-deploy-reactjs
-      - run-python-api:
-          requires:
-            - build-test-and-deploy-reactjs
-      - run-pytest:
-          requires:
-            - build-test-and-deploy-reactjs
+      - build_and_test
