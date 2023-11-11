@@ -7,6 +7,9 @@ jobs:
     executor: node/default
     steps:
       - checkout
+      - run:
+          name: Debug
+          command: ls /home/circleci/project
       - node/install-packages:
           pkg-manager: npm
       - run:
