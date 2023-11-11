@@ -137,6 +137,22 @@ def test_display_discount():
         shopping_cart = response.json['shoppingCart']
         assert 'discount' in shopping_cart
 
+def test_get_car_brands(client):
+    response = client.post('/getBrands', json={'brand': 'Toyo'})
+    assert response.status_code == 200
+    assert isinstance(response.json, list)
+    assert 'Toyota' in response.json   
 
+def test_get_bike_brands(client):
+    response = client.post('/getBikeBrands', json={'brand': 'Hon'})
+    assert response.status_code == 200
+    assert isinstance(response.json, list)
+    assert 'Honda' in response.json
+        
+def test_get_bike_models_by_brand(client):
+    response = client.post('/getBikeModelsByBrand', json={'brand': 'Honda'})
+    assert response.status_code == 200
+    assert isinstance(response.json, list)
+    assert 'CBR1000RR' in response.json 
 
 
