@@ -5,7 +5,7 @@ orbs:
 jobs:
   build_and_test:
     executor: node/default
-    working_directory: /home/circleci/my-react  # Set the correct path to your project
+    working_directory: my-react/package.json
     steps:
       - checkout
       - run:
