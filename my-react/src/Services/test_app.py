@@ -115,5 +115,28 @@ def test_display_shopping_cart_amount():
         assert 'amount' in shopping_cart
         assert shopping_cart['amount'] > 0    
 
+def test_choose_delivery_type():
+    with app.test_client() as client:
+        delivery_data = {
+            "cart_id": 1,
+            "user_id": 1,
+            "delivery_type": "Home" 
+        }
+        response = client.post('/deliveryType', json=delivery_data)
+        assert response.status_code == 200
+        assert response.json['issuccess'] is True
+
+def test_display_discount():
+    with app.test_client() as client:
+        cart_data = {
+            "user_id": 1
+        }
+        response = client.post('/prepareShoppingCart', json=cart_data)
+        assert response.status_code == 200
+        assert 'shoppingCart' in response.json
+        shopping_cart = response.json['shoppingCart']
+        assert 'discount' in shopping_cart
+
+
 
 
