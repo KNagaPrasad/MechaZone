@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate hook
+import { useNavigate } from 'react-router-dom'; 
 
 function Cart() {
-  const navigate = useNavigate(); // Initialize useNavigate hook
+  const navigate = useNavigate(); 
 
   const [cartItems, setCartItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
@@ -23,8 +23,8 @@ function Cart() {
     })
       .then(response => response.json())
       .then(data => {
-        if (data.issuccess) { //d
-          setCartItems(data.shoppingCart.sparesInfo); //d
+        if (data.issuccess) { 
+          setCartItems(data.shoppingCart.sparesInfo); 
           setTotalPrice(data.shoppingCart.price);
           setDiscount(data.shoppingCart.discount);
           setAmount(data.shoppingCart.amount);
@@ -59,15 +59,14 @@ function Cart() {
     
     const updatedCart = cartItems.filter((item) => item.id !== itemId);
     setCartItems(updatedCart);
-  };//d
+  };
 
   const handleContinueShopping = () => {
-    // Go back two pages when "Continue Shopping" is clicked ---D
     navigate(-2);
   };
 
   const handleProceedToCheckout = () => {
-    // Navigate to the checkout page when "Proceed to Checkout" is clicked ---D
+    
     navigate('/checkout');
   };
 

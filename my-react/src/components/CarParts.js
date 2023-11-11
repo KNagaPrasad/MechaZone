@@ -10,7 +10,7 @@ function CarParts() {
   const { brand, model } = useParams();
   const [parts,setParts] = useState([]);
   const user_id = useSelector(state => state?.userInfo?.user?.userId);  
-
+  const navigate = useNavigate();
   useEffect(() => {
     getBrandModelCarParts();
   },[]);
@@ -45,6 +45,9 @@ function CarParts() {
       });
   }
   
+  const handleBuyNow = () => {
+    navigate('/checkout'); 
+  }
   return (
     <div>
       <h1>Car Parts</h1>
@@ -65,7 +68,7 @@ function CarParts() {
               <button className="add-to-cart" onClick={()=> addToCart(part.s_id)}>
                 Add to Cart
               </button>
-              <button className="Buy-now">Buy Now</button>
+              <button className="Buy-now" onClick={handleBuyNow}>Buy Now</button>
             </div>
           </div>
         ))}

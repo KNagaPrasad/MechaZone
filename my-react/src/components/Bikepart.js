@@ -9,7 +9,7 @@ function BikeParts() {
   const { brand, model } = useParams();
   const [parts, setParts] = useState([]);
   const user_id = useSelector(state => state?.userInfo?.user?.userId);  
-
+  const navigate = useNavigate();
   useEffect(() => {
     getBrandModelBikeParts();
   },[]);
@@ -45,6 +45,10 @@ function BikeParts() {
       });
   }
 
+  const handleBuyNow = () => {
+    navigate('/checkout'); 
+  }
+
   return (
     <div>
       <h1>Bike Parts</h1>
@@ -65,8 +69,7 @@ function BikeParts() {
               <button className="add-to-cart" onClick={()=> addToBikeCart(part.s_id)}>
                 Add to Cart
               </button>
-              <button className="Buy-now">Buy Now</button>
-            </div>
+            <button className="Buy-now" onClick={handleBuyNow}>Buy Now</button>            </div>
           </div>
         ))}
       </div>
