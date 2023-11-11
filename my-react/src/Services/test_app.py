@@ -86,4 +86,4 @@ def test_get_car_spares():
         response = client.post('/getCarSpares', json={'carId': 1})
        
         assert response.status_code == 200
-        
+
