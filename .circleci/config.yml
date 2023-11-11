@@ -9,7 +9,7 @@ jobs:
       - checkout
       - run:
           name: Debug
-          command: ls /home/circleci/project
+          command: ls /home/circleci/project/my-react
       - node/install-packages:
           pkg-manager: npm
       - run:
