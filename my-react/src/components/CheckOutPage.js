@@ -56,8 +56,11 @@ const CheckoutPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Add logic for handling form submission (e.g., sending data to server)
     console.log('Form Submitted:', { formData, deliveryType, selectedStore, otherAddress });
+  };
+
+  const handlePay = () => {
+    navigate('/payments');
   };
 
   return (
@@ -138,6 +141,22 @@ const CheckoutPage = () => {
       </div>
 
       {/* Payment Section */}
+      <div className="sub-container payment-section">
+        <label>Payment Method:</label>
+        <select
+          name="paymentMethod"
+          value={formData.paymentMethod}
+          onChange={(e) => handleChange(e)}
+          required
+        >
+          <option value="">Select Payment Method</option>
+          <option value="creditCard">Credit Card</option>
+          <option value="debitCard">Debit Card</option>
+        </select>
+        <button type="button" onClick={handlePay}>
+          Pay
+        </button>
+      </div>
     </div>
   );
 };
