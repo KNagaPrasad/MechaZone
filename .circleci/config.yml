@@ -13,6 +13,8 @@ jobs:
     working_directory: /home/circleci/project/my-react  # Set the correct path to your project
     steps:
       - checkout
+      - node/install-packages:
+          pkg-manager: npm
       - run:
           name: Install Node.js Dependencies
           command: npm install
