@@ -9,6 +9,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Change directory permissions
+          command: sudo chmod -R 777 /home/circleci/my-react
+      - run:
           name: Install Node.js Dependencies
           command: npm install
       - run:
