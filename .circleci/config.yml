@@ -1,29 +1,38 @@
 version: 2.1
-orbs:
-  node: circleci/node@5.1.0
 
 jobs:
-  build_and_test:
-    executor: node/default
+  build:
+    docker:
+      - image: circleci/node:14.17
+      - image: circleci/python:3.9
+
+    working_directory: ~/my-react
+
     steps:
       - checkout
-      - run:
-          name: Install Node.js
-          command: |
-            sudo apt-get install -y nodejs
-            sudo apt-get install -y npm
+
+      # Node.js Build and Test
       - run:
           name: Install Node.js Dependencies
           command: npm install
+
       - run:
-          name: Run tests
-          command: npm run test
+          name: Run Node.js Tests
+          command: npm test
+
+      # Python API Build and Test
       - run:
-          name: Build app
-          command: npm run build
+          name: Install Python Dependencies
+          command: |
+            sudo apt-get install -y python3-pip
+            pip3 install -r requirements.txt
+
+      - run:
+          name: Run Python Tests
+          command: python3 -m unittest discover -s tests/
 
 workflows:
   version: 2
-  test_my_app:
+  build:
     jobs:
-      - build_and_test
+      - build
