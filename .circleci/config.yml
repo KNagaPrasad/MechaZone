@@ -14,13 +14,11 @@ jobs:
     steps:
       - checkout
       - run:
-          command: npm install
           name: Install Node.js Dependencies
-          working_directory: /home/circleci/project/my-react  # Set the correct path to your project
+          command: npm install
       - run:
-          command: npm run test
           name: Run tests
-          working_directory: /home/circleci/project/my-react  # Set the correct path to your project
+          command: npm run test
 
 workflows:
   version: 2
