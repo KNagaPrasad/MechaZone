@@ -12,10 +12,59 @@ const PaymentsPage = () => {
   });
 
   const [paymentStatus, setPaymentStatus] = useState(null);
+  const [errors, setErrors] = useState({});
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+
+    setCardData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: null,
+    }));
+  };
+
+  const handlePay = () => {
+    const validationErrors = validateCardDetails();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
+
+    setTimeout(() => {
+      setPaymentStatus('success');
+    }, 2000);
+  };
+
+  const validateCardDetails = () => {
+    const errors = {};
+
+    if (!/^\d{16}$/.test(cardData.number)) {
+      errors.number = 'Card number must have 16 digits';
+    }
+
+    if (!cardData.name.trim()) {
+      errors.name = 'Name is mandatory';
+    }
+
+    if (!cardData.expiry.trim()) {
+      errors.expiry = 'Expiry date is mandatory';
+    }
+
+    if (!cardData.cvc.trim()) {
+      errors.cvc = 'CVC is mandatory';
+    }
+
+    return errors;
+  };
 
   return (
     <div style={styles.paymentsContainer}>
-      <h2>Enter Your Card Details</h2>
+      <h2>Enter Card Details</h2>
+
       <div style={styles.creditCardForm}>
         <Cards
           cvc={cardData.cvc}
@@ -126,6 +175,11 @@ const styles = {
     borderRadius: '4px',
     cursor: 'pointer',
   },
+  successMessage: {
+    marginTop: '16px',
+    color: 'green',
+    fontWeight: 'bold',
+  },
   twoFields: {
     display: 'flex',
     justifyContent: 'space-between',
@@ -134,10 +188,10 @@ const styles = {
     flex: '1',
     marginRight: '8px',
   },
-  successMessage: {
-    marginTop: '16px',
-    color: 'green',
-    fontWeight: 'bold',
+  error: {
+    color: 'red',
+    fontSize: '12px',
+    marginTop: '4px',
   },
 };
 
