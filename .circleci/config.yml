@@ -1,10 +1,10 @@
-on:
-  push:
-    branches-ignore:
-      - '*'
+version: 2.1
 
 jobs:
   build-test-and-deploy-reactjs:
+    docker:
+      - image: circleci/node:latest
+
     steps:
       - checkout
       - run:
@@ -15,6 +15,9 @@ jobs:
           command: npm start
 
   run-python-api:
+    docker:
+      - image: python:3.8
+
     steps:
       - checkout
       - run:
@@ -22,8 +25,14 @@ jobs:
           command: python Api.py
 
   run-pytest:
+    docker:
+      - image: python:3.8
+
     steps:
       - checkout
+      - run:
+          name: Install Python Dependencies
+          command: pip install -r requirements.txt
       - run:
           name: Run Pytest
           command: pytest
