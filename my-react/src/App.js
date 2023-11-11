@@ -19,6 +19,7 @@ import BikeParts from './components/Bikepart';
 import Cart from './components/Cart'; 
 import NewBikePage from './components/NewBikePage';
 import NewCarPage from './components/NewCarPage';
+import CheckoutPage from './components/CheckOutPage';
 
 function App() {
   return (
@@ -41,7 +42,8 @@ function App() {
           <Route path="/carparts/:brand/:model" element={<CarParts />} />
           <Route path="/bikeparts/:brand/:model" element={<BikeParts />} />
           <Route path="/cart" element={<Cart/>}/>
-          <Route path ="/bike-search" element={<NewBikePage/>}/>
+          <Route path ="/bike-search" element={<NewBikePage/>}/> 
+          <Route path="/checkout" element={<CheckoutPage />} /> {/* Add a new route for the CheckoutPage */}
         </Routes>
         <Footer /> 
       </div>
@@ -49,4 +51,4 @@ function App() {
   );
 }
 
-export default App;
+export default App; 
