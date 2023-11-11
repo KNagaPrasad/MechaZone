@@ -1,12 +1,13 @@
 version: 2.1
 orbs:
-  node: circleci/node@5.1.0	 
+  node: circleci/node@5.1.0
+
 jobs:
   build-test-and-deploy-reactjs:
-	executor: node/default
+    executor: node/default
     steps:
       - checkout
-	  - node/install-packages:
+      - node/install-packages:
           pkg-manager: npm
       - run:
           name: Install Node.js Dependencies
