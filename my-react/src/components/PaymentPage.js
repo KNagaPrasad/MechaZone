@@ -11,6 +11,8 @@ const PaymentsPage = () => {
     number: '',
   });
 
+  const [paymentStatus, setPaymentStatus] = useState(null);
+
   return (
     <div style={styles.paymentsContainer}>
       <h2>Enter Your Card Details</h2>
@@ -80,6 +82,9 @@ const PaymentsPage = () => {
         <button onClick={handlePay} style={styles.button}>
           Pay
         </button>
+        {paymentStatus === 'success' && (
+          <div style={styles.successMessage}>Transaction done successfully!</div>
+        )}
       </div>
     </div>
   );
@@ -128,6 +133,11 @@ const styles = {
   field: {
     flex: '1',
     marginRight: '8px',
+  },
+  successMessage: {
+    marginTop: '16px',
+    color: 'green',
+    fontWeight: 'bold',
   },
 };
 
