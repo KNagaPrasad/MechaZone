@@ -3,14 +3,8 @@ orbs:
   node: circleci/node@5.1.0
 
 jobs:
-  build_and_test:
+  build-test-and-deploy-reactjs:
     executor: node/default
-    steps:
-      - checkout
-      - node/install-packages:
-          app-dir: my-react  # Add this line to specify the app directory
-          pkg-manager: npm
-
     steps:
       - checkout
       - node/install-packages:
@@ -19,14 +13,31 @@ jobs:
           name: Install Node.js Dependencies
           command: npm install
       - run:
-          name: Run tests
-          command: npm run test
+          name: Start ReactJS
+          command: npm start
+
+  run-python-api:
+    steps:
+      - checkout
       - run:
-          name: Build app
-          command: npm run build
+          name: Start Python API
+          command: python Api.py
+
+  run-pytest:
+    steps:
+      - checkout
+      - run:
+          name: Run Pytest
+          command: pytest
 
 workflows:
   version: 2
-  test_my_app:
+  build-test-and-deploy:
     jobs:
-      - build_and_test
+      - build-test-and-deploy-reactjs
+      - run-python-api:
+          requires:
+            - build-test-and-deploy-reactjs
+      - run-pytest:
+          requires:
+            - build-test-and-deploy-reactjs
