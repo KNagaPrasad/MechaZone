@@ -8,7 +8,6 @@ jobs:
     steps:
       - checkout
       - node/install-packages:
-          app-dir: /home/circleci/project/MechaZone/my-react
           pkg-manager: npm
       - run:
           name: Install Node.js Dependencies
