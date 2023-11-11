@@ -7,17 +7,11 @@ jobs:
     executor: node/default
     steps:
       - checkout
-      - run: echo "hello world"
       - run:
           name: Install Node.js
           command: |
             sudo apt-get install -y nodejs
             sudo apt-get install -y npm
-      - run:
-          name: Debug
-          command: ls /home/circleci/project/my-react
-      - node/install-packages:
-          pkg-manager: npm
       - run:
           name: Install Node.js Dependencies
           command: npm install
