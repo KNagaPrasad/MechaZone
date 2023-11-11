@@ -85,8 +85,6 @@ def test_add_to_cart_items():
         }
         response = client.post('/addToCart', json=cart_item_data)
         assert response.status_code == 200
-<<<<<<< HEAD
-=======
         assert response.json['issuccess'] is True 
 
 def test_get_bike_brands(client):
@@ -95,8 +93,27 @@ def test_get_bike_brands(client):
     assert isinstance(response.json, list)
     assert 'Honda' in response.json
     
+def test_display_total():
+    with app.test_client() as client:
+        cart_data = {
+            "user_id": 1
+        }
+        response = client.post('/prepareShoppingCart', json=cart_data)
+        assert response.status_code == 200
+        assert 'shoppingCart' in response.json
+
+def test_display_shopping_cart_amount():
+    with app.test_client() as client:
+        user_id = 13
+        cart_data = {
+            "user_id": user_id
+        }
+        response = client.post('/prepareShoppingCart', json=cart_data)
+        assert response.status_code == 200
+        assert 'shoppingCart' in response.json
+        shopping_cart = response.json['shoppingCart']
+        assert 'amount' in shopping_cart
+        assert shopping_cart['amount'] > 0    
 
 
-
->>>>>>> 5bd61e178fc035c8bdce583a379aae8c3166e735
 
