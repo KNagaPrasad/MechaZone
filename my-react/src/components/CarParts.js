@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../CSS/CarParts.css';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { API_URL } from '../Constants';
 import { useSelector } from 'react-redux';
