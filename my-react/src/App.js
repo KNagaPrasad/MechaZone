@@ -20,7 +20,7 @@ import Cart from './components/Cart';
 import NewBikePage from './components/NewBikePage';
 import NewCarPage from './components/NewCarPage';
 import CheckoutPage from './components/CheckOutPage';
-import PaymentsPage from './components/PaymentsPage';
+import PaymentsPage from './components/PaymentPage';
 
 function App() {
   return (
