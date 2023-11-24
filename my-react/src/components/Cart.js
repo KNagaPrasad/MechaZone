@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'; 
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { API_URL } from '../Constants';
 
 function Cart() {
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   const [cartItems, setCartItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
@@ -12,40 +14,24 @@ function Cart() {
 
   useEffect(() => {
     
-    fetch('http://localhost:5000/prepareShoppingCart', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        user_id: 40,  
-      }),
-    })
-      .then(response => response.json())
-      .then(data => {
-        if (data.issuccess) { 
-          setCartItems(data.shoppingCart.sparesInfo); 
+    axios.post(`${API_URL}/prepareShoppingCart`, { user_id: 40 })
+      .then(response => {
+        const data = response.data;
+        if (data.issuccess) {
+          setCartItems(data.shoppingCart.sparesInfo);
           setTotalPrice(data.shoppingCart.price);
           setDiscount(data.shoppingCart.discount);
           setAmount(data.shoppingCart.amount);
         } else {
-          console.error(data.message);//d
+          console.error(data.message);
         }
       })
-      .catch(error => console.error('Error:', error));//d
+      .catch(error => console.error('Error:', error));
 
     
-    fetch('http://localhost:5000/deliveryType', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        user_id: 40,  
-      }),
-    })
-      .then(response => response.json())
-      .then(data => {
+    axios.post(`${API_URL}/deliveryType`, { user_id: 40 })
+      .then(response => {
+        const data = response.data;
         if (data.issuccess) {
           setDeliveryType(data.delivery_type);
         } else {
@@ -53,10 +39,9 @@ function Cart() {
         }
       })
       .catch(error => console.error('Error:', error));
-  }, []); 
+  }, []);
 
   const removeFromCart = (itemId) => {
-    
     const updatedCart = cartItems.filter((item) => item.id !== itemId);
     setCartItems(updatedCart);
   };
@@ -66,23 +51,17 @@ function Cart() {
   };
 
   const handleProceedToCheckout = () => {
-    
     navigate('/checkout');
   };
 
   const handleDeliveryTypeChange = (selectedType) => {
-    fetch('http://localhost:5000/deliveryType', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        user_id: 40,
-        delivery_type: selectedType,
-      }),
+    
+    axios.post(`${API_URL}/deliveryType`, {
+      user_id: 40,
+      delivery_type: selectedType,
     })
-      .then(response => response.json())
-      .then(data => {
+      .then(response => {
+        const data = response.data;
         if (data.issuccess) {
           setDeliveryType(selectedType);
         } else {
@@ -109,9 +88,9 @@ function Cart() {
         <p>Discount: ${discount}</p>
         <p>Amount: ${amount}</p>
       </div>
-        <div>
-          <button onClick={handleContinueShopping}>Continue Shopping</button>
-          <button onClick={handleProceedToCheckout}>Proceed to Checkout</button>
+      <div>
+        <button onClick={handleContinueShopping}>Continue Shopping</button>
+        <button onClick={handleProceedToCheckout}>Proceed to Checkout</button>
       </div>
     </div>
   );
