@@ -45,6 +45,8 @@ describe('Signupandsignin Component', () => {
         </React.StrictMode>
       );
     });
+  });
+
     
   it('submits the registration form', async () => {
     const root = document.createElement('div');
