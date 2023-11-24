@@ -147,7 +147,3 @@ function Signupandsignin() {
 }
 
 export default Signupandsignin;
-
-
-
-
