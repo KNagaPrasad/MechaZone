@@ -29,10 +29,6 @@ from sqlalchemy.orm import Session
 from sqlalchemy import insert
 from sqlalchemy import text
 
-
-
-
-
 # qualify the base with _allow_unmapped_.  Can also be
 # applied to classes directly if preferred
 class Base:
