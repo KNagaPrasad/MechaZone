@@ -30,6 +30,22 @@ describe('Signupandsignin Component', () => {
     });
   });
 
+  it('allows users to type into input fields', async () => {
+    const root = document.createElement('div');
+    document.body.appendChild(root);
+
+    await act(async () => {
+      createRoot(root).render( 
+        <React.StrictMode>
+          <Provider store={store}>
+            <Router>
+              <Signupandsignin />
+            </Router>
+          </Provider>
+        </React.StrictMode>
+      );
+    });
+    
   it('submits the registration form', async () => {
     const root = document.createElement('div');
     document.body.appendChild(root);
