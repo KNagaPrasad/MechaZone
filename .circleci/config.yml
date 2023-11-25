@@ -16,6 +16,9 @@ jobs:
       - node/install-packages:
           pkg-manager: npm
       - run:
+          name: Debug
+          command: ls -al /home/circleci/project/my-react  # Print directory contents for debugging
+      - run:
           name: Install Node.js Dependencies
           command: npm install
       - run:
@@ -32,8 +35,11 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Debug
+          command: ls -al /home/circleci/project/my-react  # Print directory contents for debugging
+      - run:
           name: Install Python Dependencies
-          command: pip install -r requirements.txt
+          command: pip install -r src/services/requirements.txt
       - run:
           name: Run Backend Tests
           command: pytest src/services/test_app.py
