@@ -20,8 +20,9 @@ jobs:
           name: Start Frontend Server
           command: npm start
           background: true
-
   backend_test:
+    docker:
+      - image: python:3.8
     working_directory: /home/circleci/project/my-react
     steps:
       - checkout
@@ -31,10 +32,7 @@ jobs:
       - run:
           name: Run API Server
           command: python src/services/Api.py &
-
-  backend_test:
-    docker:
-      - image: python:3.8
+    
       - run:
           name: Run Backend Tests
           command: pytest src/services/test_app.py
