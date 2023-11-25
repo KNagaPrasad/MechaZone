@@ -1,15 +1,16 @@
 version: 2.1
-
 orbs:
   node: circleci/node@5.1.0
-  python: circleci/python@4.5.0
+
+filters:
+  branches:
+    only:
+      - "*"  # run on all branches
 
 jobs:
   test:
-    executor:
-      name: node/default
-      tag: 14  # Use Node.js 14.x
-    working_directory: /home/circleci/project/my-react/my-react
+    executor: node/default
+    working_directory: /home/circleci/project/my-react  # Set the correct path to your project
     steps:
       - checkout
       - node/install-packages:
@@ -18,30 +19,24 @@ jobs:
           name: Install Node.js Dependencies
           command: npm install
       - run:
-          name: Run Frontend Tests
+          name: Run tests
           command: npm test
       - run:
-          name: Start Frontend Server
+          name: Start Server
           command: npm start
-          background: true  # Run in the background
 
   backend_test:
-    executor:
-      name: python/default
-      tag: 3.8  # Use Python 3.8.x
-    working_directory: /home/circleci/project/my-react/my-react/src/services
+    docker:
+      - image: python:3.8  # Use a Python Docker image with the desired version
+    working_directory: /home/circleci/project/my-react
     steps:
       - checkout
       - run:
           name: Install Python Dependencies
-          command: pip install -r requirements.txt
+          command: pip install -r src/services/requirements.txt
       - run:
           name: Run Backend Tests
-          command: pytest test_app.py
-      - run:
-          name: Start Backend Server
-          command: python api.py
-          background: true  # Run in the background
+          command: pytest src/services/test_app.py
 
 workflows:
   version: 2
