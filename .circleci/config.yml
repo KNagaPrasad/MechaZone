@@ -2,11 +2,6 @@ version: 2.1
 orbs:
   node: circleci/node@5.1.0
 
-filters:
-  branches:
-    only:
-      - "*"  # run on all branches
-
 jobs:
   test:
     executor: node/default
@@ -16,17 +11,15 @@ jobs:
       - node/install-packages:
           pkg-manager: npm
       - run:
-          name: Debug
-          command: ls -al /home/circleci/project/my-react  # Print directory contents for debugging
-      - run:
           name: Install Node.js Dependencies
           command: npm install
       - run:
-          name: Run tests
+          name: Run Frontend Tests
           command: npm test
       - run:
-          name: Start Server
+          name: Start Frontend Server
           command: npm start
+          background: true  # Run in the background
 
   backend_test:
     docker:
@@ -34,9 +27,6 @@ jobs:
     working_directory: /home/circleci/project/my-react
     steps:
       - checkout
-      - run:
-          name: Debug
-          command: ls -al /home/circleci/project/my-react  # Print directory contents for debugging
       - run:
           name: Install Python Dependencies
           command: pip install -r src/services/requirements.txt
