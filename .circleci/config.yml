@@ -32,10 +32,10 @@ jobs:
           command: pip install -r requirements.txt
       - run:
           name: Run API Server
-          command: python src/Services/Api.py &  # Run the API server in the background
+          command: python /my-react/src/Services/Api.py &  # Run the API server in the background
       - run:
           name: Run Backend Tests
-          command: pytest src/Services/test_app.py
+          command: pytest /my-react/src/Services/test_app.py
 
 workflows:
   version: 2
