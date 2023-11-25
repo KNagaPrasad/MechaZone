@@ -32,7 +32,6 @@ jobs:
       - run:
           name: Run API Server
           command: python src/services/Api.py &
-    
       - run:
           name: Run Backend Tests
           command: pytest src/services/test_app.py
