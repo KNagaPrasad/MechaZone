@@ -20,6 +20,7 @@ jobs:
           name: Start Frontend Server
           command: npm start
           background: true
+
   backend_test:
     docker:
       - image: python:3.8
@@ -31,7 +32,7 @@ jobs:
           command: pip install -r requirements.txt
       - run:
           name: Run API Server
-          command: python src/services/Api.py &
+          command: python src/services/Api.py &  # Run the API server in the background
       - run:
           name: Run Backend Tests
           command: pytest src/services/test_app.py
@@ -43,4 +44,4 @@ workflows:
       - test
       - backend_test:
           requires:
-            - test
+            - test
