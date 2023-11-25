@@ -5,31 +5,31 @@ orbs:
 jobs:
   test:
     executor: node/default
-    working_directory: /home/circleci/project/my-react  # Set the correct path to your project
+    working_directory: /home/circleci/project/my-react
     steps:
       - checkout
       - node/install-packages:
           pkg-manager: npm
       - run:
           name: Install Node.js Dependencies
-          command: npm install --force
+          command: npm install --legacy-peer-deps
       - run:
           name: Run Frontend Tests
           command: npm test
       - run:
           name: Start Frontend Server
           command: npm start
-          background: true  # Run in the background
+          background: true
 
   backend_test:
     docker:
-      - image: python:3.8  # Use a Python Docker image with the desired version
+      - image: python:3.8
     working_directory: /home/circleci/project/my-react
     steps:
       - checkout
       - run:
           name: Install Python Dependencies
-          command: pip install -r src/services/requirements.txt
+          command: pip install -r requirements.txt
       - run:
           name: Run Backend Tests
           command: pytest src/services/test_app.py
