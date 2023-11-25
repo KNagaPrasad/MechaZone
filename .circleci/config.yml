@@ -35,7 +35,7 @@ jobs:
           command: python src/Services/Api.py &  # Run the API server in the background
       - run:
           name: Run Backend Tests
-          command: pytest src/services/test_app.py
+          command: pytest src/Services/test_app.py
 
 workflows:
   version: 2
