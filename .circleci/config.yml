@@ -30,11 +30,23 @@ jobs:
           command: pip install -r requirements.txt
       - run:
           name: Run API Server
-          command: python src/services/Api.py &  
+          command: python src/services/Api.py &
 
+  backend_test:
+    docker:
+      - image: python:3.8
+      - run:
+          name: Run Backend Tests
+          command: pytest src/services/test_app.py
 
 workflows:
   version: 2
   test_my_app:
     jobs:
       - test
+      - backend_test:
+          requires:
+            - test        
+
+
+
