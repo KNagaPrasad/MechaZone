@@ -43,7 +43,4 @@ workflows:
       - test
       - backend_test:
           requires:
-            - test        
-
-
-
+            - test
