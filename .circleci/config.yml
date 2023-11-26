@@ -31,8 +31,6 @@ jobs:
           name: Install Python Dependencies
           command: |
             pip install -r requirements.txt
-            pip install sqlalchemy
-            pip install pyodbc
       - run:
           name: Run API Server
           command: python src/Services/Api.py &
