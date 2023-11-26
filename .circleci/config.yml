@@ -37,7 +37,7 @@ jobs:
           command: cd my-react/src/Services && ls
       - run:
           name: Run API Server
-          command: python src/Services/Api.py
+          command: cd my-react/src/Services && python Api.py
       - run:
           name: Run Backend Tests
           command: pytest test_app.py
