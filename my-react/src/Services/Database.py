@@ -11,9 +11,25 @@ from sqlalchemy.orm import declared_attr
 
 #engine = create_engine('mssql+pyodbc://@' + DESKTOP-8FANH7R + '/' + BWorks + '?trusted_connection=yes&driver=ODBC+Driver+13+for+SQL+Server  driver=SQL Server Native Client 11.0')')
 
-engine = create_engine('mssql+pyodbc://@' + 'VINEETHA\MSSQL' + '/' + 'Mechazone' + '?trusted_connection=yes & driver=ODBC Driver 17 for SQL Server')
+#engine = create_engine('mssql+pyodbc://@' + 'VINEETHA\MSSQL' + '/' + 'Mechazone' + '?trusted_connection=yes & driver=ODBC Driver 17 for SQL Server')
 
-#engine = create_engine('mssql+pyodbc://@' + 'DESKTOP-8FANH7R' + '/' + 'BWorks' + '?trusted_connection=yes&driver=SQL Server', use_setinputsizes=False)
+#engine = create_engine('mssql+pyodbc://@' + '.' + '/' + 'Mechazone' + '?trusted_connection=yes & driver=driver=ODBC Driver 17 for SQL Server')
+
+#engine = create_engine('mssql+pyodbc://@' + '.' + '/' + 'Mechazone' + '?trusted_connection=yes & driver=SQL Server')
+
+#engine = create_engine('mssql+pyodbc:///?trusted_connection=yes&driver=ODBC Driver 17 for SQL Server&server=HP&database=Mechazone')
+
+# Replace 'mechazone' with your actual SQL Server login and password
+#engine = create_engine('mssql+pyodbc://mechazone:mechazone@./Mechazone?trusted_connection=no&driver=ODBC Driver 17 for SQL Server')
+# Replace these values with your actual server name, login, password, and database
+# server_name = "."
+# login = "mechazone"
+# password = "mechazone"
+# database_name = "Mechazone"
+
+
+connection_string = 'Driver={ODBC Driver 17 for SQL Server};Server=.;Database=Mechazone;UID=mechazone;PWD=mechazone;trusted_connection=yes'
+engine = create_engine(connection_string)
 
 from datetime import datetime
 from sqlalchemy import ForeignKey,DateTime,Boolean
@@ -439,33 +455,25 @@ def getBikeModelsByBrand(req):
         print(e)
         return []   
         
-
-
-    
 def getAllBikesFrom_db():
     try:
-        
-        from sqlalchemy import text
         with Session(engine) as session:
-            print("session")
-            sql_statement = text("SELECT * FROM bikes" )
+            sql_statement = text("SELECT * FROM bikes")
             query = session.query(Bikes).from_statement(sql_statement)
             bikesresult = query.all()
-            bikesList= []
-            
+            bikesList = []
+
             for bike in bikesresult:
                 bikesList.append({
-                "bike_id": Bikes.bike_id,
-                "model" : Bikes.model,
-                "year": Bikes.year,
-                "price": Bikes.price,
-                
-            })
-           
+                    "bike_id": bike.bike_id,
+                    "model": bike.model,
+                    "year": bike.year,
+                    "price": bike.price,
+                })
             return bikesList
     except Exception as e:
         print(e)
-        return {}   
+        return [] 
 
 
 def getBrandModelCarParts(req):

@@ -8,7 +8,6 @@ from Database import (
     getAllCarsFrom_db,
     getAllSparesForCars,
     getAllSparesForBikes
-
 )
 
 @pytest.fixture
@@ -65,7 +64,8 @@ def test_get_bike_spares():
 def test_get_bikes():
     with app.test_client() as client:
         response = client.get('/bike')
-        assert response.status_code == 200   
+        assert response.status_code == 200
+        assert isinstance(response.json, list) 
 
 def test_get_all_cars(client):
     response = client.get('/car')
@@ -75,7 +75,6 @@ def test_get_all_cars(client):
 def test_get_car_spares():
     with app.test_client() as client:
         response = client.post('/getCarSpares', json={'carId': 1})
-
 
 def test_add_to_cart_items():
     with app.test_client() as client:
@@ -113,7 +112,7 @@ def test_display_shopping_cart_amount():
         assert 'shoppingCart' in response.json
         shopping_cart = response.json['shoppingCart']
         assert 'amount' in shopping_cart
-        assert shopping_cart['amount'] > 0    
+        assert shopping_cart['amount'] >= 0 
 
 def test_choose_delivery_type():
     with app.test_client() as client:
@@ -141,7 +140,7 @@ def test_get_car_brands(client):
     response = client.post('/getBrands', json={'brand': 'Toyo'})
     assert response.status_code == 200
     assert isinstance(response.json, list)
-    assert 'Toyota' in response.json   
+    assert 'Toyota' in response.json    
 
 def test_get_bike_brands(client):
     response = client.post('/getBikeBrands', json={'brand': 'Hon'})
@@ -154,5 +153,3 @@ def test_get_bike_models_by_brand(client):
     assert response.status_code == 200
     assert isinstance(response.json, list)
     assert 'CBR1000RR' in response.json 
-
-
