@@ -37,10 +37,10 @@ jobs:
           command: ls -lR
       - run:
           name: Run API Server
-          command: python /home/circleci/project/my-react/src/Services/Api.py 
+          command: python src/Services/Api.py 
       - run:
           name: Run Backend Tests
-          command: pytest /home/circleci/project/my-react/src/Services/test_app.py
+          command: pytest src/Services/test_app.py
 
 workflows:
   version: 2
