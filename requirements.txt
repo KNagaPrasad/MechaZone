@@ -5,4 +5,5 @@ numpy==1.21.5
 sqlalchemy==1.4.22
 pyodbc==4.0.32
 pytest
-markupsafe==2.1.1
+MarkupSafe==1.1.1
+
