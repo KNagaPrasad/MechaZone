@@ -25,7 +25,7 @@ password = "mechazone"
 database_name = "Mechazone"
 
 # Constructing the connection string
-connection_string = f"mssql+pyodbc://{login}:{password}@{server_name}/{database_name}?trusted_connection=no&driver=ODBC+Driver+17+for+SQL+Server"
+connection_string = f"mssql+pyodbc://{login}:{password}@{server_name}/{database_name}?trusted_connection=yes & driver=ODBC Driver 17 for SQL Server"
 
 # Creating the engine
 engine = create_engine(connection_string)
