@@ -24,6 +24,7 @@ jobs:
   backend_test:
     docker:
       - image: python:3.8
+    working_directory: /home/circleci/project/my-react
     steps:
       - checkout
       - run:
@@ -31,6 +32,9 @@ jobs:
           command: |
             apt-get update && apt-get install -y unixodbc-dev
             pip install -r requirements.txt
+      - run:
+          name: Debug Info
+          command: ls -lR
       - run:
           name: Run API Server
           command: python /home/circleci/project/my-react/src/Services/Api.py 
