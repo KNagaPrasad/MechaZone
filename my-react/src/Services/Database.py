@@ -17,7 +17,18 @@ import base64
 #engine = create_engine('mssql+pyodbc:///?trusted_connection=yes&driver=ODBC Driver 17 for SQL Server&server=HP&database=Mechazone')
 
 # Replace 'mechazone' with your actual SQL Server login and password
-engine = create_engine('mssql+pyodbc://mechazone:mechazone@./Mechazone?trusted_connection=no&driver=ODBC Driver 17 for SQL Server')
+#engine = create_engine('mssql+pyodbc://mechazone:mechazone@./Mechazone?trusted_connection=no&driver=ODBC Driver 17 for SQL Server')
+# Replace these values with your actual server name, login, password, and database
+server_name = "."
+login = "mechazone"
+password = "mechazone"
+database_name = "Mechazone"
+
+# Constructing the connection string
+connection_string = f"mssql+pyodbc://{login}:{password}@{server_name}/{database_name}?trusted_connection=no&driver=ODBC+Driver+17+for+SQL+Server"
+
+# Creating the engine
+engine = create_engine(connection_string)
 
 from datetime import datetime
 from sqlalchemy import ForeignKey,DateTime,Boolean
