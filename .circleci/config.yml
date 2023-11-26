@@ -3,9 +3,10 @@ orbs:
   node: circleci/node@5.1.0
 
 jobs:
-  test:
-    executor: node/default
-    working_directory: /home/circleci/project/my-react
+  test-frontend:
+    docker:
+      - image: circleci/node:16.14
+
     steps:
       - checkout
       - node/install-packages:
@@ -16,49 +17,55 @@ jobs:
       - run:
           name: Run Frontend Tests
           command: npm test
-      - run:
-          name: Start Frontend Server
-          command: npm start
-          background: true
 
-  backend_test:
+  build-frontend:
     docker:
-      - image: python:3.8
-    working_directory: /home/circleci/project/my-react
+      - image: circleci/node:16.14
+
     steps:
       - checkout
+      - node/install-packages:
+          pkg-manager: npm
       - run:
-          name: Install Compatible Markupsafe
-          command: pip install markupsafe==1.1.1
+          name: Install Node.js Dependencies
+          command: npm install --legacy-peer-deps
       - run:
-          name: Create Virtual Environment
-          command: python -m venv venv
-      - run:
-          name: Activate Virtual Environment
-          command: source venv/bin/activate
+          name: run Frontend
+          command: npm start
+
+  test-backend:
+    docker:
+      - image: python:3.8
+
+    steps:
+      - checkout
       - run:
           name: Install Python Dependencies
           command: |
             apt-get update && apt-get install -y unixodbc-dev
             pip install -r requirements.txt
       - run:
-          name: List Installed Packages
-          command: pip list
-      - run:
-          name: Get directory
-          command: cd my-react/src/Services && ls
-      - run:
-          name: Run API Server
-          command: cd my-react/src/Services && python Api.py
-      - run:
           name: Run Backend Tests
-          command: pytest test_app.py
+          command: pytest
+
+  start-backend:
+    docker:
+      - image: python:3.8
+
+    steps:
+      - checkout
+      - run:
+          name: Start Backend
+          command: |
+            cd mechazone/my-react/src/Services
+            python Api.py &
 
 workflows:
   version: 2
-  test_my_app:
+  test:
     jobs:
-      - test
-      - backend_test:
+      - test-frontend
+      - test-backend:
           requires:
-            - test
+            - test-frontend
+      - start-backend
