@@ -21,7 +21,7 @@ jobs:
           command: npm start
           background: true
 
-   backend_test:
+  backend_test:
     docker:
       - image: python:3.8
     working_directory: /home/circleci/project/my-react
