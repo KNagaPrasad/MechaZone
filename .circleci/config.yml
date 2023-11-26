@@ -21,24 +21,24 @@ jobs:
           command: npm start
           background: true
 
-  backend_test:
-    docker:
-      - image: python:3.8
-    working_directory: /home/circleci/project/my-react
-    steps:
-      - checkout
-      - run:
-          name: Install Python Dependencies
-          command: |
-            pip install -r requirements.txt
-            pip install sqlalchemy
-            pip install pyodbc
-      - run:
-          name: Run API Server
-          command: python src/Services/Api.py &
-      - run:
-          name: Run Backend Tests
-          command: pytest src/Services/test_app.py
+backend_test:
+  docker:
+    - image: python:3.8
+  working_directory: /home/circleci/project/my-react
+  steps:
+    - checkout
+    - run:
+        name: Install Python Dependencies
+        command: |
+          pip install -r requirements.txt
+          pip install sqlalchemy
+          pip install pyodbc
+    - run:
+        name: Run API Server
+        command: python src/Services/Api.py &
+    - run:
+        name: Run Backend Tests
+        command: pytest my-react/src/Services/test_app.py
 
 workflows:
   version: 2
