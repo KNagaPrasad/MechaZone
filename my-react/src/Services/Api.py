@@ -22,11 +22,10 @@ def login():
     res = login_db(req)
     return jsonify(res)
 
-@app.route('/getAllCars',methods=['get'])
-def getAllCars():
+@app.route('/car', methods=['get'])
+def get_all_cars_route():
     res = getAllCarsFrom_db()
-    return res
-
+    return jsonify(res)
 
 @app.route('/getModelsByBrand',methods = ['post'])
 def cars():

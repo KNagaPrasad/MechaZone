@@ -442,33 +442,25 @@ def getBikeModelsByBrand(req):
         print(e)
         return []   
         
-
-
-    
 def getAllBikesFrom_db():
     try:
-        
-        from sqlalchemy import text
         with Session(engine) as session:
-            print("session")
-            sql_statement = text("SELECT * FROM bikes" )
+            sql_statement = text("SELECT * FROM bikes")
             query = session.query(Bikes).from_statement(sql_statement)
             bikesresult = query.all()
-            bikesList= []
-            
+            bikesList = []
+
             for bike in bikesresult:
                 bikesList.append({
-                "bike_id": Bikes.bike_id,
-                "model" : Bikes.model,
-                "year": Bikes.year,
-                "price": Bikes.price,
-                
-            })
-           
+                    "bike_id": bike.bike_id,
+                    "model": bike.model,
+                    "year": bike.year,
+                    "price": bike.price,
+                })
             return bikesList
     except Exception as e:
         print(e)
-        return {}   
+        return [] 
 
 
 def getBrandModelCarParts(req):
