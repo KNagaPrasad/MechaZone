@@ -37,7 +37,7 @@ jobs:
           command: python src/Services/Api.py &
       - run:
           name: Run Backend Tests
-          command: pytest my-react/src/Services/test_app.py
+          command: pytest test_app.py
 
 workflows:
   version: 2
