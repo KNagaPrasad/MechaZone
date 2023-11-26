@@ -8,7 +8,6 @@ from Database import (
     getAllCarsFrom_db,
     getAllSparesForCars,
     getAllSparesForBikes
-
 )
 
 @pytest.fixture
