@@ -1,5 +1,5 @@
 Flask==1.1.4
-Werkzeug==1.0.1
+Werkzeug
 traitlets==5.1.0
 numpy==1.21.0
 sqlalchemy==1.4.22
