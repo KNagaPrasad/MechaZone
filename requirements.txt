@@ -1,3 +1,4 @@
 Flask==2.0.1
 pytest==7.4.1
 Werkzeug==2.0.1
+traitlets==5.1.0
