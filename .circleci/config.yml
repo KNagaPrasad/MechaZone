@@ -24,6 +24,9 @@ jobs:
   backend_test:
     docker:
       - image: python:3.8
+    environment:
+      API_PATH: /home/circleci/project/my-react/src/Services/Api.py
+      TEST_PATH: /home/circleci/project/my-react/src/Services/test_app.py
     working_directory: /home/circleci/project/my-react
     steps:
       - checkout
@@ -34,11 +37,10 @@ jobs:
             pip install -r requirements.txt
       - run:
           name: Run API Server
-          command: python src/Services/Api.py
-          working_directory: /home/circleci/project/my-react
+          command: python $API_PATH
       - run:
           name: Run Backend Tests
-          command: pytest src/Services/test_app.py
+          command: pytest $TEST_PATH
 
 workflows:
   version: 2
