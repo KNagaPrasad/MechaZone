@@ -34,7 +34,7 @@ jobs:
             pip install -r requirements.txt
       - run:
           name: Get directory
-          command: cd my-react/src && ls
+          command: cd my-react/src/Services && ls
       - run:
           name: Run API Server
           command: python src/Services/Api.py
