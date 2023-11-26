@@ -28,6 +28,18 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Upgrade Markupsafe
+          command: pip install --upgrade markupsafe
+      - run:
+          name: List Installed Packages
+          command: pip list
+      - run:
+          name: Create Virtual Environment
+          command: python -m venv venv
+      - run:
+          name: Activate Virtual Environment
+          command: source venv/bin/activate
+      - run:
           name: Install Python Dependencies
           command: |
             apt-get update && apt-get install -y unixodbc-dev
