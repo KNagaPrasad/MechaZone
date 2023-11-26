@@ -1,5 +1,4 @@
 version: 2.1
-
 orbs:
   node: circleci/node@5.1.0
 
@@ -32,8 +31,8 @@ jobs:
           name: Upgrade Markupsafe
           command: pip install --upgrade markupsafe
       - run:
-          name: Print Markupsafe Version
-          command: pip show markupsafe
+          name: List Installed Packages
+          command: pip list
       - run:
           name: Create Virtual Environment
           command: python -m venv venv
@@ -45,9 +44,6 @@ jobs:
           command: |
             apt-get update && apt-get install -y unixodbc-dev
             pip install -r requirements.txt
-      - run:
-          name: List Installed Packages
-          command: pip list
       - run:
           name: Get directory
           command: cd my-react/src/Services && ls
