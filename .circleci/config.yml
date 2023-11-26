@@ -34,11 +34,11 @@ jobs:
             pip install -r requirements.txt
       - run:
           name: Run API Server
-          command:
-            cd src/Services && python Api.py
+          command: python src/Services/Api.py
+          working_directory: /home/circleci/project/my-react
       - run:
           name: Run Backend Tests
-          command: pytest test_app.py
+          command: pytest src/Services/test_app.py
 
 workflows:
   version: 2
