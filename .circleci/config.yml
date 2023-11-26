@@ -33,6 +33,9 @@ jobs:
             apt-get update && apt-get install -y unixodbc-dev
             pip install -r requirements.txt
       - run:
+          name: Get directory
+          command: ls
+      - run:
           name: Run API Server
           command: python src/Services/Api.py
       - run:
