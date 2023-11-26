@@ -21,38 +21,38 @@ jobs:
           command: npm start
           background: true
 
-backend_test:
-  docker:
-    - image: python:3.8
-  working_directory: /home/circleci/project/my-react
-  steps:
-    - checkout
-    - run:
-        name: Install Compatible Markupsafe
-        command: pip install markupsafe==1.1.1
-    - run:
-        name: Create Virtual Environment
-        command: python -m venv venv
-    - run:
-        name: Activate Virtual Environment
-        command: source venv/bin/activate
-    - run:
-        name: Install Python Dependencies
-        command: |
-          apt-get update && apt-get install -y unixodbc-dev
-          pip install -r requirements.txt
-    - run:
-        name: List Installed Packages
-        command: pip list
-    - run:
-        name: Get directory
-        command: cd my-react/src/Services && ls
-    - run:
-        name: Run API Server
-        command: cd my-react/src/Services && python Api.py
-    - run:
-        name: Run Backend Tests
-        command: pytest test_app.py
+  backend_test:
+    docker:
+      - image: python:3.8
+    working_directory: /home/circleci/project/my-react
+    steps:
+      - checkout
+      - run:
+          name: Install Compatible Markupsafe
+          command: pip install markupsafe==1.1.1
+      - run:
+          name: Create Virtual Environment
+          command: python -m venv venv
+      - run:
+          name: Activate Virtual Environment
+          command: source venv/bin/activate
+      - run:
+          name: Install Python Dependencies
+          command: |
+            apt-get update && apt-get install -y unixodbc-dev
+            pip install -r requirements.txt
+      - run:
+          name: List Installed Packages
+          command: pip list
+      - run:
+          name: Get directory
+          command: cd my-react/src/Services && ls
+      - run:
+          name: Run API Server
+          command: cd my-react/src/Services && python Api.py
+      - run:
+          name: Run Backend Tests
+          command: pytest test_app.py
 
 workflows:
   version: 2
