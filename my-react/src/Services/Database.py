@@ -14,7 +14,7 @@ import base64
 
 #engine = create_engine('mssql+pyodbc://@' + '.' + '/' + 'Mechazone' + '?trusted_connection=yes & driver=SQL Server')
 
-engine = create_engine('mssql+pyodbc://@' + 'HP' + '/' + 'Mechazone' + '?trusted_connection=yes & driver=ODBC Driver 17 for SQL Server')
+engine = create_engine('mssql+pyodbc:///?trusted_connection=yes&driver=ODBC Driver 17 for SQL Server&server=HP&database=Mechazone')
 
 from datetime import datetime
 from sqlalchemy import ForeignKey,DateTime,Boolean
