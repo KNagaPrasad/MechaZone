@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { API_URL } from '../Constants';
+import { useSelector } from 'react-redux';
 
 function Cart() {
   const navigate = useNavigate();
@@ -10,11 +11,12 @@ function Cart() {
   const [totalPrice, setTotalPrice] = useState(0);
   const [discount, setDiscount] = useState(0);
   const [amount, setAmount] = useState(0);
-  const [deliveryType, setDeliveryType] = useState('');
+
+  const userIdFromRedux = useSelector(state => state?.userInfo?.user?.userId);
 
   useEffect(() => {
     
-    axios.post(`${API_URL}/prepareShoppingCart`, { user_id: 40 })
+    axios.post(`${API_URL}/prepareShoppingCart`, { user_id: userIdFromRedux })
       .then(response => {
         const data = response.data;
         if (data.issuccess) {
@@ -22,18 +24,6 @@ function Cart() {
           setTotalPrice(data.shoppingCart.price);
           setDiscount(data.shoppingCart.discount);
           setAmount(data.shoppingCart.amount);
-        } else {
-          console.error(data.message);
-        }
-      })
-      .catch(error => console.error('Error:', error));
-
-    
-    axios.post(`${API_URL}/deliveryType`, { user_id: 40 })
-      .then(response => {
-        const data = response.data;
-        if (data.issuccess) {
-          setDeliveryType(data.delivery_type);
         } else {
           console.error(data.message);
         }
@@ -54,25 +44,9 @@ function Cart() {
     navigate('/checkout');
   };
 
-  const handleDeliveryTypeChange = (selectedType) => {
-    
-    axios.post(`${API_URL}/deliveryType`, {
-      user_id: 40,
-      delivery_type: selectedType,
-    })
-      .then(response => {
-        const data = response.data;
-        if (data.issuccess) {
-          setDeliveryType(selectedType);
-        } else {
-          console.error(data.message);
-        }
-      })
-      .catch(error => console.error('Error:', error));
-  };
 
   return (
-    <div className="cart-container">
+    <div className="cart-container" style={{ color: 'black' }}>
       <h3>Shopping Cart</h3>
       <ul>
         {cartItems.map((item) => (
