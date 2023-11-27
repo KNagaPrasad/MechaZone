@@ -57,10 +57,6 @@ jobs:
           name: Get directory
           command: cd my-react/src/Services && ls
       - run:
-          name: Debug Connection
-          command: |
-          echo "Connection String: $CONNECTION_STRING"
-      - run:
           name: Run Backend Tests
           command: cd my-react/src/Services && pytest test_app.py
       - run:
