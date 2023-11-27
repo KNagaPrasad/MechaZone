@@ -5,6 +5,10 @@ from sqlalchemy import select
 import base64
 
 import sqlalchemy
+
+from sqlalchemy.orm import mapped_column
+from sqlalchemy.orm import declared_attr
+
 #from sqlalchemy import filter, filter_by
 
 
@@ -20,8 +24,6 @@ import sqlalchemy
 # connection_string = 'mssql+pyodbc://@' + '.' + '/' + 'Mechazone' + '?trusted_connection=yes&driver=ODBC+Driver+17+for+SQL+Server'
 # engine = create_engine(connection_string)
 
-connection_string = 'mssql+pyodbc://mechazone:mechazone@./Mechazone?trusted_connection=no&driver=ODBC+Driver+17+for+SQL+Server'
-engine = create_engine(connection_string)
 #engine = create_engine('mssql+pyodbc:///?trusted_connection=yes&driver=ODBC Driver 17 for SQL Server&server=HP&database=Mechazone')
 
 
@@ -155,8 +157,6 @@ def get_store_details(store_id):
     except Exception as e:
         print(f"Failed to get store details: {str(e)}")
         return {"issuccess": False, "message": str(e)}
-
-
 
 
 
