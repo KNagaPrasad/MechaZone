@@ -3,6 +3,8 @@ from numpy import insert
 from sqlalchemy import Enum, LargeBinary, and_, create_engine, update
 from sqlalchemy import select
 import base64
+
+import sqlalchemy
 #from sqlalchemy import filter, filter_by
 
 
@@ -13,20 +15,15 @@ import base64
 #engine = create_engine('mssql+pyodbc://@' + '.' + '/' + 'Mechazone' + '?trusted_connection=yes & driver=driver=ODBC Driver 17 for SQL Server')
 
 #engine = create_engine('mssql+pyodbc://@' + '.' + '/' + 'Mechazone' + '?trusted_connection=yes & driver=SQL Server')
+#engine = create_engine('mssql+pyodbc://@' + '.' + '/' + 'Mechazone' + '?trusted_connection=yes & driver=ODBC Driver 17 for SQL Server')
 
+# connection_string = 'mssql+pyodbc://@' + '.' + '/' + 'Mechazone' + '?trusted_connection=yes&driver=ODBC+Driver+17+for+SQL+Server'
+# engine = create_engine(connection_string)
+
+connection_string = 'mssql+pyodbc://mechazone:mechazone@./Mechazone?trusted_connection=no&driver=ODBC+Driver+17+for+SQL+Server'
+engine = create_engine(connection_string)
 #engine = create_engine('mssql+pyodbc:///?trusted_connection=yes&driver=ODBC Driver 17 for SQL Server&server=HP&database=Mechazone')
 
-# Replace 'mechazone' with your actual SQL Server login and password
-#engine = create_engine('mssql+pyodbc://mechazone:mechazone@./Mechazone?trusted_connection=no&driver=ODBC Driver 17 for SQL Server')
-# Replace these values with your actual server name, login, password, and database
-# server_name = "."
-# login = "mechazone"
-# password = "mechazone"
-# database_name = "Mechazone"
-
-
-connection_string = 'Driver={ODBC Driver 17 for SQL Server};Server=.;Database=Mechazone;UID=mechazone;PWD=mechazone;trusted_connection=yes'
-engine = create_engine(connection_string)
 
 from datetime import datetime
 from sqlalchemy import ForeignKey,DateTime,Boolean
@@ -47,7 +44,9 @@ from flask import session
 class Base:
     pass
     
-Base = declarative_base(cls=Base)
+#Base = declarative_base(cls=Base)
+Base = sqlalchemy.orm.declarative_base(cls=Base)
+
 
 class Cars(Base):
     __tablename__ = "cars"
