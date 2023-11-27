@@ -71,9 +71,9 @@ jobs:
       - run:
           name: Run Backend Tests
           command: cd my-react/src/Services && pytest test_app.py
-      - run:
-          name: Run API Server
-          command: cd my-react/src/Services && python Api.py
+      # - run:
+      #     name: Run API Server
+      #     command: cd my-react/src/Services && python Api.py
 
 workflows:
   version: 2
