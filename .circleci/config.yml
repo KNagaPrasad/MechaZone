@@ -32,16 +32,6 @@ jobs:
           name: Upgrade Markupsafe
           command: pip install --upgrade markupsafe	  
       - run:
-          name: Check Environment
-          command: |
-            apt-get update
-            apt-get install -y unixodbc-dev
-            apt-get install -y odbcinst  # Add this line to install odbcinst
-            odbcinst -q -d -n "ODBC Driver 17 for SQL Server"
-            echo "Python version: $(python --version)"
-            echo "Installed Python packages: $(pip list)"
-            echo "Installed ODBC drivers: $(odbcinst -q -d)"
-      - run:
           name: List Installed Packages
           command: pip list
       - run:
@@ -72,6 +62,16 @@ jobs:
       - run:
           name: Run API Server
           command: cd my-react/src/Services && python Api.py
+      - run:
+          name: Check Environment
+          command: |
+            apt-get update
+            apt-get install -y unixodbc-dev
+            apt-get install -y odbcinst  # Add this line to install odbcinst
+            odbcinst -q -d -n "ODBC Driver 17 for SQL Server"
+            echo "Python version: $(python --version)"
+            echo "Installed Python packages: $(pip list)"
+            echo "Installed ODBC drivers: $(odbcinst -q -d)"
 
 workflows:
   version: 2
