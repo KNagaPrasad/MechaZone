@@ -31,6 +31,18 @@ jobs:
       - run:
           name: Upgrade Markupsafe
           command: pip install --upgrade markupsafe
+		  
+	  - run:
+          name: Check Environment
+          command: |
+            apt-get update
+            apt-get install -y unixodbc-dev
+            # Check if ODBC driver is installed
+            odbcinst -q -d -n "ODBC Driver 17 for SQL Server"
+            # Print other relevant information
+            echo "Python version: $(python --version)"
+            echo "Installed Python packages: $(pip list)"
+            echo "Installed ODBC drivers: $(odbcinst -q -d)"
       - run:
           name: List Installed Packages
           command: pip list
