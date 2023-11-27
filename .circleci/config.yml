@@ -30,9 +30,8 @@ jobs:
       - checkout
       - run:
           name: Upgrade Markupsafe
-          command: pip install --upgrade markupsafe
-		  
-	  - run:
+          command: pip install --upgrade markupsafe	  
+      - run:
           name: Check Environment
           command: |
             apt-get update
