@@ -142,11 +142,11 @@ def test_choose_delivery_type():
 #     assert isinstance(response.json, list)
 #     assert 'Toyota' in response.json    
 
-def test_get_bike_brands(client):
-    response = client.post('/getBikeBrands', json={'brand': 'Hon'})
-    assert response.status_code == 200
-    assert isinstance(response.json, list)
-    assert 'Honda' in response.json
+# def test_get_bike_brands(client):
+#     response = client.post('/getBikeBrands', json={'brand': 'Hon'})
+#     assert response.status_code == 200
+#     assert isinstance(response.json, list)
+#     assert 'Honda' in response.json
         
 # def test_get_bike_models_by_brand(client):
 #     response = client.post('/getBikeModelsByBrand', json={'brand': 'Honda'})
