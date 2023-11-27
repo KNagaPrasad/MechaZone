@@ -2,7 +2,7 @@ import React from 'react';
 import Carousel from '../components/Carousel'; // Import the Carousel component
 import '../CSS/HomePage.css';
 import image1 from '../images/image1.jpg';
-import image2 from '../images/image2.avif';
+import image2 from '../images/SpareParts.png';
 import image3 from '../images/image3.jpg';
 
 function HomePage() {
