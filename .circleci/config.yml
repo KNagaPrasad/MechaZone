@@ -68,7 +68,7 @@ jobs:
       - run:
           name: List Installed Packages
           command: pip list
-              - run:
+      - run:
           name: Get directory
           command: cd my-react/src/Services && ls
       - run:
