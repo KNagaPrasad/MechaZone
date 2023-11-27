@@ -32,6 +32,19 @@ jobs:
           name: Upgrade Markupsafe
           command: pip install --upgrade markupsafe
       - run:
+          name: Install Dependencies and ODBC Driver
+          command: |
+            apt-get update
+            apt-get install -y unixodbc-dev odbcinst
+
+            # Add Microsoft repository for the SQL Server ODBC driver
+            curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
+            curl https://packages.microsoft.com/config/debian/10/prod.list > /etc/apt/sources.list.d/mssql-release.list
+            apt-get update
+
+            # Install the ODBC Driver 17 for SQL Server
+            ACCEPT_EULA=Y apt-get install -y msodbcsql17
+      - run:
           name: List Installed Packages
           command: pip list
       - run:
@@ -51,7 +64,6 @@ jobs:
       - run:
           name: Install Python Dependencies
           command: |
-            apt-get update && apt-get install -y unixodbc-dev
             pip install -r requirements.txt
       - run:
           name: Get directory
