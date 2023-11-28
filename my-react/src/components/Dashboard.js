@@ -4,18 +4,18 @@ import { Link } from "react-router-dom";
 const Dashboard = () => (
   <>
     <Link to="/car-search"> 
-      <svg height="260" width="260">
-        <circle cx="130" cy="120" r="40%" fill="black" />
-        <text x="80" y="130" fill="white" style={{ fontSize: 40 }}>
+      <svg height="400" width="400">
+        <circle cx="200" cy="200" r="40%" fill="navy" />
+        <text x="150" y="210" fill="white" style={{ fontSize: 40 }}>
           Cars
         </text>
       </svg>
     </Link>
     
     <Link to="/bike-search">
-      <svg height="260" width="260">
-        <circle cx="130" cy="120" r="40%" fill="black" />
-        <text x="80" y="130" fill="white" style={{ fontSize: 40 }}>
+      <svg height="400" width="400">
+        <circle cx="200" cy="200" r="40%" fill="navy" />
+        <text x="150" y="210" fill="white" style={{ fontSize: 40 }}>
           Bikes
         </text>
       </svg>
