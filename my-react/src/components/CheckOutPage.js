@@ -1,15 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import '../CSS/CheckoutPage.css';
+import { useSelector } from 'react-redux';
+import axios from 'axios';
+import { API_URL } from '../Constants';
+
 
 const CheckoutPage = () => {
   const location = useLocation();
-  const productDetails = location.state?.productDetails || [];
+  const [cartItems, setCartItems] = useState([]);
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [discount, setDiscount] = useState(0);
+  const [amount, setAmount] = useState(0);
 
-  // Calculate total price, discount, and amount
-  const totalPrice = productDetails.reduce((total, product) => total + product.price, 0);
-  const discount = totalPrice * 0.1; // Assuming a 10% discount
-  const amount = totalPrice - discount;
+  const userIdFromRedux = useSelector(state => state?.userInfo?.user?.userId);
+  useEffect(() => {
+    
+    axios.post(`${API_URL}/prepareShoppingCart`, { user_id: userIdFromRedux })
+      .then(response => {
+        const data = response.data;
+        if (data.issuccess) {
+          setCartItems(data.shoppingCart.sparesInfo);
+          setTotalPrice(data.shoppingCart.price);
+          setDiscount(data.shoppingCart.discount);
+          setAmount(data.shoppingCart.amount);
+        } else {
+          console.error(data.message);
+        }
+      })
+      .catch(error => console.error('Error:', error));
+  }, []);
 
   const [formData, setFormData] = useState({
     deliveryAddress: '',
@@ -39,8 +59,7 @@ const CheckoutPage = () => {
   const handleDeliveryTypeChange = (selectedType) => {
     setDeliveryType(selectedType);
     if (selectedType === 'Store') {
-      // Placeholder for store data
-      // You can fetch and set actual store data here
+  
       setSearchedStores(storeOptions);
     }
   };
@@ -121,25 +140,23 @@ const CheckoutPage = () => {
         )}
       </div>
 
-      <div className="sub-container product-details">
-        <h3>Product Details</h3>
-        {productDetails.map((product) => (
-          <div key={product.id}>
-            <p>{product.name}</p>
-            <p>{product.description}</p>
-            <p>Price: ${product.price}</p>
-          </div>
+      <div className="product details" style={{ color: 'black' }}>
+      <h3>Product details</h3>
+      <ul>
+        {cartItems.map((item) => (
+          <li key={item.id}>
+            {item.name} - ${item.price}
+          </li>
         ))}
-        <div className="price-summary">
-          <p>Tires      : $100</p>
-          <p>Spark Plugs: $10</p>
-          <p>Total Price: $110</p>
-          <p>Discount   : $11</p>
-          <p>Amount     : $99</p>
-        </div>
+      </ul>
+
+      <div>
+        <p>Total Price: ${totalPrice}</p>
+        <p>Discount: ${discount}</p>
+        <p>Amount: ${amount}</p>
           <button type="button" onClick={()=> navigate('/dashboard')}>CONTINUE SHOPPING</button>
       </div>
-
+      </div>
       {/* Payment Section */}
       <div className="sub-container payment-section">
         <label>Payment Method:</label>
