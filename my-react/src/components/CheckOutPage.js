@@ -5,17 +5,22 @@ import { useSelector } from 'react-redux';
 import axios from 'axios';
 import { API_URL } from '../Constants';
 
-
 const CheckoutPage = () => {
   const location = useLocation();
   const [cartItems, setCartItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [discount, setDiscount] = useState(0);
   const [amount, setAmount] = useState(0);
+  const [showStoreOptions, setShowStoreOptions] = useState(false);
+  const [selectedAddress, setSelectedAddress] = useState('');
+  const [searchedStores, setSearchedStores] = useState([]);
+  const [showSaveStore, setShowSaveStore] = useState(false);
+  const [popupMessage, setPopupMessage] = useState('');
+  const user = useSelector(state => state?.userInfo?.user);
 
   const userIdFromRedux = useSelector(state => state?.userInfo?.user?.userId);
+
   useEffect(() => {
-    
     axios.post(`${API_URL}/prepareShoppingCart`, { user_id: userIdFromRedux })
       .then(response => {
         const data = response.data;
@@ -46,9 +51,24 @@ const CheckoutPage = () => {
     phoneNumber: '',
   });
 
-  const [storeOptions, setStoreOptions] = useState(['Store1', 'Store2', 'Store3']); // Replace with your actual store names
-  const [searchedStores, setSearchedStores] = useState([]);
+  const [storeOptions, setStoreOptions] = useState(['Store1', 'Store2', 'Store3']);
 
+  const handleStoreSelect = (selectedStore) => {
+    setSelectedStore(selectedStore);
+    setShowStoreOptions(true);
+    setSelectedAddress(`Store ${selectedStore} is selected.`);
+  };
+
+  const handleSaveStore = () => {
+    console.log('Selected Store:', selectedStore);
+    setShowSaveStore(true);
+    setPopupMessage(`Store ${selectedStore} is selected.`);
+  };
+
+  const handleSaveOtherAddress = () => {
+    const formattedAddress = `${otherAddress.street}, ${otherAddress.apt}, ${otherAddress.zipcode}, ${otherAddress.city}, ${otherAddress.phoneNumber}, is selected`;
+    setSelectedAddress(`Address: ${formattedAddress}`);
+  };
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -58,8 +78,9 @@ const CheckoutPage = () => {
 
   const handleDeliveryTypeChange = (selectedType) => {
     setDeliveryType(selectedType);
+    setShowStoreOptions(false);
+
     if (selectedType === 'Store') {
-  
       setSearchedStores(storeOptions);
     }
   };
@@ -67,10 +88,6 @@ const CheckoutPage = () => {
   const handleOtherAddressChange = (e) => {
     const { name, value } = e.target;
     setOtherAddress({ ...otherAddress, [name]: value });
-  };
-
-  const handleStoreSelect = (selectedStore) => {
-    setSelectedStore(selectedStore);
   };
 
   const handleSubmit = (e) => {
@@ -93,6 +110,8 @@ const CheckoutPage = () => {
           <button type="button" className={deliveryType === 'Home' ? 'selected' : ''}>
             Self Checkout
           </button>
+          <input type="text" placeholder="Address" id='address' value={user.address}  />
+          <input type="text" placeholder="Zip Code" id='zipCode' value={user.zipCode} />
         </div>
         <div className="delivery-option" onClick={() => handleDeliveryTypeChange('Store')}>
           <button type="button" className={deliveryType === 'Store' ? 'selected' : ''}>
@@ -112,6 +131,14 @@ const CheckoutPage = () => {
                   </option>
                 ))}
               </select>
+              {showStoreOptions && (
+                <div className="save-button-container">
+                  <button type="button" onClick={handleSaveStore}>
+                    Save Store
+                  </button>
+                  <p>{selectedAddress}</p>
+                </div>
+              )}
             </div>
           )}
         </div>
@@ -136,27 +163,34 @@ const CheckoutPage = () => {
 
             <label>Phone Number:</label>
             <input type="tel" name="phoneNumber" value={otherAddress.phoneNumber} onChange={handleOtherAddressChange} required />
+
+            <button type="button" onClick={handleSaveOtherAddress}>
+              Save Address
+            </button>
+            <p>{selectedAddress}</p>
           </div>
         )}
       </div>
 
+      {/* Product Details Section */}
       <div className="product details" style={{ color: 'black' }}>
-      <h3>Product details</h3>
-      <ul>
-        {cartItems.map((item) => (
-          <li key={item.id}>
-            {item.name} - ${item.price}
-          </li>
-        ))}
-      </ul>
+        <h3>Product details</h3>
+        <ul>
+          {cartItems.map((item) => (
+            <li key={item.id}>
+              {item.name} - ${item.price}
+            </li>
+          ))}
+        </ul>
 
-      <div>
-        <p>Total Price: ${totalPrice}</p>
-        <p>Discount: ${discount}</p>
-        <p>Amount: ${amount}</p>
-          <button type="button" onClick={()=> navigate('/dashboard')}>CONTINUE SHOPPING</button>
+        <div>
+          <p>Total Price: ${totalPrice}</p>
+          <p>Discount: ${discount}</p>
+          <p>Amount: ${amount}</p>
+          <button type="button" onClick={() => navigate('/dashboard')}>CONTINUE SHOPPING</button>
+        </div>
       </div>
-      </div>
+
       {/* Payment Section */}
       <div className="sub-container payment-section">
         <label>Payment Method:</label>
@@ -178,4 +212,4 @@ const CheckoutPage = () => {
   );
 };
 
-export default CheckoutPage;
+export default CheckoutPage;
