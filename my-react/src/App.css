@@ -48,7 +48,7 @@ body {
   color: white;
   text-align: center;
   align-items: center;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
