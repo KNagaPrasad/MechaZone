@@ -1,24 +1,32 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-/* Footer.css */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
 
+.content {
+  flex: 1;
+}
 
 .footer {
-    background-color: #333;
-    color: white;
-    text-align: center;
-    align-items: center;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-  }
-  
-  /* Add a media query for screens smaller than 768px (e.g., mobile devices) */
-  @media (max-width: 768px) {
-    .footer {
-      font-size: 14px; /* Adjust font size for smaller screens */
-      padding: 10px; /* Adjust padding for smaller screens */
-    }
-  }
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
 
-  
+@media (max-width: 768px) {
+  .footer {
+      font-size: 14px;
+  }
+}
