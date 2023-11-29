@@ -61,6 +61,5 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-
 # Start the Flask app
-CMD ["flask", "run"]
+CMD ["python", "Api.py"]
