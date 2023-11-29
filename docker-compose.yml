@@ -1,8 +1,18 @@
-version: '3'  
+version: '3'
 
-mechazone-backend:
+services:
+  mechazone-frontend:
+    build:
+      context: .
+      target: frontend
+    ports:
+      - "3000:3000"
+
+  mechazone-backend:
     build:
       context: .
       target: backend
     ports:
-     - "5000:5000"
+      - "5000:5000"
+    depends_on:
+      - mechazone-frontend
