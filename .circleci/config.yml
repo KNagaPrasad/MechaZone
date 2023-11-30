@@ -12,8 +12,11 @@ jobs:
       - node/install-packages:
           pkg-manager: npm
       - run:
+          name: Clear npm Cache
+          command: npm cache clean --force
+      - run:
           name: Install Node.js Dependencies
-          command: npm install --legacy-peer-deps
+          command: npm install --legacy-peer-deps --force
       - run:
           name: Run Frontend Tests
           command: npm test
