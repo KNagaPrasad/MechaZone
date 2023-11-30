@@ -1,4 +1,6 @@
-# Use the official Node.js image
+# Frontend Dockerfile
+
+# Use the official Node.js image for building
 FROM node:14 as builder
 
 # Set the working directory for the frontend
@@ -8,7 +10,7 @@ WORKDIR /app
 COPY my-react/package*.json ./
 
 # Install dependencies
-RUN npm install @latest --force
+RUN npm install --force
 
 # Copy the frontend source code
 COPY my-react /.
@@ -16,13 +18,17 @@ COPY my-react /.
 # Build the frontend
 RUN npm run build
 
-# Production frontend stage
-FROM nginx:alpine
+# Use a lightweight Node.js image for the production environment
+FROM node:14-alpine
 
-WORKDIR /usr/share/nginx/html
+# Set the working directory for the production image
+WORKDIR /app/frontend
 
-COPY --from=builder /app/frontend/build /usr/share/nginx/html
+# Copy the built files from the builder stage
+COPY --from=builder /app/frontend/build /app/frontend/build
 
-EXPOSE 80
+# Expose the port on which the React app will run
+EXPOSE 3000
 
-CMD ["nginx", "-g", "daemon off;"]
+# Start the React app
+CMD ["npm", "start"]
