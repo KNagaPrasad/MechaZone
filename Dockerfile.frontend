@@ -33,8 +33,11 @@ RUN npm install -g serve
 # Set the production environment
 ENV NODE_ENV=production
 
+# Explicitly set the port for the React app
+ENV PORT=3000
+
 # Expose the port on which the React app will run
-EXPOSE 3000
+EXPOSE $PORT
 
 # CMD for production
 CMD ["serve", "-s", "build", "-p", "3000"]

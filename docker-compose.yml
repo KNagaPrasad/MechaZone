@@ -19,7 +19,7 @@ services:
     environment:
       DB_USER_ID: "ut7xwfa4xede5b2"
       DB_PASSWORD: "cEYw6IHcSCliHUX&vXdsynEDC"
-      DB_SERVER: "frontend"  
+      DB_SERVER: "sql-server"  
       DB_DATABASE: "d9zkgftdim6prd0"
       DB_DRIVER: "ODBC+Driver+17+for+SQL+Server"
 
