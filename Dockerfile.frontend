@@ -10,10 +10,10 @@ WORKDIR /app
 COPY my-react/package*.json ./
 
 # Install dependencies
-RUN npm install --force
+RUN npm install
 
 # Copy the frontend source code
-COPY my-react /.
+COPY my-react .
 
 # Build the frontend
 RUN npm run build
@@ -25,10 +25,16 @@ FROM node:14-alpine
 WORKDIR /app/frontend
 
 # Copy the built files from the builder stage
-COPY --from=builder /app/frontend/build /app/frontend/build
+COPY --from=builder /app/build /app/frontend/build
+
+# Install 'serve' globally
+RUN npm install -g serve
+
+# Set the production environment
+ENV NODE_ENV=production
 
 # Expose the port on which the React app will run
 EXPOSE 3000
 
-# Start the React app
-CMD ["npm", "start"]
+# CMD for production
+CMD ["serve", "-s", "build", "-p", "3000"]
