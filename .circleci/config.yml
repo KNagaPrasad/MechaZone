@@ -13,7 +13,7 @@ jobs:
           pkg-manager: npm
       - run:
           name: Install Node.js Dependencies
-          command: npm install --force
+          command: npm install @latest
       - run:
           name: Run Frontend Tests
           command: npm test
