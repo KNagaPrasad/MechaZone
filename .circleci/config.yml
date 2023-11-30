@@ -13,7 +13,7 @@ jobs:
           pkg-manager: npm
       - run:
           name: Install Node.js Dependencies
-          command: npm install --legacy-peer-deps
+          command: npm install --force
       - run:
           name: Run Frontend Tests
           command: npm test

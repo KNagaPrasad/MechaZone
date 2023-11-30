@@ -17,11 +17,7 @@ services:
     depends_on:
       - sql-server
     environment:
-      DB_USER_ID: "ut7xwfa4xede5b2"
-      DB_PASSWORD: "cEYw6IHcSCliHUX&vXdsynEDC"
-      DB_SERVER: "sql-server"  
-      DB_DATABASE: "d9zkgftdim6prd0"
-      DB_DRIVER: "ODBC+Driver+17+for+SQL+Server"
+      CONNECTION_STRING: "Server=tcp:eu-az-sql-serv1.database.windows.net,1433;Initial Catalog=d9zkgftdim6prd0;Persist Security Info=False;User ID=ut7xwfa4xede5b2;Password=cEYw6IHcSCliHUX&vXdsynEDC;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
 
   sql-server:
     image: "mcr.microsoft.com/mssql/server"
