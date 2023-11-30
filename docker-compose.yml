@@ -4,14 +4,14 @@ services:
   frontend:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.frontend
     ports:
-      - "3000:3000"
+      - "3000:80"
 
   backend:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.backend
     ports:
       - "5000:5000"
     depends_on:
@@ -19,7 +19,7 @@ services:
     environment:
       DB_USER_ID: "ut7xwfa4xede5b2"
       DB_PASSWORD: "cEYw6IHcSCliHUX&vXdsynEDC"
-      DB_SERVER: "frontend"  # This should be the name of the frontend service defined in this docker-compose file
+      DB_SERVER: "frontend"  
       DB_DATABASE: "d9zkgftdim6prd0"
       DB_DRIVER: "ODBC+Driver+17+for+SQL+Server"
 
