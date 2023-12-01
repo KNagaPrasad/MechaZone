@@ -6,11 +6,13 @@ FROM python:3.8
 # Set the working directory for the backend
 WORKDIR /app
 
-# Install system dependencies for pyodbc
+# Install system dependencies for pyodbc and ODBC Driver 17 for SQL Server
 RUN apt-get update \
-    && apt-get install -y unixodbc-dev \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+    && apt-get install -y unixodbc-dev gnupg2 \
+    && curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
+    && curl https://packages.microsoft.com/config/debian/10/prod.list > /etc/apt/sources.list.d/mssql-release.list \
+    && apt-get update \
+    && ACCEPT_EULA=Y apt-get install -y msodbcsql17
 
 # Upgrade pip
 RUN pip install --no-cache-dir --upgrade pip
@@ -24,23 +26,14 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the backend source code
 COPY my-react/src/Services/ .
 
+ENV PORT=3000
+
 # Expose the port on which the Flask app will run
 EXPOSE 5000
 
 # Set environment variables for the Flask app
 ENV FLASK_APP=Api.py
 ENV FLASK_RUN_HOST=0.0.0.0
-
-# Set environment variables for the SQL Server connection
-ENV SQL_SERVER_CONNECTION_STRING='mssql+pyodbc://ut7xwfa4xede5b2:cEYw6IHcSCliHUX&vXdsynEDC@eu-az-sql-serv1.database.windows.net/d9zkgftdim6prd0?trusted_connection=no&driver=ODBC+Driver+17+for+SQL+Server'
-
-# Download and install the SQL Server ODBC driver
-RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
-    && curl https://packages.microsoft.com/config/debian/10/prod.list > /etc/apt/sources.list.d/mssql-release.list \
-    && apt-get update \
-    && ACCEPT_EULA=Y apt-get install -y msodbcsql17 \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
 
 # Start the Flask app
 CMD ["python", "Api.py"]

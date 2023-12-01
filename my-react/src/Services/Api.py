@@ -121,9 +121,5 @@ def get_stores():
     res = get_store_details(store_id)
     return jsonify(res)
     
-    
-
-
-
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0')

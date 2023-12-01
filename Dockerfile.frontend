@@ -4,7 +4,7 @@
 FROM node:14 as builder
 
 # Set the working directory for the frontend
-WORKDIR /app
+WORKDIR /usr/src/app
 
 # Copy the package.json and package-lock.json files
 COPY my-react/package*.json ./
@@ -25,19 +25,13 @@ FROM node:14-alpine
 WORKDIR /app/frontend
 
 # Copy the built files from the builder stage
-COPY --from=builder /app/build /app/frontend/build
+COPY --from=builder /usr/src/app/build .
 
 # Install 'serve' globally
 RUN npm install -g serve
 
-# Set the production environment
-ENV NODE_ENV=production
-
 # Explicitly set the port for the React app
 ENV PORT=3000
 
-# Expose the port on which the React app will run
-EXPOSE $PORT
-
 # CMD for production
-CMD ["serve", "-s", "build", "-p", "3000"]
+CMD ["serve", "-s", ".", "-p", "3000"]
