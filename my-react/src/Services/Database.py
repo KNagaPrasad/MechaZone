@@ -3,16 +3,27 @@ from numpy import insert
 from sqlalchemy import Enum, LargeBinary, and_, create_engine, update
 from sqlalchemy import select
 import base64
-#from sqlalchemy import filter, filter_by
 
+import sqlalchemy
+
+from sqlalchemy.orm import mapped_column
+from sqlalchemy.orm import declared_attr
 
 #engine = create_engine('mssql+pyodbc://@' + DESKTOP-8FANH7R + '/' + BWorks + '?trusted_connection=yes&driver=ODBC+Driver+13+for+SQL+Server  driver=SQL Server Native Client 11.0')')
 
 #engine = create_engine('mssql+pyodbc://@' + 'VINEETHA\MSSQL' + '/' + 'Mechazone' + '?trusted_connection=yes & driver=ODBC Driver 17 for SQL Server')
 
-#engine = create_engine('mssql+pyodbc://@' + 'DESKTOP-8FANH7R' + '/' + 'BWorks' + '?trusted_connection=yes&driver=SQL Server', use_setinputsizes=False)
-#engine = create_engine('mssql+pyodbc://@' + 'DESKTOP-E5BITMF' + '/' + 'Mechazone' + '?trusted_connection=yes & driver=ODBC Driver 17 for SQL Server')
-engine = create_engine('mssql+pyodbc://@' + 'HP' + '/' + 'Mechazone' + '?trusted_connection=yes & driver=ODBC Driver 17 for SQL Server')
+#engine = create_engine('mssql+pyodbc://@' + '.' + '/' + 'Mechazone' + '?trusted_connection=yes & driver=driver=ODBC Driver 17 for SQL Server')
+
+#engine = create_engine('mssql+pyodbc://@' + '.' + '/' + 'Mechazone' + '?trusted_connection=yes & driver=SQL Server')
+#engine = create_engine('mssql+pyodbc://@' + '.' + '/' + 'Mechazone' + '?trusted_connection=yes & driver=ODBC Driver 17 for SQL Server')
+
+# connection_string = 'mssql+pyodbc://@' + '.' + '/' + 'Mechazone' + '?trusted_connection=yes&driver=ODBC+Driver+17+for+SQL+Server'
+# engine = create_engine(connection_string)
+
+connection_string = 'mssql+pyodbc://ut7xwfa4xede5b2:cEYw6IHcSCliHUX&vXdsynEDC@eu-az-sql-serv1.database.windows.net/d9zkgftdim6prd0?trusted_connection=no&driver=ODBC+Driver+17+for+SQL+Server'
+engine = create_engine(connection_string)
+#engine = create_engine('mssql+pyodbc:///?trusted_connection=yes&driver=ODBC Driver 17 for SQL Server&server=HP&database=Mechazone')
 
 
 from datetime import datetime
@@ -28,18 +39,16 @@ from sqlalchemy.orm import mapped_column
 from sqlalchemy.orm import Session
 from sqlalchemy import insert
 from sqlalchemy import text
+from flask import session 
 
-# qualify the base with _allow_unmapped_.  Can also be
-# applied to classes directly if preferred
+
 class Base:
     pass
-    #_allow_unmapped_ = True
+    
+#Base = declarative_base(cls=Base)
+Base = sqlalchemy.orm.declarative_base(cls=Base)
 
 
-Base = declarative_base(cls=Base)
-
-# existing mapping proceeds, Declarative will ignore any annotations
-# which don't include ``Mapped[]``
 class Cars(Base):
     __tablename__ = "cars"
 
@@ -58,6 +67,7 @@ class Car_Spares(Base):
     price: float = Column(Float, nullable = False)
     warranty: int = Column(Integer, nullable = True)
     car_id: int = Column(Integer, nullable = False)  
+
 
 class Bike_Spares(Base):
     __tablename__ = "Bike_Spares"
@@ -93,21 +103,21 @@ class Users(Base):
     Password: str = Column(String, nullable = False)
 
 
-class CartItems(Base): #D
+class CartItems(Base): 
     __tablename__ = "CartItems"
 
     cart_item_id: int = Column(Integer, primary_key=True)
     user_id: int = Column(Integer, nullable=False)
     s_id: int =  Column(Integer, nullable=False)
 
-class BikeCartItems(Base):#d
+class BikeCartItems(Base):
     __tablename__ = "BikeCartItems"
 
     cart_item_id: int = Column(Integer, primary_key=True)
     user_id: int = Column(Integer, nullable=False)
     s_id: int =  Column(Integer, nullable=False)
 
-class ShoppingCart(Base): #V
+class ShoppingCart(Base): 
     __tablename__ = "shopping_cart_table"
 
     Cart_id: int = Column(Integer,primary_key=True)
@@ -120,7 +130,37 @@ class ShoppingCart(Base): #V
     status: str = Column(String, nullable=False)
     date_created: str = Column(String,nullable=False)
 
-def update_delivery_type(req_data): #v
+class Stores(Base):
+    __tablename__ = "stores"
+
+    store_id: int = Column(Integer, primary_key=True)
+    name: str = Column(String, nullable=False)
+    address: str = Column(String, nullable=False)
+
+
+def get_store_details(store_id):
+    try:
+        with Session(engine) as session:
+            store = session.query(Stores).filter_by(store_id=store_id).first()
+
+            if store:
+                store_details = {
+                    "store_id": store.store_id,
+                    "name": store.name,
+                    "address": store.address,
+                }
+                return {"issuccess": True, "store_details": store_details}
+            else:
+                return {"issuccess": False, "message": "Store not found"}
+
+    except Exception as e:
+        print(f"Failed to get store details: {str(e)}")
+        return {"issuccess": False, "message": str(e)}
+
+
+
+
+def update_delivery_type(req_data): 
     try:
         cart_id = req_data.get('cart_id')
         user_id = req_data.get('user_id')
@@ -148,7 +188,7 @@ def update_delivery_type(req_data): #v
         return {"issuccess": False, "message": str(e)}   
      
 
-def prepareShoppingCart(req):#v
+def prepareShoppingCart(req):
 
     try:
         cartItems= getCartItems(req) 
@@ -173,8 +213,10 @@ def prepareShoppingCart(req):#v
         print(f"Failed to prepare shopping cart: {str(e)}")
         return {"issuccess": False, "message": str(e)} 
     
+
+
     
-def getCartItems(req):#V
+def getCartItems(req):
     try:
         with Session(engine) as session:
             sql_statement = text("SELECT * FROM CartItems where user_id=:user_id " )
@@ -189,7 +231,7 @@ def getCartItems(req):#V
         print(e)
         return []
     
-def getSparePartAmount(s_ids):#V
+def getSparePartAmount(s_ids):
     try:
         with Session(engine) as session:
             query = session.query(Car_Spares).filter(Car_Spares.s_id.in_(s_ids))
@@ -211,7 +253,7 @@ def getSparePartAmount(s_ids):#V
 
 
 
-def addBike_item_to_cart(req):#D
+def addBike_item_to_cart(req):
     from sqlalchemy import insert
     try:
         stmt = insert(BikeCartItems).values(user_id=req['user_id'], s_id=req['s_id'])
@@ -225,7 +267,7 @@ def addBike_item_to_cart(req):#D
         return {"issuccess": False, "message": str(e)}        
     
 
-def addCar_item_to_cart(req):#D
+def addCar_item_to_cart(req):
     from sqlalchemy import insert
     try:
         stmt = insert(CartItems).values(user_id=req['user_id'], s_id=req['s_id'])
@@ -410,33 +452,25 @@ def getBikeModelsByBrand(req):
         print(e)
         return []   
         
-
-
-    
 def getAllBikesFrom_db():
     try:
-        
-        from sqlalchemy import text
         with Session(engine) as session:
-            print("session")
-            sql_statement = text("SELECT * FROM bikes" )
+            sql_statement = text("SELECT * FROM bikes")
             query = session.query(Bikes).from_statement(sql_statement)
             bikesresult = query.all()
-            bikesList= []
-            
+            bikesList = []
+
             for bike in bikesresult:
                 bikesList.append({
-                "bike_id": Bikes.bike_id,
-                "model" : Bikes.model,
-                "year": Bikes.year,
-                "price": Bikes.price,
-                
-            })
-           
+                    "bike_id": bike.bike_id,
+                    "model": bike.model,
+                    "year": bike.year,
+                    "price": bike.price,
+                })
             return bikesList
     except Exception as e:
         print(e)
-        return {}   
+        return [] 
 
 
 def getBrandModelCarParts(req):

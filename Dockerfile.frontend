@@ -1,0 +1,37 @@
+# Frontend Dockerfile
+
+# Use the official Node.js image for building
+FROM node:14 as builder
+
+# Set the working directory for the frontend
+WORKDIR /usr/src/app
+
+# Copy the package.json and package-lock.json files
+COPY my-react/package*.json ./
+
+# Install dependencies
+RUN npm install
+
+# Copy the frontend source code
+COPY my-react .
+
+# Build the frontend
+RUN npm run build
+
+# Use a lightweight Node.js image for the production environment
+FROM node:14-alpine
+
+# Set the working directory for the production image
+WORKDIR /app/frontend
+
+# Copy the built files from the builder stage
+COPY --from=builder /usr/src/app/build .
+
+# Install 'serve' globally
+RUN npm install -g serve
+
+# Explicitly set the port for the React app
+ENV PORT=3000
+
+# CMD for production
+CMD ["serve", "-s", ".", "-p", "3000"]

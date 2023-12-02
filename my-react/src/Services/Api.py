@@ -1,15 +1,11 @@
 from flask import Flask
 from flask import request,jsonify,render_template
 from traitlets import This
-from Database import addBike_item_to_cart, addCar_item_to_cart, getAllBikesFrom_db,getAllSparesForBikes,getAllCarsFrom_db,getAllSparesForCars, getBikeBrands,getBikeModelsByBrand, getBrandModelBikeParts, getBrandModelCarParts, getBrands, getModelsByBrand, prepareShoppingCart,register_db,login_db, update_delivery_type
+from Database import addBike_item_to_cart, addCar_item_to_cart, get_store_details, getAllBikesFrom_db,getAllSparesForBikes,getAllCarsFrom_db,getAllSparesForCars, getBikeBrands,getBikeModelsByBrand, getBrandModelBikeParts, getBrandModelCarParts, getBrands, getModelsByBrand, prepareShoppingCart,register_db,login_db, update_delivery_type
 from flask_cors import CORS
 
 app = Flask(__name__)
 CORS(app)
-
-# @app.route('/',methods = ['get'])
-# def home():
-#     return render_template('index.html')
 
 @app.route('/register', methods=['POST'])
 def register_user():
@@ -26,11 +22,10 @@ def login():
     res = login_db(req)
     return jsonify(res)
 
-@app.route('/getAllCars',methods=['get'])
-def getAllCars():
+@app.route('/car', methods=['get'])
+def get_all_cars_route():
     res = getAllCarsFrom_db()
-    return res
-
+    return jsonify(res)
 
 @app.route('/getModelsByBrand',methods = ['post'])
 def cars():
@@ -87,7 +82,7 @@ def brandmodelbikeparts():
     res = getBrandModelBikeParts(req)
     return jsonify(res)
 
-@app.route('/addToCart',methods = ['post'])#D
+@app.route('/addToCart',methods = ['post'])
 def addtocart():
     req = request.get_json()
     if req['user_id'] is None or req['s_id'] is None:
@@ -95,7 +90,7 @@ def addtocart():
     res = addCar_item_to_cart(req)
     return jsonify(res)
 
-@app.route('/addToBikeCart',methods = ['post'])#D
+@app.route('/addToBikeCart',methods = ['post'])
 def addtobikecart():
     req = request.get_json()
     if req['user_id'] is None or req['s_id'] is None:
@@ -103,18 +98,28 @@ def addtobikecart():
     res = addBike_item_to_cart(req)
     return jsonify(res)
 
-@app.route('/prepareShoppingCart',methods = ['post'])#V
+@app.route('/prepareShoppingCart',methods = ['post'])
 def prepareshoppingcart():
     req = request.get_json()
     res = prepareShoppingCart(req)
     return jsonify(res)
 
-@app.route('/deliveryType',methods = ['post'])#V
+@app.route('/deliveryType',methods = ['post'])
 def deliverytype():
     req = request.get_json()
     res = update_delivery_type(req)
     return jsonify(res)
 
 
+
+@app.route('/getStoreDetailsById', methods=['POST'])
+def get_stores():
+    req = request.get_json()
+    store_id = req.get('store_id')
+    if store_id is None:
+        return {"issuccess": False, "message": "Store ID is required."}
+    res = get_store_details(store_id)
+    return jsonify(res)
+    
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0')

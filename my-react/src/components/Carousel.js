@@ -15,7 +15,12 @@ function Carousel({ slides }) {
   };
 
   return (
-    <div className="carousel">
+    <div
+      className="carousel"
+      style={{
+        backgroundImage: `url(${slides[currentSlide].backgroundImage})`,
+      }}
+    >
       <div className="content">
         <div className="center-content">
           <h1>{slides[currentSlide].heading}</h1>

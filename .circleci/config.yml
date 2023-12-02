@@ -1,32 +1,88 @@
 version: 2.1
+
 orbs:
   node: circleci/node@5.1.0
-
-filters:
-  branches:
-    only:
-      - "*"  # run on all branches
 
 jobs:
   test:
     executor: node/default
-    working_directory: /home/circleci/project/my-react  # Set the correct path to your project
+    working_directory: /home/circleci/project/my-react
     steps:
       - checkout
       - node/install-packages:
           pkg-manager: npm
       - run:
+          name: Clear npm Cache
+          command: npm cache clean --force
+      - run:
           name: Install Node.js Dependencies
-          command: npm install
+          command: npm install --legacy-peer-deps --force
       - run:
-          name: Run tests
-          command: npm run test
+          name: Run Frontend Tests
+          command: npm test
       - run:
-          name: Start Server
+          name: Start Frontend Server
           command: npm start
+          background: true
+
+  backend_test:
+    docker:
+      - image: python:3.8
+    working_directory: /home/circleci/project/my-react
+    steps:
+      - checkout
+      - run:
+          name: Upgrade Markupsafe
+          command: pip install --upgrade markupsafe
+      - run:
+          name: Install Dependencies and ODBC Driver
+          command: |
+            apt-get update
+            apt-get install -y unixodbc-dev odbcinst
+
+            # Add Microsoft repository for the SQL Server ODBC driver
+            curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
+            curl https://packages.microsoft.com/config/debian/10/prod.list > /etc/apt/sources.list.d/mssql-release.list
+            apt-get update
+
+            # Install the ODBC Driver 17 for SQL Server
+            ACCEPT_EULA=Y apt-get install -y msodbcsql17
+      - run:
+          name: List Installed Packages
+          command: pip list
+      - run:
+          name: Create Virtual Environment
+          command: python -m venv venv
+      - run:
+          name: Activate Virtual Environment
+          command: |
+            if [ -f venv/bin/activate ]; then
+              source venv/bin/activate
+            elif [ -f venv/Scripts/activate ]; then
+              source venv/Scripts/activate
+            else
+              echo "Virtual environment activation script not found."
+              exit 1
+            fi
+      - run:
+          name: Install Python Dependencies
+          command: |
+            pip install -r requirements.txt
+      - run:
+          name: Get directory
+          command: cd my-react/src/Services && ls
+      - run:
+          name: Run Backend Tests
+          command: cd my-react/src/Services && pytest test_app.py
+      # - run:
+      #     name: Run API Server
+      #     command: cd my-react/src/Services && python Api.py
 
 workflows:
   version: 2
   test_my_app:
     jobs:
       - test
+      - backend_test:
+          requires:
+            - test

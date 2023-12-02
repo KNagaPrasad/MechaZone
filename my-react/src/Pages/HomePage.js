@@ -1,6 +1,9 @@
 import React from 'react';
 import Carousel from '../components/Carousel'; // Import the Carousel component
 import '../CSS/HomePage.css';
+import image1 from '../images/image1.jpg';
+import image2 from '../images/SpareParts.png';
+import image3 from '../images/image3.jpg';
 
 function HomePage() {
 
@@ -10,23 +13,21 @@ function HomePage() {
       description: 'Discover amazing products and services.',
       buttonText: 'Register/Login',
       buttonLink: '/signup',
-      background: 'url(image1.avif)', 
-
+      backgroundImage: image1, 
     },
     {
       heading: 'Revolutionize Your Vehicle Experience',
       description: 'Discover a comprehensive solution for all your automotive needs.',
       buttonText: 'Learn More',
       buttonLink: '/about',
-      background: 'url(image2.webp)', 
-
+      backgroundImage: image2, 
     },
     {
       heading: 'Join Mechazone Today',
       description: 'Sign up now and get started.',
       buttonText: 'Sign Up',
       buttonLink: '/signup',
-      background: 'url(image3.webp)', 
+      backgroundImage: image3, 
 
     },
   ];
