@@ -21,6 +21,7 @@ import NewBikePage from './components/NewBikePage';
 import NewCarPage from './components/NewCarPage';
 import CheckoutPage from './components/CheckOutPage';
 import PaymentsPage from './components/PaymentPage';
+import SuccessPage from './components/SuccessPage';   // Update the path accordingly
 
 function App() {
   return (
@@ -46,6 +47,8 @@ function App() {
           <Route path ="/bike-search" element={<NewBikePage/>}/> 
           <Route path="/checkout" element={<CheckoutPage />} />
           <Route path="/payments" element={<PaymentsPage />} />
+          <Route path="/success" element={<SuccessPage/>} />
+
         </Routes>
         <Footer /> 
       </div>

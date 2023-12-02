@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Cards from 'react-credit-cards';
 import 'react-credit-cards/es/styles-compiled.css';
+import { Link } from 'react-router-dom';  // Import Link from react-router-dom
 
 const PaymentsPage = () => {
   const [cardData, setCardData] = useState({
@@ -129,11 +130,10 @@ const PaymentsPage = () => {
           </div>
         </form>
         <button onClick={handlePay} style={styles.button}>
-          Pay
+          <Link to="/success" style={{ textDecoration: 'none', color: '#fff' }}>
+            Submit
+          </Link>
         </button>
-        {paymentStatus === 'success' && (
-          <div style={styles.successMessage}>Transaction done successfully!</div>
-        )}
       </div>
     </div>
   );
