@@ -9,7 +9,7 @@
 
 body {
   background: #f6f5f7;
-  background-image: url('./images/SpareParts.png');
+  /*background-image: url('./images/SpareParts.png');*/
   display: flex;
   justify-content: center;
   align-items: center;
