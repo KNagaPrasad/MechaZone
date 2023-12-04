@@ -110,8 +110,6 @@ def deliverytype():
     res = update_delivery_type(req)
     return jsonify(res)
 
-
-
 @app.route('/getStoreDetailsById', methods=['POST'])
 def get_stores():
     req = request.get_json()

@@ -4,12 +4,15 @@ import { API_URL } from "../Constants";
 import { Link } from "react-router-dom";
 import '../CSS/BikePage.css'; 
 
+// ... (Your existing imports)
+
 const NewBikePage = () => {
   const [brand, setBrand] = useState('');
   const [brands, setBrands] = useState([]);
   const [selectedBrand, setSelectedBrand] = useState('');
   const [model, setModel] = useState('');
   const [models, setModels] = useState([]);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     if (brand.length <= 2) {
@@ -19,17 +22,25 @@ const NewBikePage = () => {
   }, [brand]);
 
   useEffect(() => {
-    getModels();
-  }, [selectedBrand]);
+    if (model.length >= 2) {
+      getModels();
+    } else {
+      // Clear the models if the entered text is less than 2 characters
+      setModels([]);
+    }
+  }, [selectedBrand, model]);
 
   const getBrands = () => {
     const _searchBrand = {
       brand
     };
-    axios.post(`${API_URL}/getBikeBrands`, _searchBrand) // Update the API endpoint for bike brands
+    axios.post(`${API_URL}/getBikeBrands`, _searchBrand)
       .then((res) => {
         if (res && res.data && res.data.length > 0) {
           setBrands(res.data);
+          setError(''); // Clear any previous error
+        } else {
+          setError('Brand not found'); // Set error if no brands match
         }
       }).catch((err) => {
         console.error(err);
@@ -38,12 +49,17 @@ const NewBikePage = () => {
 
   const getModels = () => {
     const _searchBrand = {
-      brand: selectedBrand
+      brand: selectedBrand,
+      model
     };
-    axios.post(`${API_URL}/getBikeModelsByBrand`, _searchBrand) // Update the API endpoint for bike models
+
+    axios.post(`${API_URL}/getBikeModelsByBrand`, _searchBrand)
       .then((res) => {
         if (res && res.data && res.data.length > 0) {
           setModels(res.data);
+        } else {
+          // Handle the case where no models are found
+          setModels([]);
         }
       }).catch((err) => {
         console.error(err);
@@ -53,7 +69,14 @@ const NewBikePage = () => {
   return (
     <div>
       <div className="bikepage-container">
-        <h1>Bike Brands</h1>
+        <h1 style={{ fontSize: "2.5rem", marginBottom: "20px", color: "#4caf50", textShadow: "2px 2px 4px rgba(76, 175, 80, 0.5)" }}>
+          BIKE BRANDS
+        </h1>
+        {error && (
+          <div className="error-popup">
+            {error}
+          </div>
+        )}
         <div className="search-container">
           <div className="search-input">
             <input
@@ -61,15 +84,19 @@ const NewBikePage = () => {
               placeholder="Search bike brands"
               value={brand}
               onChange={(e) => setBrand(e.target.value)}
+              style={{ fontSize: "1.5rem", padding: "10px", boxShadow: "0 0 10px rgba(76, 175, 80, 0.5)" }}
             />
             {brands.length > 0 && brands.map((eachBrand) => (
               <p
+                key={eachBrand}
                 onClick={() => {
                   setBrand(eachBrand);
                   setSelectedBrand(eachBrand);
+                  setError(''); // Clear error when a brand is selected
                 }}
                 className={eachBrand === selectedBrand ? "highlighted-brand" : ""}
-              >
+                style={{ fontSize: "1.5rem", padding: "10px", boxShadow: "0 0 10px rgba(76, 175, 80, 0.5)" }}
+                >
                 {eachBrand}
               </p>
             ))}
@@ -83,7 +110,8 @@ const NewBikePage = () => {
                 placeholder={`Enter your ${selectedBrand} model`}
                 value={model}
                 onChange={(e) => setModel(e.target.value)}
-              />
+                style={{ fontSize: "1.5rem", padding: "10px", boxShadow: "0 0 10px rgba(76, 175, 80, 0.5)" }}
+                />
               {models.length > 0 && (
                 <div className="model-suggestions">
                   {models
