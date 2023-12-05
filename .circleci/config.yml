@@ -20,10 +20,6 @@ jobs:
       - run:
           name: Run Frontend Tests
           command: npm test
-      - run:
-          name: Start Frontend Server
-          command: npm start
-          background: true
 
   backend_test:
     docker:
@@ -39,12 +35,10 @@ jobs:
           command: |
             apt-get update
             apt-get install -y unixodbc-dev odbcinst
-
             # Add Microsoft repository for the SQL Server ODBC driver
             curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
             curl https://packages.microsoft.com/config/debian/10/prod.list > /etc/apt/sources.list.d/mssql-release.list
             apt-get update
-
             # Install the ODBC Driver 17 for SQL Server
             ACCEPT_EULA=Y apt-get install -y msodbcsql17
       - run:
@@ -74,15 +68,44 @@ jobs:
       - run:
           name: Run Backend Tests
           command: cd my-react/src/Services && pytest test_app.py
-      # - run:
-      #     name: Run API Server
-      #     command: cd my-react/src/Services && python Api.py
+
+  deploy_frontend:
+    docker:
+      - image: docker:19.03.12
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Build and Push Frontend Docker Image
+          command: |
+            docker build -t $DOCKERHUB_USERNAME/mechazone-frontend:latest -f Dockerfile.frontend .
+            docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
+            docker push $DOCKERHUB_USERNAME/mechazone-frontend:latest
+
+  deploy_backend:
+    docker:
+      - image: docker:19.03.12
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Build and Push Backend Docker Image
+          command: |
+            docker build -t $DOCKERHUB_USERNAME/mechazone-backend:latest -f Dockerfile.backend .
+            docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
+            docker push $DOCKERHUB_USERNAME/mechazone-backend:latest
 
 workflows:
   version: 2
-  test_my_app:
+  test_and_deploy:
     jobs:
       - test
       - backend_test:
           requires:
             - test
+      - deploy_frontend:
+          requires:
+            - test
+      - deploy_backend:
+          requires:
+            - backend_test
