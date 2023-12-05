@@ -24,6 +24,7 @@ from sqlalchemy.orm import declared_attr
 connection_string = 'mssql+pyodbc://ut7xwfa4xede5b2:cEYw6IHcSCliHUX&vXdsynEDC@eu-az-sql-serv1.database.windows.net/d9zkgftdim6prd0?trusted_connection=no&driver=ODBC+Driver+17+for+SQL+Server'
 engine = create_engine(connection_string)
 #engine = create_engine('mssql+pyodbc:///?trusted_connection=yes&driver=ODBC Driver 17 for SQL Server&server=HP&database=Mechazone')
+#engine = create_engine('mssql+pyodbc://@' + 'HP' + '/' + 'Mechazone' + '?trusted_connection=yes & driver=ODBC Driver 17 for SQL Server')
 
 
 from datetime import datetime
