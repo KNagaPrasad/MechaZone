@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { API_URL } from '../Constants';
 import { useSelector } from 'react-redux';
+import '../CSS/Cart.css';
 
 function Cart() {
   const navigate = useNavigate();
