@@ -16,6 +16,14 @@ ul {
   padding: 0;
 }
 
+/* Cart.css */
+
+.highlight {
+  color: darkblue; /* You can adjust the color as needed */
+  font-weight: bold;
+}
+
+
 li {
   display: flex;
   justify-content: space-between;

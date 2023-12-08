@@ -16,7 +16,6 @@ function Cart() {
   const userIdFromRedux = useSelector(state => state?.userInfo?.user?.userId);
 
   useEffect(() => {
-    
     axios.post(`${API_URL}/prepareShoppingCart`, { user_id: userIdFromRedux })
       .then(response => {
         const data = response.data;
@@ -45,7 +44,6 @@ function Cart() {
     navigate('/checkout');
   };
 
-
   return (
     <div className="cart-container" style={{ color: 'black' }}>
       <h3>Shopping Cart</h3>
@@ -57,13 +55,21 @@ function Cart() {
           </li>
         ))}
       </ul>
+  
 
-      <div>
-        <p>Total Price: ${totalPrice}</p>
-        <p>Discount: ${discount}</p>
-        <p>Amount: ${amount}</p>
-      </div>
-      <div>
+<div className="cart-summary">
+  <p>
+    <span className="highlight">Total Price:</span> ${totalPrice}
+  </p>
+  <p>
+    <span className="highlight">Discount:</span> ${discount}
+  </p>
+  <p>
+    <span className="highlight">Amount:</span> ${amount}
+  </p>
+</div>
+  
+      <div className="cart-buttons">
         <button onClick={handleContinueShopping}>Continue Shopping</button>
         <button onClick={handleProceedToCheckout}>Proceed to Checkout</button>
       </div>
