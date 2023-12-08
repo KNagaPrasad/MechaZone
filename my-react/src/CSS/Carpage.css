@@ -1,94 +1,61 @@
+
 .carpage-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 50px;
-  margin-bottom: 150px;
-}
-
-.search-container {
-  margin-bottom: 20px;
-}
-
-.search-input input[type="text"] {
-  width: 100%;
-  padding: 8px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  font-size: 16px;
-}
-
-.car-logos-container {
-  display: flex;
-  flex-wrap: wrap;
   justify-content: center;
 }
 
-.car-logos-container .row {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
+.carpage-container h1 {
+  font-size: 5rem;
+  margin-bottom: 100px;
+  color: #4caf50;
+  text-shadow: 20px 20px 12px rgba(76, 175, 80, 0.5);
 }
 
-.car-logos-container .row .car-logo {
-  margin: 10px;
+.carpage-container .search-container input,
+.carpage-container .search-input p {
+  font-size: 1.5rem;
+  padding: 10px;
+  border: 2px solid #4caf50; 
+  box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+  transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
+.carpage-container .search-container input:hover,
+.carpage-container .search-input p:hover {
+  border-color: #45a049; 
+  box-shadow: 0 0 15px rgba(76, 175, 80, 0.8); 
+}
+
+.carpage-container .highlighted-brand {
+  font-size: 2rem; 
+  padding: 15px; 
+  width: 500px; 
+  height: 75px; 
+  box-shadow: 10 10 10px rgba(76, 175, 80, 0.5); 
+}
 .car-models-container {
-  margin-top: 20px;
-}
-
-.car-models-container .search-model-container {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px; 
-}
-
-.car-models-container input[type="text"] {
-  width: calc(70% - 20px);
-  padding: 8px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  font-size: 16px;
-}
-
-.car-models-container .search-button {
-  width: calc(30% - 20px);
-  padding: 10px 20px;
-  font-size: 16px;
-  margin-left: 10px;
-  margin-right: 10px; 
-}
-
-error-popup {
-  position: fixed;
-  bottom: 70px;
-  right: 100px;
-  background-color: #a10000;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 4px;
+  margin-top: 30px; 
 }
 
 .model-suggestions {
-  position: relative; /* Change position to relative */
-  background: #eeebeb;
-  border: 1px solid #ccc;
-  width: 100%; /* Occupy full width of the container */
-  max-height: 200px;
-  overflow-y: auto;
-  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  box-shadow: 10 10 10px rgba(76, 175, 80, 0.5); 
+  
+  
 }
 
-.model-suggestions .model-suggestion {
-  padding: 10px;
-  cursor: pointer;
+.model-suggestion {
+  font-size: 2rem; 
+  padding: 15px; 
+  width: 500px; 
+  height: 50px; 
+  box-shadow: 10 10 10px rgba(76, 175, 80, 0.5); 
 }
 
-.model-suggestions .model-suggestion:hover {
-  background-color: #f5f5f5;
+.model-suggestion:hover {
+  background-color: rgb(231, 16, 16);
 }

@@ -4,8 +4,6 @@ import { API_URL } from "../Constants";
 import { Link } from "react-router-dom";
 import '../CSS/BikePage.css'; 
 
-// ... (Your existing imports)
-
 const NewBikePage = () => {
   const [brand, setBrand] = useState('');
   const [brands, setBrands] = useState([]);
@@ -25,7 +23,6 @@ const NewBikePage = () => {
     if (model.length >= 2) {
       getModels();
     } else {
-      // Clear the models if the entered text is less than 2 characters
       setModels([]);
     }
   }, [selectedBrand, model]);
@@ -38,9 +35,9 @@ const NewBikePage = () => {
       .then((res) => {
         if (res && res.data && res.data.length > 0) {
           setBrands(res.data);
-          setError(''); // Clear any previous error
+          setError(''); 
         } else {
-          setError('Brand not found'); // Set error if no brands match
+          setError('Brand not found'); 
         }
       }).catch((err) => {
         console.error(err);
@@ -58,7 +55,6 @@ const NewBikePage = () => {
         if (res && res.data && res.data.length > 0) {
           setModels(res.data);
         } else {
-          // Handle the case where no models are found
           setModels([]);
         }
       }).catch((err) => {
