@@ -69,7 +69,7 @@ const NewBikePage = () => {
   return (
     <div>
       <div className="bikepage-container">
-        <h1 style={{ fontSize: "2.5rem", marginBottom: "20px", color: "#4caf50", textShadow: "2px 2px 4px rgba(76, 175, 80, 0.5)" }}>
+        <h1>
           BIKE BRANDS
         </h1>
         {error && (
@@ -84,7 +84,7 @@ const NewBikePage = () => {
               placeholder="Search bike brands"
               value={brand}
               onChange={(e) => setBrand(e.target.value)}
-              style={{ fontSize: "1.5rem", padding: "10px", boxShadow: "0 0 10px rgba(76, 175, 80, 0.5)" }}
+              style={{ fontSize: "2rem", padding: "15px", width:"500px",height:"75px",boxShadow: "10 10 10px rgba(76, 175, 80, 0.5)" }}
             />
             {brands.length > 0 && brands.map((eachBrand) => (
               <p
@@ -95,7 +95,7 @@ const NewBikePage = () => {
                   setError(''); // Clear error when a brand is selected
                 }}
                 className={eachBrand === selectedBrand ? "highlighted-brand" : ""}
-                style={{ fontSize: "1.5rem", padding: "10px", boxShadow: "0 0 10px rgba(76, 175, 80, 0.5)" }}
+                style={{ fontSize: "2rem", padding: "15px", boxShadow: "10 10 10px rgba(76, 175, 80, 0.5)" }}
                 >
                 {eachBrand}
               </p>
@@ -110,7 +110,7 @@ const NewBikePage = () => {
                 placeholder={`Enter your ${selectedBrand} model`}
                 value={model}
                 onChange={(e) => setModel(e.target.value)}
-                style={{ fontSize: "1.5rem", padding: "10px", boxShadow: "0 0 10px rgba(76, 175, 80, 0.5)" }}
+                style={{ fontSize: "2rem", padding: "10px", width:"500px",height:"75px",boxShadow: "10 10 10px rgba(76, 175, 80, 0.5)" }}
                 />
               {models.length > 0 && (
                 <div className="model-suggestions">

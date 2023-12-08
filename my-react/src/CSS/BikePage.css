@@ -3,50 +3,60 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  
 }
 
-h1 {
-  font-size: 2.5rem;
-  margin-bottom: 20px;
+.bikepage-container h1 {
+  font-size: 5rem;
+  margin-bottom: 100px;
   color: #4caf50;
-  text-shadow: 2px 2px 4px rgba(76, 175, 80, 0.5);
+  text-shadow: 20px 20px 12px rgba(76, 175, 80, 0.5);
 }
 
-.search-input p {
+.bikepage-container .search-container input,
+.bikepage-container .search-input p {
   font-size: 1.5rem;
+  padding: 10px;
+  border: 2px solid #4caf50; 
   box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+  transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
-/* Add additional styling for the highlighted brand */
-.highlighted-brand {
-  font-weight: bold;
-  color: #4caf50;
-  text-shadow: 2px 2px 4px rgba(76, 175, 80, 0.5);
+.bikepage-container .search-container input:hover,
+.bikepage-container .search-input p:hover {
+  border-color: #45a049; 
+  box-shadow: 0 0 15px rgba(76, 175, 80, 0.8); 
 }
 
-
+.bikepage-container .highlighted-brand {
+  font-size: 2rem; 
+  padding: 15px; 
+  width: 500px; 
+  height: 75px; 
+  box-shadow: 10 10 10px rgba(76, 175, 80, 0.5); 
+}
 .bike-models-container {
-  margin-top: 20px; /* Add some space between bike brands and models */
+  margin-top: 30px; 
 }
 
-/* Style the model suggestions */
 .model-suggestions {
   display: flex;
   flex-direction: column;
   margin-top: 10px;
+  box-shadow: 10 10 10px rgba(76, 175, 80, 0.5); 
+  
+  
 }
 
 .model-suggestion {
-  padding: 10px;
-  background-color: #f1f1f1;
-  margin-bottom: 5px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
+  font-size: 2rem; 
+  padding: 15px; 
+  width: 500px; 
+  height: 50px; 
+  box-shadow: 10 10 10px rgba(76, 175, 80, 0.5); 
 }
 
 .model-suggestion:hover {
-  background-color: rgb(221, 221, 221)919;
+  background-color: rgb(231, 16, 16);
 }
 
