@@ -1,5 +1,3 @@
-/* CheckoutPage.css */
-
 body {
   margin: 0;
   font-family: 'Arial', sans-serif;
@@ -42,7 +40,6 @@ body {
   padding: 20px;
 }
 
-/* Styling for delivery box */
 .delivery-box label {
   display: block;
   margin-bottom: 8px;
@@ -50,7 +47,7 @@ body {
 
 .delivery-option {
   display: flex;
-  flex-direction: column; /* Change to column layout */
+  flex-direction: column; 
   align-items: flex-start; 
   cursor: pointer;
   margin-bottom: 8px;
@@ -95,7 +92,6 @@ body {
   background-color: #45a049;
 }
 
-/* Styling for other address form */
 .other-address-form label {
   display: block;
   margin-bottom: 8px;
@@ -108,7 +104,6 @@ body {
   box-sizing: border-box;
 }
 
-/* Styling for payment section */
 .payment-section label {
   display: block;
   margin-bottom: 8px;
@@ -121,7 +116,6 @@ body {
   box-sizing: border-box;
 }
 
-/* Styling for Pay Now button */
 .payment-section button {
   background-color: #f0c14b;
   border: 1px solid #a88734;
@@ -130,7 +124,7 @@ body {
   cursor: pointer;
   border-radius: 4px;
   font-size: 16px;
-  margin-top: 10px; /* Add top margin to create space */
+  margin-top: 10px; 
 }
 
 .payment-section button:hover {

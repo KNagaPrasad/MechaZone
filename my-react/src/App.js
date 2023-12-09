@@ -10,8 +10,6 @@ import Header from './components/Header';
 import Footer from './components/Footer'; 
 import './App.css';
 import Dashboard from './components/Dashboard';
-import Cars from './components/Car';
-import Bikes from './components/Bike';
 import Logout from './components/Logout';
 import Settings from './components/Settings';
 import CarParts from './components/CarParts'; 
@@ -36,8 +34,6 @@ function App() {
           <Route path="/signup" element={<SignupPage />} /> 
           <Route path="/login" element={<LoginPage />} /> 
           <Route path ="/dashboard" element={<Dashboard/>}/>
-          <Route path ="/cars" element={<Cars/>}/>
-          <Route path ="/bikes" element={<Bikes/>}/>
           <Route path ="/logout" element={<Logout/>}/>
           <Route path ="/settings" element={<Settings/>}/>
           <Route path ="/car-search" element={<NewCarPage/>}/> 

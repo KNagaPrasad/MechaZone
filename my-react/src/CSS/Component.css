@@ -50,8 +50,6 @@
     color: #333; 
   }
   
-  
-  /* Form Styles */
   form {
     background-color: transparent;
     display: flex;
@@ -62,14 +60,12 @@
     height: 100%;
     text-align: center;
   }
-  
-  /* Title Styles */
+
   h1 {
     font-weight: bold;
     margin: 0;
   }
   
-  /* Input Styles */
   input {
     background-color: #eee;
     border: none;
@@ -78,7 +74,6 @@
     width: 100%;
   }
   
-  /* Button Styles */
   button {
     border-radius: 20px;
     border: 1px solid #ff4b2b;
@@ -100,7 +95,6 @@
     outline: none;
   }
   
-  /* Anchor Styles */
   a {
     color: #05090b;
     font-size: 14px;
@@ -108,7 +102,6 @@
     margin: 15px 0;
   }
   
-  /* OverlayContainer Styles */
   .overlay-container {
     position: absolute;
     top: 0;
@@ -124,7 +117,6 @@
     transform: translateX(-100%);
   }
   
-  /* Overlay Styles */
   .overlay {
     background: #f30606; 
     background: -webkit-linear-gradient(to right, #a80c0c, #000000);
@@ -145,7 +137,6 @@
     transform: translateX(50%);
   }
   
-  /* OverlayPanel Styles */
   .overlay .overlay-panel {
     position: absolute;
     display: flex;
@@ -161,18 +152,15 @@
     transition: transform 0.6s ease-in-out;
   }
   
-  /* LeftOverlayPanel Styles */
   .overlay .left-overlay-panel {
     transform: translateX(0%);
   }
   
-  /* RightOverlayPanel Styles */
   .overlay .right-overlay-panel {
     right: 0;
     transform: translateX(0);
   }
   
-  /* Paragraph Styles */
   p {
     font-size: 14px;
     font-weight: 100;
@@ -181,13 +169,11 @@
     margin: 20px 0 30px;
   }
   
-  /* GhostButton Styles */
   .ghost-button {
     background-color: transparent;
     border-color: #ffffff;
   }
   
-  /* Styling for the Terms and Conditions checkbox */
   .terms-label {
     align-items: center;
     margin: 10px 0;

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Logo from './Logo';
 import '../CSS/Header.css';
 import { useSelector } from 'react-redux';
-import { FaShoppingCart } from 'react-icons/fa'; // Import the cart icon
+import { FaShoppingCart } from 'react-icons/fa'; 
 import NavDropDown from './NavDropDown';
 
 function Header() {

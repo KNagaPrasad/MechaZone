@@ -76,44 +76,6 @@ def test_get_car_spares():
     with app.test_client() as client:
         response = client.post('/getCarSpares', json={'carId': 1})
 
-# def test_add_to_cart_items():
-#     with app.test_client() as client:
-#         cart_item_data = {
-#             "user_id": 1,
-#             "s_id": 1
-#         }
-#         response = client.post('/addToCart', json=cart_item_data)
-#         assert response.status_code == 200
-#         assert response.json['issuccess'] is True 
-
-# def test_get_bike_brands(client):
-#     response = client.post('/getBikeBrands', json={'brand': 'Hon'})
-#     assert response.status_code == 200
-#     assert isinstance(response.json, list)
-#     assert 'Honda' in response.json
-    
-# def test_display_total():
-#     with app.test_client() as client:
-#         cart_data = {
-#             "user_id": 1
-#         }
-#         response = client.post('/prepareShoppingCart', json=cart_data)
-#         assert response.status_code == 200
-#         assert 'shoppingCart' in response.json
-
-# def test_display_shopping_cart_amount():
-#     with app.test_client() as client:
-#         user_id = 13
-#         cart_data = {
-#             "user_id": user_id
-#         }
-#         response = client.post('/prepareShoppingCart', json=cart_data)
-#         assert response.status_code == 200
-#         assert 'shoppingCart' in response.json
-#         shopping_cart = response.json['shoppingCart']
-#         assert 'amount' in shopping_cart
-#         assert shopping_cart['amount'] >= 0 
-
 def test_choose_delivery_type():
     with app.test_client() as client:
         delivery_data = {
@@ -125,31 +87,3 @@ def test_choose_delivery_type():
         assert response.status_code == 200
         assert response.json['issuccess'] is True
 
-# def test_display_discount():
-#     with app.test_client() as client:
-#         cart_data = {
-#             "user_id": 1
-#         }
-#         response = client.post('/prepareShoppingCart', json=cart_data)
-#         assert response.status_code == 200
-#         assert 'shoppingCart' in response.json
-#         shopping_cart = response.json['shoppingCart']
-#         assert 'discount' in shopping_cart
-
-# def test_get_car_brands(client):
-#     response = client.post('/getBrands', json={'brand': 'Toyo'})
-#     assert response.status_code == 200
-#     assert isinstance(response.json, list)
-#     assert 'Toyota' in response.json    
-
-# def test_get_bike_brands(client):
-#     response = client.post('/getBikeBrands', json={'brand': 'Hon'})
-#     assert response.status_code == 200
-#     assert isinstance(response.json, list)
-#     assert 'Honda' in response.json
-        
-# def test_get_bike_models_by_brand(client):
-#     response = client.post('/getBikeModelsByBrand', json={'brand': 'Honda'})
-#     assert response.status_code == 200
-#     assert isinstance(response.json, list)
-#     assert 'CBR1000RR' in response.json 

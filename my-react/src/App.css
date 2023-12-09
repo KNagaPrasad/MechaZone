@@ -1,6 +1,4 @@
 
-/* App.css */
-
 @import url("https://fonts.googleapis.com/css?family=Montserrat:400,800");
 
 * {
@@ -9,7 +7,6 @@
 
 body {
   background: #f6f5f7;
-  /*background-image: url('./images/SpareParts.png');*/
   display: flex;
   justify-content: center;
   align-items: center;
@@ -17,7 +14,7 @@ body {
   font-family: "Montserrat", sans-serif;
   height: 100vh;
   margin: 0;
-  padding: 0; /* Remove margin and add padding */
+  padding: 0; 
 }
 
 .App {
@@ -57,11 +54,11 @@ body {
 
 @media (max-width: 768px) {
   body {
-    padding: 10px; /* Adjust padding for smaller screens */
+    padding: 10px; 
   }
 
   .App {
-    font-size: 16px; /* Adjust font size for smaller screens */
+    font-size: 16px; 
   }
 }
 

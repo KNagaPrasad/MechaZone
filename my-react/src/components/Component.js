@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../redux/Actions/UserActions";
 
-
 const userObj = {
   name: '',
   contactId: '',
@@ -18,7 +17,6 @@ const userObj = {
   confirmPassword: '',
   isTNC: false
 }
-
 
 function Signupandsignin() {
   const [signIn, toggleSignIn] = useState(true);
@@ -33,7 +31,6 @@ function Signupandsignin() {
     }
   }, [userFromRedux]);
 
-  
   const toggleForm = () => {
     toggleSignIn(!signIn);
   };
@@ -65,7 +62,6 @@ function Signupandsignin() {
       window.alert("FAILURE");
     })
   }
-
 
   const handleLoginSubmit=(e)=>{
     e.preventDefault();

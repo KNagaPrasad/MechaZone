@@ -1,28 +1,28 @@
 .contact-container {
-  background-color: rgb(255, 213, 0); /* Change the background color */
+  background-color: rgb(255, 213, 0); 
   color: white;
-  padding: 5px; /* Increase the padding for more space */
-  width: 1000px; /* Increase the width of the container */
-  height: 300px; /* Increase the height of the container */
+  padding: 5px; 
+  width: 1000px; 
+  height: 300px; 
   text-align: center;
 }
 
 .contact-text {
-  margin-bottom: 30px; /* Increase the margin */
-  font-size: x-large; /* Increase the font size */
+  margin-bottom: 30px; 
+  font-size: x-large; 
 }
 
 .contact-text p {
-  margin: 10px 0; /* Adjust the margin */
+  margin: 10px 0; 
 }
 
 .contact-text a {
   color: rgb(0, 0, 0);
-  font-size: x-large; /* Increase the font size */
+  font-size: x-large; 
   text-decoration: none;
 }
 
 .social-links a {
-  margin: 0 15px; /* Adjust the margin */
-  font-size: x-large; /* Increase the font size */
+  margin: 0 15px; 
+  font-size: x-large; 
 }

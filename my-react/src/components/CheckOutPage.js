@@ -52,7 +52,6 @@ const CheckoutPage = () => {
   });
 
   const [storeOptions, setStoreOptions] = useState(['Store1', 'Store2', 'Store3']);
-
   const handleStoreSelect = (selectedStore) => {
     setSelectedStore(selectedStore);
     setShowStoreOptions(true);

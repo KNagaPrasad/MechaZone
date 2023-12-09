@@ -1,4 +1,4 @@
-/* Header.css */
+
 .header {
     display: flex;
     justify-content: space-between;
@@ -20,16 +20,16 @@
   }
   
   .logo img {
-    width: 70px; /* Adjust the logo size as needed */
+    width: 70px; 
   }
   
   .navigation ul {
     list-style-type: none;
     display: flex;
-    gap: 50px; /* Adjust the gap as needed */
+    gap: 50px;
     padding: 0;
     margin: 0;
-    margin-right: auto; /* Push navigation links to the left */
+    margin-right: auto; 
   }
   
   .navigation ul li {
@@ -49,27 +49,26 @@
     align-items: center;
   }
   
-  /* Media Query for Smaller Screens */
   @media (max-width: 768px) {
     .header {
-      height: auto; /* Adjust header height for mobile */
-      padding: 10px; /* Add padding for better mobile display */
-      flex-direction: row; /* Align elements horizontally on mobile */
+      height: auto; 
+      padding: 10px; 
+      flex-direction: row; 
       align-items: center;
     }
   
     .logo img {
-      max-width: 70px; /* Adjust the logo size for mobile */
+      max-width: 70px; 
     }
   
     .navigation ul {
-      flex-direction: row; /* Align navigation links horizontally on mobile */
-      gap: 10px; /* Adjust spacing between links */
-      margin: 0; /* Remove margin for mobile */
+      flex-direction: row; 
+      gap: 10px; 
+      margin: 0; 
     }
   
     .login-link {
-      margin-left: auto; /* Push the login link to the right */
+      margin-left: auto; 
     }
   }
   

@@ -69,7 +69,7 @@ function BikeParts() {
               <button className="add-to-cart" onClick={()=> addToBikeCart(part.s_id)}>
                 Add to Cart
               </button>
-            <button className="Buy-now" onClick={handleBuyNow}>Buy Now</button>            </div>
+            <button className="Buy-now" onClick={handleBuyNow}>Buy Now</button> </div>
           </div>
         ))}
       </div>

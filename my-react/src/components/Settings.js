@@ -4,14 +4,8 @@ import { useSelector } from "react-redux";
 const Settings = () => {
 
     const user = useSelector(state => state?.userInfo?.user);
-
-    const handleChange = (e) => {
-
-    }
-
-    const handleUpdateSubmit = (e) => {
-
-    }
+    const handleChange = (e) => {}
+    const handleUpdateSubmit = (e) => {}
 
     return (
         <div className="container">

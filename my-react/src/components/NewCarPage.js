@@ -1,5 +1,3 @@
-// NewCarPage.js
-
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { API_URL } from "../Constants";
@@ -38,9 +36,9 @@ const NewCarPage = () => {
         if (res && res.data && res.data.length > 0) {
           const uniqueBrands = Array.from(new Set(res.data));
           setBrands(uniqueBrands);
-          setError(''); // Clear any previous error
+          setError(''); 
         } else {
-          setError('Brand not found'); // Set error if no brands match
+          setError('Brand not found'); 
         }
       }).catch((err) => {
         console.error(err);
@@ -54,14 +52,18 @@ const NewCarPage = () => {
     axios.post(`${API_URL}/getModelsByBrand`, _searchBrand)
       .then((res) => {
         if (res && res.data && res.data.length > 0) {
-          setModels(res.data);
+          const uniqueModels = Array.from(new Set(res.data));
+          setModels(uniqueModels);
+          setError(''); 
         } else {
-          setError('Model not found'); // Set error if no models are found
+          setModels([]);
+          setError('Model not found'); 
         }
       }).catch((err) => {
         console.error(err);
       });
   }
+  
 
   const handleCloseError = () => {
     setError('');
@@ -87,7 +89,7 @@ const NewCarPage = () => {
                 onClick={() => {
                   setBrand(eachBrand);
                   setSelectedBrand(eachBrand);
-                  setError(''); // Clear error when a brand is selected
+                  setError(''); 
                 }}
                 className={eachBrand === selectedBrand ? "highlighted-brand" : ""}
                 style={{ fontSize: "2rem", padding: "15px", width:"500px",height:"75px",boxShadow: "10 10 10px rgba(76, 175, 80, 0.5)" }}

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Cards from 'react-credit-cards';
 import 'react-credit-cards/es/styles-compiled.css';
-import { Link } from 'react-router-dom';  // Import Link from react-router-dom
+import { Link } from 'react-router-dom';  
 
 const PaymentsPage = () => {
   const [cardData, setCardData] = useState({
@@ -64,7 +64,7 @@ const PaymentsPage = () => {
 
   return (
     <div style={styles.paymentsContainer}>
-      <h2>Enter Card Details</h2>
+      <h2>Payment Details</h2>
 
       <div style={styles.creditCardForm}>
         <Cards
@@ -131,7 +131,7 @@ const PaymentsPage = () => {
         </form>
         <button onClick={handlePay} style={styles.button}>
           <Link to="/success" style={{ textDecoration: 'none', color: '#fff' }}>
-            Submit
+            Place Order
           </Link>
         </button>
       </div>
@@ -141,13 +141,19 @@ const PaymentsPage = () => {
 
 const styles = {
   paymentsContainer: {
-    maxWidth: '600px',
-    margin: '0 auto',
-    padding: '20px',
-    border: '1px solid #ccc',
-    borderRadius: '5px',
-    boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+    maxWidth: '800px',
+    width: '100%',
+    margin: '100px auto',
+    padding: '30px',
+    border: '2px solid #2196F3',
+    borderRadius: '10px',
+    boxShadow: '0 0 20px rgba(33, 150, 243, 0.2)',
     backgroundColor: '#fff',
+    transition: 'box-shadow 0.3s, transform 0.3s',
+    '&:hover': {
+      boxShadow: '0 0 30px rgba(33, 150, 243, 0.4)',
+      transform: 'scale(1.02)',
+    },
   },
   creditCardForm: {
     display: 'flex',
@@ -166,14 +172,20 @@ const styles = {
   input: {
     padding: '8px',
     marginBottom: '16px',
+    border: '1px solid #000',
+    borderRadius: '4px',
   },
   button: {
-    backgroundColor: '#4caf50',
-    color: '#fff',
+    backgroundColor: '#008000',
+    color: '#00fff',
     padding: '10px',
     border: 'none',
     borderRadius: '4px',
     cursor: 'pointer',
+    transition: 'background-color 0.3s',
+    '&:hover': {
+      backgroundColor: '#1565C0',
+    },
   },
   successMessage: {
     marginTop: '16px',

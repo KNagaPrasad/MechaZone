@@ -88,7 +88,7 @@ const NewBikePage = () => {
                 onClick={() => {
                   setBrand(eachBrand);
                   setSelectedBrand(eachBrand);
-                  setError(''); // Clear error when a brand is selected
+                  setError(''); 
                 }}
                 className={eachBrand === selectedBrand ? "highlighted-brand" : ""}
                 style={{ fontSize: "2rem", padding: "15px", boxShadow: "10 10 10px rgba(76, 175, 80, 0.5)" }}
