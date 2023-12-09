@@ -73,7 +73,7 @@ const Support = () => {
       )}
 
       <div className="chat-messages">
-        <h3>Example Queries and Answers</h3>
+        <h3>Frequently Asked Questions</h3>
         {chatMessages.map((message, index) => (
           <div key={index} className="chat-message">
             <strong>Q:</strong> {message.question}
