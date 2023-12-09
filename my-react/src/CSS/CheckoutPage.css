@@ -15,6 +15,31 @@ body {
   background-color: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+/* CheckoutPage.css */
+.highlighted-item {
+  color: navy; /* Navy blue color for highlighted items */
+}
+
+.checkout-summary {
+  /* Adjust styles for the checkout summary */
+}
+
+.checkout-summary p {
+  margin: 0.5em 0; /* Optional: Adjust margin for better spacing */
+}
+
+.highlight {
+  color: navy; /* Navy blue color for highlighted details */
+  font-weight: bold; /* Optionally, make the text bold */
+}
+
+/* CheckoutPage.css */
+.choose-delivery-type {
+  font-weight: bold; /* Make the text bold */
+  color: #333; /* Set the desired color */
+  font-size: 18px;
+}
+
 
 .sub-container {
   width: 100%;
