@@ -1,4 +1,3 @@
-// Support.js
 import React, { useState } from 'react';
 import '../CSS/support.css';
 

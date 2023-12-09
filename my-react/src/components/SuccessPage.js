@@ -4,39 +4,49 @@ import { Link } from 'react-router-dom';
 const SuccessPage = () => {
   const [loading, setLoading] = useState(true);
   const [transactionNumber, setTransactionNumber] = useState('');
+  const [orderPlaced, setOrderPlaced] = useState(false);
 
   useEffect(() => {
     const generateTransactionNumber = () => {
       const randomTransactionNumber = Math.floor(Math.random() * 1000000);
       setTransactionNumber(randomTransactionNumber);
     };
-    const delay = setTimeout(() => {
+
+    const delayOrderPlaced = setTimeout(() => {
+      setOrderPlaced(true);
+    }, 2000);
+
+    const delayLoading = setTimeout(() => {
       setLoading(false);
       generateTransactionNumber();
-    }, 3000);
+    }, 4000);
 
-    return () => clearTimeout(delay); 
+    return () => {
+      clearTimeout(delayOrderPlaced);
+      clearTimeout(delayLoading);
+    };
 
-  }, []); 
+  }, []);
+
   const styles = {
     paymentsContainer: {
       position: 'relative',
       maxWidth: '800px',
       margin: '0 auto',
-      padding: '40px', 
+      padding: '40px',
       borderRadius: '10px',
-      boxShadow: '0 0 20px rgba(0, 128, 0, 0.3)', 
-      backgroundColor: '#e0f7fa', 
+      boxShadow: '0 0 20px rgba(0, 128, 0, 0.3)',
+      backgroundColor: '#e0f7fa',
       textAlign: 'center',
     },
     tickIcon: {
       fontSize: '100px',
-      color: '#4CAF50', 
+      color: '#4CAF50',
       marginBottom: '16px',
     },
     successMessage: {
       marginTop: '16px',
-      color: '#4CAF50', 
+      color: '#4CAF50',
       fontWeight: 'bold',
       fontSize: '36px',
     },
@@ -61,11 +71,16 @@ const SuccessPage = () => {
 
   return (
     <div style={styles.paymentsContainer}>
-      {loading ? (
+      {orderPlaced && (
+        <>
+          <div style={styles.tickIcon}>&#10004;</div>
+          <h2 style={styles.successMessage}>Order Placed</h2>
+        </>
+      )}
+      {loading && !orderPlaced ? (
         <div>Loading...</div>
       ) : (
         <>
-          <div style={styles.tickIcon}>&#10004;</div>
           <h2 style={styles.successMessage}>Transaction Successful</h2>
           <div style={styles.transactionNumber}>Transaction Number: {transactionNumber}</div>
           <Link to="/dashboard" style={styles.exitButton}>
