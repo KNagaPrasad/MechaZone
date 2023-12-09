@@ -143,8 +143,8 @@ const styles = {
   paymentsContainer: {
     maxWidth: '800px',
     width: '100%',
-    margin: '100px auto',
-    padding: '30px',
+    margin: '500px auto',
+    padding: '100px',
     border: '2px solid #2196F3',
     borderRadius: '10px',
     boxShadow: '0 0 20px rgba(33, 150, 243, 0.2)',

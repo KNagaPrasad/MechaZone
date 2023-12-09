@@ -1,8 +1,10 @@
 import React from 'react';
 import '../CSS/Profile.css';
+import React, { useState } from 'react';
+
 
 const Profile = () => {
-  // Hardcoded user data for demonstration
+
   const userData = {
     username: 'mech',
     contact: '6368495758',

@@ -104,7 +104,8 @@ const CheckoutPage = () => {
 
       {/* Delivery Section */}
       <div className="sub-container delivery-box">
-        <p>Choose Delivery Type:</p>
+      <p className="choose-delivery-type">Choose Delivery Type:</p>
+
         <div className="delivery-option" onClick={() => handleDeliveryTypeChange('Home')}>
           <button type="button" className={deliveryType === 'Home' ? 'selected' : ''}>
             Self Checkout
@@ -172,23 +173,24 @@ const CheckoutPage = () => {
       </div>
 
       {/* Product Details Section */}
-      <div className="product details" style={{ color: 'black' }}>
-        <h3>Product details</h3>
-        <ul>
-          {cartItems.map((item) => (
-            <li key={item.id}>
-              {item.name} - ${item.price}
-            </li>
-          ))}
-        </ul>
+      <div className="product details" style={{ color: 'navy' }}>
+  <h3>Product details</h3>
+  <ul className="product-list">
+    {cartItems.map((item) => (
+      <li key={item.id}>
+        <span className="product-name">{item.name}</span> - <span className="product-price">${item.price}</span>
+      </li>
+    ))}
+  </ul>
 
-        <div>
-          <p>Total Price: ${totalPrice}</p>
-          <p>Discount: ${discount}</p>
-          <p>Amount: ${amount}</p>
-          <button type="button" onClick={() => navigate('/dashboard')}>CONTINUE SHOPPING</button>
-        </div>
-      </div>
+  <div>
+    <p>Total Price: ${totalPrice}</p>
+    <p>Discount: ${discount}</p>
+    <p>Amount: ${amount}</p>
+    <button type="button" onClick={() => navigate('/dashboard')}>CONTINUE SHOPPING</button>
+  </div>
+</div>
+
 
       {/* Payment Section */}
       <div className="sub-container payment-section">
