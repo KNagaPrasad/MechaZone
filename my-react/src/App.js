@@ -20,6 +20,7 @@ import NewCarPage from './components/NewCarPage';
 import CheckoutPage from './components/CheckOutPage';
 import PaymentsPage from './components/PaymentPage';
 import SuccessPage from './components/SuccessPage';   // Update the path accordingly
+import Profile from './components/Profile';
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
           <Route path="/checkout" element={<CheckoutPage />} />
           <Route path="/payments" element={<PaymentsPage />} />
           <Route path="/success" element={<SuccessPage/>} />
+          <Route path="/profile" element={<Profile/>}/>
 
         </Routes>
         <Footer /> 
