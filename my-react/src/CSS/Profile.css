@@ -1,0 +1,22 @@
+.profile {
+  background-color: #f4f4f4;
+  padding: 20px;
+  margin: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.profile-content {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.profile-content h2 {
+  color: #333;
+}
+
+.profile-content p {
+  margin-bottom: 10px;
+}
+
+/* Add more styles as needed */

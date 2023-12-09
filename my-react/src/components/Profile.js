@@ -1,22 +1,28 @@
-import React, { useState } from 'react';
+import React from 'react';
+import '../CSS/Profile.css';
 
 const Profile = () => {
-  const [isProfileOpen, setProfileOpen] = useState(false);
-
-  const toggleProfile = () => {
-    setProfileOpen(!isProfileOpen);
+  
+  const userData = {
+    username: 'Mech John',
+    contact: '6368495758',
+    address: '123, lineddll Blvd',
   };
 
   return (
-    <div className={`profile ${isProfileOpen ? 'profile-open' : ''}`}>
-      <button className="profile-button" onClick={toggleProfile}>
-        Profile
-      </button>
-      {isProfileOpen && (
-        <div className="profile-content">
-          {}
-        </div>
-      )}
+    <div className="profile">
+      <div className="profile-content">
+        <h2>User Profile</h2>
+        <p>
+          <strong>Username:</strong> {userData.username}
+        </p>
+        <p>
+          <strong>Contact:</strong> {userData.contact}
+        </p>
+        <p>
+          <strong>Address:</strong> {userData.address}
+        </p>
+      </div>
     </div>
   );
 };

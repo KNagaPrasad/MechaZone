@@ -22,6 +22,7 @@ import PaymentsPage from './components/PaymentPage';
 import SuccessPage from './components/SuccessPage';   // Update the path accordingly
 import Profile from './components/Profile';
 import Support from './components/support';
+
 function App() {
   return (
     <Router>
@@ -46,7 +47,11 @@ function App() {
           <Route path="/checkout" element={<CheckoutPage />} />
           <Route path="/payments" element={<PaymentsPage />} />
           <Route path="/success" element={<SuccessPage/>} />
+          <Route path="/profile" element={<Profile/>}/>
+
+
           <Route path="/support" element={<Support/>} />
+
         </Routes>
         <Footer /> 
       </div>
