@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import '../CSS/Profile.css';
 
 const Profile = () => {
   const [isProfileOpen, setProfileOpen] = useState(false);

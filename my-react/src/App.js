@@ -20,7 +20,7 @@ import NewCarPage from './components/NewCarPage';
 import CheckoutPage from './components/CheckOutPage';
 import PaymentsPage from './components/PaymentPage';
 import SuccessPage from './components/SuccessPage';   // Update the path accordingly
-
+import Profile from './components/Profile';
 function App() {
   return (
     <Router>
@@ -36,7 +36,8 @@ function App() {
           <Route path ="/dashboard" element={<Dashboard/>}/>
           <Route path ="/logout" element={<Logout/>}/>
           <Route path ="/settings" element={<Settings/>}/>
-          <Route path ="/car-search" element={<NewCarPage/>}/> 
+          <Route path ="/car-search" element={<NewCarPage/>}/>
+          <Route path ="/profile" element={<Profile/>}/>
           <Route path="/carparts/:brand/:model" element={<CarParts />} />
           <Route path="/bikeparts/:brand/:model" element={<BikeParts />} />
           <Route path="/cart" element={<Cart/>}/>
@@ -44,7 +45,6 @@ function App() {
           <Route path="/checkout" element={<CheckoutPage />} />
           <Route path="/payments" element={<PaymentsPage />} />
           <Route path="/success" element={<SuccessPage/>} />
-
         </Routes>
         <Footer /> 
       </div>
