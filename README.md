@@ -93,7 +93,7 @@ The docker-compose.yml file defines the services, build configurations, and depe
 
 You can simply run the file directly using: 
  
-Docker-compose up --build 
+	Docker-compose up --build 
 
 ## Building Docker Images 
 
@@ -101,13 +101,13 @@ Docker-compose up --build
 
 To build the Mechazone frontend Docker image, navigate to the project directory and run the following command: 
 
-docker build -t deepthi29/mechazone-frontend:latest -f Dockerfile.frontend . 
+	docker build -t deepthi29/mechazone-frontend:latest -f Dockerfile.frontend . 
 
 ### Backend 
 
 To build the Mechazone backend Docker image, navigate to the project directory and run the following command: 
 
-docker build -t deepthi29/mechazone-backend:latest -f Dockerfile.backend . 
+	docker build -t deepthi29/mechazone-backend:latest -f Dockerfile.backend . 
 
  ## Running Docker Containers 
 
@@ -115,13 +115,13 @@ docker build -t deepthi29/mechazone-backend:latest -f Dockerfile.backend .
 
 To run the Mechazone frontend Docker container, use the following command: 
 
-docker run -p 3000:3000 deepthi29/mechazone-frontend:latest 
+	docker run -p 3000:3000 deepthi29/mechazone-frontend:latest 
 
 ### Backend 
 
 To run the Mechazone backend Docker container, use the following command: 
 
-docker run -p 5000:5000 deepthi29/mechazone-backend:latest 
+	docker run -p 5000:5000 deepthi29/mechazone-backend:latest 
 
 ## Pushing Images to Docker Hub 
 
@@ -129,13 +129,13 @@ docker run -p 5000:5000 deepthi29/mechazone-backend:latest
 
 To push the Mechazone frontend Docker image to Docker Hub, use the following command: 
 
-docker push deepthi29/mechazone-frontend:latest 
+	docker push deepthi29/mechazone-frontend:latest 
 
 ### Backend 
 
 To push the Mechazone backend Docker image to Docker Hub, use the following command: 
 
-docker push deepthi29/mechazone-backend:latest 
+	docker push deepthi29/mechazone-backend:latest 
 
 ## Pulling Images from Docker Hub 
 
@@ -143,17 +143,17 @@ docker push deepthi29/mechazone-backend:latest
 
 To pull the Mechazone frontend Docker image from Docker Hub, use the following command: 
 
-docker pull deepthi29/mechazone-frontend:latest 
+	docker pull deepthi29/mechazone-frontend:latest 
 
 ### Backend 
 
 To pull the Mechazone backend Docker image from Docker Hub, use the following command: 
 
-docker pull deepthi29/mechazone-backend:latest 
+	docker pull deepthi29/mechazone-backend:latest 
  
 After pulling you can also go with the command  
 
-Docker-compose up --build 
+	Docker-compose up --build 
 
 # Additional Notes
 
